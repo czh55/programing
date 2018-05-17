@@ -14,4 +14,7 @@ public interface ICartService {
     ServerResponse<CartVo> list (Integer userId);
     ServerResponse<CartVo> selectOrUnSelect (Integer userId,Integer productId,Integer checked);
     ServerResponse<Integer> getCartProductCount(Integer userId);
+
+    //判断当前购物车中选中的商品是否是相同的sponsorid下的。
+    ServerResponse judgeSameSponsorId(Integer productId);
 }

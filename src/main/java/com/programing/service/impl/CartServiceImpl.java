@@ -10,6 +10,8 @@ import com.programing.dao.ProductMapper;
 import com.programing.pojo.Cart;
 import com.programing.pojo.Product;
 import com.programing.service.ICartService;
+import com.programing.service.IProductService;
+import com.programing.service.IUserService;
 import com.programing.util.BigDecimalUtil;
 import com.programing.util.PropertiesUtil;
 import com.programing.vo.CartProductVo;
@@ -31,6 +33,11 @@ public class CartServiceImpl implements ICartService {
     private CartMapper cartMapper;
     @Autowired
     private ProductMapper productMapper;
+
+    @Autowired
+    private IProductService iProductService;
+    @Autowired
+    private IUserService iUserService;
 
     public ServerResponse<CartVo> add(Integer userId, Integer productId, Integer count){
         if(productId == null || count == null){
@@ -99,17 +106,24 @@ public class CartServiceImpl implements ICartService {
     }
 
 
+    public ServerResponse judgeSameSponsorId(Integer userId) {
+        //从购物车中获取数据
+        List<Cart> cartList = cartMapper.selectCheckedCartByUserId(userId);
 
-
-
-
-
-
-
-
-
-
-
+        Cart cart = cartList.get(0);
+        int sponsorIdTemp = iProductService.getSponsorIdByProductId(cart.getProductId()).getData();
+        for(int i = 1; i < cartList.size(); i++){
+            cart = cartList.get(i);
+            int sponsorId = iProductService.getSponsorIdByProductId(cart.getProductId()).getData();
+            if(sponsorId != sponsorIdTemp){
+                //code = 1表示失败
+                return ServerResponse.createByErrorMessage("不是同一个sponsor，请重新选择");
+            }
+            sponsorIdTemp = sponsorId;
+        }
+        //code = 0表示成功
+        return ServerResponse.createBySuccess();
+    }
 
 
     private CartVo getCartVoLimit(Integer userId){
@@ -128,6 +142,11 @@ public class CartServiceImpl implements ICartService {
 
                 Product product = productMapper.selectByPrimaryKey(cartItem.getProductId());
                 if(product != null){
+
+                    //用于前台顾客购物车显示商品对应的sponsor
+                    String sponsorName = iUserService.getInformation(product.getSponsorId()).getData().getUsername();
+                    cartProductVo.setSponsorName(sponsorName);
+
                     cartProductVo.setProductMainImage(product.getMainImage());
                     cartProductVo.setProductName(product.getName());
                     cartProductVo.setProductSubtitle(product.getSubtitle());

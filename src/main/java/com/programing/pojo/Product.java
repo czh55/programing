@@ -17,6 +17,8 @@ public class Product {
 
     private Integer categoryId;
 
+    private Integer sponsorId;
+
     private String name;
 
     private String subtitle;

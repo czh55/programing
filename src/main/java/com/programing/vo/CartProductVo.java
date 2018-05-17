@@ -12,6 +12,7 @@ public class CartProductVo {
     private Integer id;
     private Integer userId;
     private Integer productId;
+    private String sponsorName;//用于前台顾客购物车显示商品对应的sponsor
     private Integer quantity;//购物车中此商品的数量
     private String productName;
     private String productSubtitle;
@@ -126,5 +127,12 @@ public class CartProductVo {
 
     public void setLimitQuantity(String limitQuantity) {
         this.limitQuantity = limitQuantity;
+    }
+
+    public String getSponsorName() {
+        return sponsorName;
+    }
+    public void setSponsorName(String sponsorName) {
+        this.sponsorName = sponsorName;
     }
 }

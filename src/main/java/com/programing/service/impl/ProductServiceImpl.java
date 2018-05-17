@@ -140,11 +140,31 @@ public class ProductServiceImpl implements IProductService {
         return ServerResponse.createBySuccess(pageResult);
     }
 
+    //sponsor
+    public ServerResponse<PageInfo> getProductListBySponsorId(Integer sponsorId, int pageNum,int pageSize){
+        //startPage--start
+        //填充自己的sql查询逻辑
+        //pageHelper-收尾
+        PageHelper.startPage(pageNum,pageSize);
+        List<Product> productList = productMapper.selectListBySponsorId(sponsorId);
+
+        List<ProductListVo> productListVoList = Lists.newArrayList();
+        for(Product productItem : productList){
+            ProductListVo productListVo = assembleProductListVo(productItem);
+            productListVoList.add(productListVo);
+        }
+        PageInfo pageResult = new PageInfo(productList);
+        pageResult.setList(productListVoList);
+        return ServerResponse.createBySuccess(pageResult);
+    }
+
+
     private ProductListVo assembleProductListVo(Product product){
         ProductListVo productListVo = new ProductListVo();
         productListVo.setId(product.getId());
         productListVo.setName(product.getName());
         productListVo.setCategoryId(product.getCategoryId());
+        productListVo.setSponsorId(product.getSponsorId());//sponsor
         productListVo.setImageHost(PropertiesUtil.getProperty("ftp.server.http.prefix","http://img.happymmall.com/"));
         productListVo.setMainImage(product.getMainImage());
         productListVo.setPrice(product.getPrice());
@@ -161,6 +181,23 @@ public class ProductServiceImpl implements IProductService {
             productName = new StringBuilder().append("%").append(productName).append("%").toString();
         }
         List<Product> productList = productMapper.selectByNameAndProductId(productName,productId);
+        List<ProductListVo> productListVoList = Lists.newArrayList();
+        for(Product productItem : productList){
+            ProductListVo productListVo = assembleProductListVo(productItem);
+            productListVoList.add(productListVo);
+        }
+        PageInfo pageResult = new PageInfo(productList);
+        pageResult.setList(productListVoList);
+        return ServerResponse.createBySuccess(pageResult);
+    }
+
+    //sponsor
+    public ServerResponse<PageInfo> searchProduct(String productName,Integer productId, Integer status, Integer sponsorId, int pageNum,int pageSize){
+        PageHelper.startPage(pageNum,pageSize);
+        if(StringUtils.isNotBlank(productName)){
+            productName = new StringBuilder().append("%").append(productName).append("%").toString();
+        }
+        List<Product> productList = productMapper.selectByNameAndProductIdAndStatusAndSponsorId(productName,productId,status,sponsorId);
         List<ProductListVo> productListVoList = Lists.newArrayList();
         for(Product productItem : productList){
             ProductListVo productListVo = assembleProductListVo(productItem);
@@ -231,28 +268,14 @@ public class ProductServiceImpl implements IProductService {
     }
 
 
+    public ServerResponse<Integer> getSponsorIdByProductId(Integer productId) {
+        //调用productMapper去查询sponsorId
+        Product product = productMapper.selectByPrimaryKey(productId);
 
+        int sponsorId = product.getSponsorId();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        return ServerResponse.createBySuccess(sponsorId);
+    }
 
 
 }

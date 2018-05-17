@@ -9,6 +9,7 @@ public class ProductListVo {
 
     private Integer id;
     private Integer categoryId;
+    private Integer sponsorId;//sponsor
 
     private String name;
     private String subtitle;
@@ -33,6 +34,14 @@ public class ProductListVo {
 
     public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
+    }
+    //sponsor
+    public Integer getSponsorId() {
+        return sponsorId;
+    }
+    //sponsor
+    public void setSponsorId(Integer userId) {
+        this.sponsorId = userId;
     }
 
     public String getName() {

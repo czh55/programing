@@ -3,10 +3,14 @@ package com.programing.controller.backend;
 import com.google.common.collect.Maps;
 import com.programing.common.ServerResponse;
 import com.programing.pojo.Product;
+import com.programing.pojo.User;
 import com.programing.service.IFileService;
 import com.programing.service.IProductService;
 import com.programing.service.IUserService;
+import com.programing.util.CookieUtil;
+import com.programing.util.JsonUtil;
 import com.programing.util.PropertiesUtil;
+import com.programing.util.RedisShardedPoolUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -54,6 +58,12 @@ public class ProductManageController {
 //        }else{
 //            return ServerResponse.createByErrorMessage("无权限操作");
 //        }
+
+        //由于使用了拦截器，所以我们必须重新获得一次，不同的是这次不用验证了。
+        String loginToken = CookieUtil.readLoginToken(httpServletRequest);
+        String userJsonStr = RedisShardedPoolUtil.get(loginToken);
+        User user = JsonUtil.string2Obj(userJsonStr,User.class);
+        product.setSponsorId(user.getId());
         return iProductService.saveOrUpdateProduct(product);
     }
 
@@ -123,12 +133,18 @@ public class ProductManageController {
 //        }else{
 //            return ServerResponse.createByErrorMessage("无权限操作");
 //        }
-        return iProductService.getProductList(pageNum,pageSize);
+        //由于使用了拦截器，所以我们必须重新获得一次，不同的是这次不用验证了。
+        String loginToken = CookieUtil.readLoginToken(httpServletRequest);
+        String userJsonStr = RedisShardedPoolUtil.get(loginToken);
+        User user = JsonUtil.string2Obj(userJsonStr,User.class);
+        Integer sponsorId = user.getId();
+
+        return iProductService.getProductListBySponsorId(sponsorId, pageNum,pageSize);
     }
 
     @RequestMapping("search.do")
     @ResponseBody
-    public ServerResponse productSearch(HttpServletRequest httpServletRequest,String productName,Integer productId, @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,@RequestParam(value = "pageSize",defaultValue = "10") int pageSize){
+    public ServerResponse productSearch(HttpServletRequest httpServletRequest,String productName,Integer productId,Integer status,  @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,@RequestParam(value = "pageSize",defaultValue = "10") int pageSize){
 //        String loginToken = CookieUtil.readLoginToken(httpServletRequest);
 //        if(StringUtils.isEmpty(loginToken)){
 //            return ServerResponse.createByErrorMessage("用户未登录,无法获取当前用户的信息");
@@ -146,7 +162,13 @@ public class ProductManageController {
 //        }else{
 //            return ServerResponse.createByErrorMessage("无权限操作");
 //        }
-        return iProductService.searchProduct(productName,productId,pageNum,pageSize);
+        //由于使用了拦截器，所以我们必须重新获得一次，不同的是这次不用验证了。
+        String loginToken = CookieUtil.readLoginToken(httpServletRequest);
+        String userJsonStr = RedisShardedPoolUtil.get(loginToken);
+        User user = JsonUtil.string2Obj(userJsonStr,User.class);
+        Integer sponsorId = user.getId();
+
+        return iProductService.searchProduct(productName,productId,status,sponsorId,pageNum,pageSize);
     }
 
     @RequestMapping("upload.do")

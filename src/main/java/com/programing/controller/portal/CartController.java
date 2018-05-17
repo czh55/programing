@@ -179,7 +179,24 @@ public class CartController {
     }
 
 
+    @RequestMapping("judgeSameSponsorId.do")
+    @ResponseBody
+    public ServerResponse judgeSameSponsorId(HttpServletRequest httpServletRequest){
+        String loginToken = CookieUtil.readLoginToken(httpServletRequest);
+        if(StringUtils.isEmpty(loginToken)){
+            return ServerResponse.createByErrorMessage("用户未登录,无法获取当前用户的信息");
+        }
+        String userJsonStr = RedisShardedPoolUtil.get(loginToken);
+        User user = JsonUtil.string2Obj(userJsonStr,User.class);
 
+        if(user ==null){
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
+        }
+
+        //userId是从后台之后获取的，不是传过来的
+        int userId = user.getId();
+        return iCartService.judgeSameSponsorId(userId);
+    }
 
     //全选
     //全反选

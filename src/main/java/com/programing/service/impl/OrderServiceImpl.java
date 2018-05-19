@@ -95,17 +95,20 @@ public class OrderServiceImpl implements IOrderService {
         //从购物车中获取数据
         List<Cart> cartList = cartMapper.selectCheckedCartByUserId(userId);
 
-        //计算这个订单的总价
-        ServerResponse serverResponse = this.getCartOrderItem(userId,cartList);
+        //查询货物对应的sponsor
+        Product product = productMapper.selectByPrimaryKey(cartList.get(0).getProductId());
+        int sponsorId = product.getSponsorId();
+
+        //计算这个订单的总价,返回封装好orderItemList
+        ServerResponse serverResponse = this.getCartOrderItem(userId,cartList,sponsorId);
         if(!serverResponse.isSuccess()){
             return serverResponse;
         }
         List<OrderItem> orderItemList = (List<OrderItem>)serverResponse.getData();
         BigDecimal payment = this.getOrderTotalPrice(orderItemList);
 
-
         //生成订单
-        Order order = this.assembleOrder(userId,shippingId,payment);
+        Order order = this.assembleOrder(userId,shippingId,payment,sponsorId);
         if(order == null){
             return ServerResponse.createByErrorMessage("生成订单错误");
         }
@@ -216,7 +219,7 @@ public class OrderServiceImpl implements IOrderService {
     }
 
 
-    private Order assembleOrder(Integer userId,Integer shippingId,BigDecimal payment){
+    private Order assembleOrder(Integer userId,Integer shippingId,BigDecimal payment, Integer sponsorId){
         Order order = new Order();
         long orderNo = this.generateOrderNo();
         order.setOrderNo(orderNo);
@@ -226,6 +229,7 @@ public class OrderServiceImpl implements IOrderService {
         order.setPayment(payment);
 
         order.setUserId(userId);
+        order.setSponsorId(sponsorId);
         order.setShippingId(shippingId);
         //发货时间等等
         //付款时间等等
@@ -252,7 +256,7 @@ public class OrderServiceImpl implements IOrderService {
         return payment;
     }
 
-    private ServerResponse getCartOrderItem(Integer userId,List<Cart> cartList){
+    private ServerResponse getCartOrderItem(Integer userId,List<Cart> cartList,Integer sponsorId){
         List<OrderItem> orderItemList = Lists.newArrayList();
         if(CollectionUtils.isEmpty(cartList)){
             return ServerResponse.createByErrorMessage("购物车为空");
@@ -271,6 +275,7 @@ public class OrderServiceImpl implements IOrderService {
                 return ServerResponse.createByErrorMessage("产品"+product.getName()+"库存不足");
             }
 
+            orderItem.setSponsorId(sponsorId);
             orderItem.setUserId(userId);
             orderItem.setProductId(product.getId());
             orderItem.setProductName(product.getName());
@@ -314,7 +319,14 @@ public class OrderServiceImpl implements IOrderService {
         //从购物车中获取数据
 
         List<Cart> cartList = cartMapper.selectCheckedCartByUserId(userId);
-        ServerResponse serverResponse =  this.getCartOrderItem(userId,cartList);
+
+        //查询货物对应的sponsor
+        Product product = productMapper.selectByPrimaryKey(cartList.get(0).getProductId());
+        int sponsorId = product.getSponsorId();
+
+        //这里的getCartOrderItem()还在create订单的时候使用，目的：根据cartList，检查并重组orderItem
+        //到达确认页以后，可能同时又很多用户同时操作。当我们真正的提交订单时，可能库存已经不够了，所有要调用进行第二次的检查
+        ServerResponse serverResponse =  this.getCartOrderItem(userId,cartList,sponsorId);
         if(!serverResponse.isSuccess()){
             return serverResponse;
         }
@@ -584,9 +596,11 @@ public class OrderServiceImpl implements IOrderService {
 
     //backend
 
-    public ServerResponse<PageInfo> manageList(int pageNum,int pageSize){
+    public ServerResponse<PageInfo> manageList(int pageNum,int pageSize, int sponsorId){
         PageHelper.startPage(pageNum,pageSize);
-        List<Order> orderList = orderMapper.selectAllOrder();
+//        List<Order> orderList = orderMapper.selectAllOrder();
+
+        List<Order> orderList = orderMapper.selectBySponsorId(sponsorId);
         List<OrderVo> orderVoList = this.assembleOrderVoList(orderList,null);
         PageInfo pageResult = new PageInfo(orderList);
         pageResult.setList(orderVoList);
@@ -594,8 +608,8 @@ public class OrderServiceImpl implements IOrderService {
     }
 
 
-    public ServerResponse<OrderVo> manageDetail(Long orderNo){
-        Order order = orderMapper.selectByOrderNo(orderNo);
+    public ServerResponse<OrderVo> manageDetail(Long orderNo,int sponsorId){
+        Order order = orderMapper.selectByOrderNoAndSponsorId(orderNo,sponsorId);
         if(order != null){
             List<OrderItem> orderItemList = orderItemMapper.getByOrderNo(orderNo);
             OrderVo orderVo = assembleOrderVo(order,orderItemList);
@@ -606,9 +620,9 @@ public class OrderServiceImpl implements IOrderService {
 
 
 
-    public ServerResponse<PageInfo> manageSearch(Long orderNo,int pageNum,int pageSize){
+    public ServerResponse<PageInfo> manageSearch(Long orderNo,int sponsorId,int pageNum,int pageSize){
         PageHelper.startPage(pageNum,pageSize);
-        Order order = orderMapper.selectByOrderNo(orderNo);
+        Order order = orderMapper.selectByOrderNoAndSponsorId(orderNo,sponsorId);
         if(order != null){
             List<OrderItem> orderItemList = orderItemMapper.getByOrderNo(orderNo);
             OrderVo orderVo = assembleOrderVo(order,orderItemList);
@@ -621,8 +635,8 @@ public class OrderServiceImpl implements IOrderService {
     }
 
 
-    public ServerResponse<String> manageSendGoods(Long orderNo){
-        Order order= orderMapper.selectByOrderNo(orderNo);
+    public ServerResponse<String> manageSendGoods(Long orderNo,int sponsorId){
+        Order order= orderMapper.selectByOrderNoAndSponsorId(orderNo,sponsorId);
         if(order != null){
             if(order.getStatus() == Const.OrderStatusEnum.PAID.getCode()){
                 order.setStatus(Const.OrderStatusEnum.SHIPPED.getCode());

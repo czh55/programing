@@ -20,16 +20,17 @@ public interface OrderMapper {
 
     Order selectByUserIdAndOrderNo(@Param("userId")Integer userId, @Param("orderNo")Long orderNo);
 
-
+    //这个方法是用于alipay回调时使用
     Order selectByOrderNo(Long orderNo);
 
+    //默认要使用sponsorId进行限制
+    Order selectByOrderNoAndSponsorId(@Param("orderNo")Long orderNo, @Param("sponsorId")Integer sponsorId);
 
+    List<Order> selectBySponsorId(@Param("sponsorId")Integer sponsorId);
 
     List<Order> selectByUserId(Integer userId);
 
-
     List<Order> selectAllOrder();
-
 
     //二期新增定时关单
     List<Order> selectOrderStatusByCreateTime(@Param("status") Integer status,@Param("date") String date);

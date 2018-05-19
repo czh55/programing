@@ -2,8 +2,12 @@ package com.programing.controller.backend;
 
 import com.github.pagehelper.PageInfo;
 import com.programing.common.ServerResponse;
+import com.programing.pojo.User;
 import com.programing.service.IOrderService;
 import com.programing.service.IUserService;
+import com.programing.util.CookieUtil;
+import com.programing.util.JsonUtil;
+import com.programing.util.RedisShardedPoolUtil;
 import com.programing.vo.OrderVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -48,8 +52,15 @@ public class OrderManageController {
 //        }else{
 //            return ServerResponse.createByErrorMessage("无权限操作");
 //        }
+
+        //由于使用了拦截器，所以我们必须重新获得一次，不同的是这次不用验证了。
+        String loginToken = CookieUtil.readLoginToken(httpServletRequest);
+        String userJsonStr = RedisShardedPoolUtil.get(loginToken);
+        User user = JsonUtil.string2Obj(userJsonStr,User.class);
+        Integer sponsorId = user.getId();
+
         //全部通过拦截器验证是否登录以及权限
-        return iOrderService.manageList(pageNum,pageSize);
+        return iOrderService.manageList(pageNum,pageSize,sponsorId);
     }
 
     @RequestMapping("detail.do")
@@ -74,8 +85,14 @@ public class OrderManageController {
 //        }else{
 //            return ServerResponse.createByErrorMessage("无权限操作");
 //        }
+
+        //由于使用了拦截器，所以我们必须重新获得一次，不同的是这次不用验证了。
+        String loginToken = CookieUtil.readLoginToken(httpServletRequest);
+        String userJsonStr = RedisShardedPoolUtil.get(loginToken);
+        User user = JsonUtil.string2Obj(userJsonStr,User.class);
+        Integer sponsorId = user.getId();
         //全部通过拦截器验证是否登录以及权限
-        return iOrderService.manageDetail(orderNo);
+        return iOrderService.manageDetail(orderNo,sponsorId);
     }
 
 
@@ -100,8 +117,14 @@ public class OrderManageController {
 //        }else{
 //            return ServerResponse.createByErrorMessage("无权限操作");
 //        }
+
+        //由于使用了拦截器，所以我们必须重新获得一次，不同的是这次不用验证了。
+        String loginToken = CookieUtil.readLoginToken(httpServletRequest);
+        String userJsonStr = RedisShardedPoolUtil.get(loginToken);
+        User user = JsonUtil.string2Obj(userJsonStr,User.class);
+        Integer sponsorId = user.getId();
         //全部通过拦截器验证是否登录以及权限
-        return iOrderService.manageSearch(orderNo,pageNum,pageSize);
+        return iOrderService.manageSearch(orderNo,sponsorId,pageNum,pageSize);
     }
 
 
@@ -127,8 +150,13 @@ public class OrderManageController {
 //        }else{
 //            return ServerResponse.createByErrorMessage("无权限操作");
 //        }
+        //由于使用了拦截器，所以我们必须重新获得一次，不同的是这次不用验证了。
+        String loginToken = CookieUtil.readLoginToken(httpServletRequest);
+        String userJsonStr = RedisShardedPoolUtil.get(loginToken);
+        User user = JsonUtil.string2Obj(userJsonStr,User.class);
+        Integer sponsorId = user.getId();
         //全部通过拦截器验证是否登录以及权限
-        return iOrderService.manageSendGoods(orderNo);
+        return iOrderService.manageSendGoods(orderNo,sponsorId);
     }
 
 

@@ -19,6 +19,8 @@ public class Order {
 
     private Integer userId;
 
+    private Integer sponsorId;
+
     private Integer shippingId;
 
     private BigDecimal payment;

@@ -71,7 +71,7 @@ public class OrderController {
         return iOrderService.cancel(user.getId(),orderNo);
     }
 
-
+    //用于订单确认页
     @RequestMapping("get_order_cart_product.do")
     @ResponseBody
     public ServerResponse getOrderCartProduct(HttpServletRequest httpServletRequest){

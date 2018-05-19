@@ -34,5 +34,7 @@ public class OrderItem {
 
     private Integer userId;
 
+    private Integer sponsorId;
+
 
 }

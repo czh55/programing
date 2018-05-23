@@ -39,6 +39,7 @@ public class CodeController {
         String userJsonStr = RedisShardedPoolUtil.get(loginToken);
         User user = JsonUtil.string2Obj(userJsonStr, User.class);
         code.setUserId(user.getId());
+        code.setUserName(user.getUsername());
         //productId,title,src是从前台传来，其他的userId是服务器端处理出来的,id的存在与否，区分两种情况
         return iCodeService.saveOrUpdateCode(code);
     }

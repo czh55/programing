@@ -20,6 +20,8 @@ public class Code {
 
     private Integer userId;
 
+    private String userName;
+
     private String title;
 
     private String src;

@@ -45,7 +45,13 @@ public class CodeController {
 
     @RequestMapping("detail.do")
     @ResponseBody
-    public ServerResponse getCodeDetail(HttpServletRequest httpServletRequest, Integer productId, Integer userId) {
+    public ServerResponse getCodeDetail(HttpServletRequest httpServletRequest, Integer productId) {
+        //由于使用了拦截器，所以我们必须重新获得一次，不同的是这次不用验证了。
+        String loginToken = CookieUtil.readLoginToken(httpServletRequest);
+        String userJsonStr = RedisShardedPoolUtil.get(loginToken);
+        User user = JsonUtil.string2Obj(userJsonStr, User.class);
+        Integer userId = user.getId();
+
         return iCodeService.getCodeDetail(productId,userId);
     }
 

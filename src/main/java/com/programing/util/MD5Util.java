@@ -2,9 +2,6 @@ package com.programing.util;
 
 import java.security.MessageDigest;
 
-/**
- * Created by geely
- */
 public class MD5Util {
 
     private static String byteArrayToHexString(byte b[]) {

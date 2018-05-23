@@ -1,22 +1,13 @@
 package com.programing.service.impl;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import com.google.common.collect.Lists;
 import com.programing.common.ResponseCode;
 import com.programing.common.ServerResponse;
-import com.programing.dao.ProductMapper;
 import com.programing.dao.ResultMapper;
-import com.programing.pojo.Product;
 import com.programing.pojo.Result;
 import com.programing.service.IResultService;
-import com.programing.vo.ProductDetailVo;
-import com.programing.vo.ProductListVo;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service("iResultService")
 public class ResultServiceImpl implements IResultService {

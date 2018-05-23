@@ -3,9 +3,6 @@ package com.programing.service;
 import com.programing.common.ServerResponse;
 import com.programing.pojo.User;
 
-/**
- * Created by geely
- */
 public interface IUserService {
 
     ServerResponse<User> login(String username, String password);

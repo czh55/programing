@@ -11,9 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
-/**
- * Created by geely
- */
+
 @Service("iFileService")
 @Slf4j
 public class FileServiceImpl implements IFileService {

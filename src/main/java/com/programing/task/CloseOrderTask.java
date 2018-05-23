@@ -15,9 +15,6 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PreDestroy;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Created by geely
- */
 @Component
 @Slf4j
 public class CloseOrderTask {

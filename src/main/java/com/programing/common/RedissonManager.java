@@ -8,9 +8,6 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 
-/**
- * Created by geely
- */
 @Component
 @Slf4j
 public class RedissonManager {

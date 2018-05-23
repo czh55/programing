@@ -3,9 +3,7 @@ package com.programing.service;
 import com.programing.common.ServerResponse;
 import com.programing.vo.CartVo;
 
-/**
- * Created by geely
- */
+
 public interface ICartService {
     ServerResponse<CartVo> add(Integer userId, Integer productId, Integer count);
     ServerResponse<CartVo> update(Integer userId,Integer productId,Integer count);

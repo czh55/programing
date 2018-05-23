@@ -1,8 +1,5 @@
 package com.programing.vo;
 
-/**
- * Created by geely
- */
 public class ShippingVo {
     private String receiverName;
 

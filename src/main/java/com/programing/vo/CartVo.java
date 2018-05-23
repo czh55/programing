@@ -3,9 +3,6 @@ package com.programing.vo;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * Created by geely
- */
 public class CartVo {
 
     private List<CartProductVo> cartProductVoList;

@@ -15,9 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by geely
- */
+
 @Service("iCategoryService")
 @Slf4j
 public class CategoryServiceImpl implements ICategoryService {

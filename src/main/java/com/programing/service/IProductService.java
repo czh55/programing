@@ -5,9 +5,6 @@ import com.programing.common.ServerResponse;
 import com.programing.pojo.Product;
 import com.programing.vo.ProductDetailVo;
 
-/**
- * Created by geely
- */
 public interface IProductService {
 
     ServerResponse saveOrUpdateProduct(Product product);

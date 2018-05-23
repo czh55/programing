@@ -20,9 +20,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Map;
 
-/**
- * Created by geely
- */
 @Slf4j
 public class AuthorityInterceptor implements HandlerInterceptor{
 

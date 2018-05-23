@@ -5,9 +5,7 @@ import com.programing.pojo.Category;
 
 import java.util.List;
 
-/**
- * Created by geely
- */
+
 public interface ICategoryService {
     ServerResponse addCategory(String categoryName, Integer parentId);
     ServerResponse updateCategoryName(Integer categoryId,String categoryName);

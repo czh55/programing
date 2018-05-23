@@ -6,9 +6,6 @@ import com.programing.vo.OrderVo;
 
 import java.util.Map;
 
-/**
- * Created by geely
- */
 public interface IOrderService {
     ServerResponse pay(Long orderNo, Integer userId, String path);
     ServerResponse aliCallback(Map<String,String> params);

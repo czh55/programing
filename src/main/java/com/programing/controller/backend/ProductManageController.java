@@ -23,9 +23,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
-/**
- * Created by geely
- */
 
 @Controller
 @RequestMapping("/manage/product")

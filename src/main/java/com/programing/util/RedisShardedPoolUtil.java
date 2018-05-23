@@ -4,9 +4,6 @@ import com.programing.common.RedisShardedPool;
 import lombok.extern.slf4j.Slf4j;
 import redis.clients.jedis.ShardedJedis;
 
-/**
- * Created by geely
- */
 @Slf4j
 public class RedisShardedPoolUtil {
 

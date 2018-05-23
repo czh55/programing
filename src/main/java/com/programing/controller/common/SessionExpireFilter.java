@@ -17,9 +17,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-/**
- * Created by geely
- */
 public class SessionExpireFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

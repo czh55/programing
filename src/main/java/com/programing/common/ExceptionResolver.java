@@ -8,10 +8,6 @@ import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-/**
- * Created by geely
- */
 @Slf4j
 @Component
 public class ExceptionResolver implements HandlerExceptionResolver{

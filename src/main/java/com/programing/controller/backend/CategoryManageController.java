@@ -1,8 +1,6 @@
 package com.programing.controller.backend;
 
-import com.google.common.collect.Lists;
 import com.programing.common.ServerResponse;
-import com.programing.pojo.Category;
 import com.programing.service.ICategoryService;
 import com.programing.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.LinkedList;
-import java.util.List;
 
-/**
- * Created by geely
- */
+
 @Controller
 @RequestMapping("/manage/category")
 public class CategoryManageController {

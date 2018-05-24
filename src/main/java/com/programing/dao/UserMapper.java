@@ -1,7 +1,10 @@
 package com.programing.dao;
 
+import com.programing.pojo.Code;
 import com.programing.pojo.User;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
@@ -31,4 +34,6 @@ public interface UserMapper {
     int checkPassword(@Param(value="password")String password,@Param("userId")Integer userId);
 
     int checkEmailByUserId(@Param(value="email")String email,@Param(value="userId")Integer userId);
+
+    List<User> selectListByRole(@Param(value="role")Integer role);
 }

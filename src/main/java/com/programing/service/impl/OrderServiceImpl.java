@@ -96,15 +96,16 @@ public class OrderServiceImpl implements IOrderService {
         Product product = productMapper.selectByPrimaryKey(cartList.get(0).getProductId());
         int sponsorId = product.getSponsorId();
 
-        //计算这个订单的总价,返回封装好orderItemList
+        //计算这个订单的总价,校验购物车的数据,包括产品的状态和数量，返回封装好orderItemList
         ServerResponse serverResponse = this.getCartOrderItem(userId,cartList,sponsorId);
         if(!serverResponse.isSuccess()){
             return serverResponse;
         }
+
         List<OrderItem> orderItemList = (List<OrderItem>)serverResponse.getData();
         BigDecimal payment = this.getOrderTotalPrice(orderItemList);
 
-        //生成订单
+        //生成订单:这时候操作的是order表，并把数据已经插入
         Order order = this.assembleOrder(userId,shippingId,payment,sponsorId);
         if(order == null){
             return ServerResponse.createByErrorMessage("生成订单错误");
@@ -115,7 +116,7 @@ public class OrderServiceImpl implements IOrderService {
         for(OrderItem orderItem : orderItemList){
             orderItem.setOrderNo(order.getOrderNo());
         }
-        //mybatis 批量插入
+        //mybatis 批量插入,这时操作的是order_item表
         orderItemMapper.batchInsert(orderItemList);
 
         //生成成功,我们要减少我们产品的库存
@@ -215,7 +216,7 @@ public class OrderServiceImpl implements IOrderService {
         }
     }
 
-
+    //生成订单:这时候操作的是order表，并把数据已经插入
     private Order assembleOrder(Integer userId,Integer shippingId,BigDecimal payment, Integer sponsorId){
         Order order = new Order();
         long orderNo = this.generateOrderNo();
@@ -252,7 +253,7 @@ public class OrderServiceImpl implements IOrderService {
         }
         return payment;
     }
-
+    //计算这个订单的总价,校验购物车的数据,包括产品的状态和数量，返回封装好orderItemList
     private ServerResponse getCartOrderItem(Integer userId,List<Cart> cartList,Integer sponsorId){
         List<OrderItem> orderItemList = Lists.newArrayList();
         if(CollectionUtils.isEmpty(cartList)){
@@ -417,7 +418,7 @@ public class OrderServiceImpl implements IOrderService {
 
 
         // (必填) 订单标题，粗略描述用户的支付目的。如“xxx品牌xxx门店当面付扫码消费”
-        String subject = new StringBuilder().append("happymmall扫码支付,订单号:").append(outTradeNo).toString();
+        String subject = new StringBuilder().append("programing扫码支付,订单号:").append(outTradeNo).toString();
 
 
         // (必填) 订单总金额，单位为元，不能超过1亿元
@@ -540,17 +541,20 @@ public class OrderServiceImpl implements IOrderService {
         String tradeStatus = params.get("trade_status");
         Order order = orderMapper.selectByOrderNo(orderNo);
         if(order == null){
-            return ServerResponse.createByErrorMessage("非快乐慕商城的订单,回调忽略");
+            return ServerResponse.createByErrorMessage("非programing的订单,回调忽略");
         }
         if(order.getStatus() >= Const.OrderStatusEnum.PAID.getCode()){
             return ServerResponse.createBySuccess("支付宝重复调用");
         }
+
+        //交易成功，更改order表中数据的状态
         if(Const.AlipayCallback.TRADE_STATUS_TRADE_SUCCESS.equals(tradeStatus)){
             order.setPaymentTime(DateTimeUtil.strToDate(params.get("gmt_payment")));
             order.setStatus(Const.OrderStatusEnum.PAID.getCode());
             orderMapper.updateByPrimaryKeySelective(order);
         }
 
+        //交易成功，添加payinfo表的信息
         PayInfo payInfo = new PayInfo();
         payInfo.setUserId(order.getUserId());
         payInfo.setOrderNo(order.getOrderNo());

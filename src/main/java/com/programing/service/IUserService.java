@@ -1,7 +1,10 @@
 package com.programing.service;
 
+import com.github.pagehelper.PageInfo;
 import com.programing.common.ServerResponse;
 import com.programing.pojo.User;
+
+import java.util.List;
 
 public interface IUserService {
 
@@ -24,4 +27,6 @@ public interface IUserService {
     ServerResponse<User> getInformation(Integer userId);
 
     ServerResponse checkAdminRole(User user);
+
+    ServerResponse<PageInfo> selectListByRole(int role, int pageNum, int pageSize);
 }

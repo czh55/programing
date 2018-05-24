@@ -1,8 +1,11 @@
 package com.programing.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.programing.common.Const;
 import com.programing.common.ServerResponse;
 import com.programing.dao.UserMapper;
+import com.programing.pojo.Code;
 import com.programing.pojo.User;
 import com.programing.service.IUserService;
 import com.programing.util.MD5Util;
@@ -10,6 +13,8 @@ import com.programing.util.RedisShardedPoolUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.PageFormat;
+import java.util.List;
 import java.util.UUID;
 
 @Service("iUserService")
@@ -200,6 +205,18 @@ public class UserServiceImpl implements IUserService {
         return ServerResponse.createByError();
     }
 
+    @Override
+    public ServerResponse<PageInfo> selectListByRole(int role, int pageNum, int pageSize) {
+        //startPage--start
+        //填充自己的sql查询逻辑
+        //pageHelper-收尾
+        PageHelper.startPage(pageNum,pageSize);
+        List<Code> codeList = userMapper.selectListByRole(role);
+
+        PageInfo pageResult = new PageInfo(codeList);
+        pageResult.setList(codeList);
+        return ServerResponse.createBySuccess(pageResult);
+    }
 
 
 }

@@ -37,6 +37,7 @@ public class CartServiceImpl implements ICartService {
     @Autowired
     private IUserService iUserService;
 
+    //只有比赛没有被添加到收藏夹中，才可以添加
     public ServerResponse<CartVo> add(Integer userId, Integer productId, Integer count){
         if(productId == null || count == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(),ResponseCode.ILLEGAL_ARGUMENT.getDesc());
@@ -45,20 +46,15 @@ public class CartServiceImpl implements ICartService {
 
         Cart cart = cartMapper.selectCartByUserIdProductId(userId,productId);
         if(cart == null){
-            //这个产品不在这个购物车里,需要新增一个这个产品的记录
+            //这个产品不在这个收藏夹里,需要新增一个这个产品的记录
             Cart cartItem = new Cart();
             cartItem.setQuantity(count);
             cartItem.setChecked(Const.Cart.CHECKED);
             cartItem.setProductId(productId);
             cartItem.setUserId(userId);
             cartMapper.insert(cartItem);
-        }else{
-            //这个产品已经在购物车里了.
-            //如果产品已存在,数量相加
-            count = cart.getQuantity() + count;
-            cart.setQuantity(count);
-            cartMapper.updateByPrimaryKeySelective(cart);
         }
+
         return this.list(userId);
     }
 
@@ -105,7 +101,7 @@ public class CartServiceImpl implements ICartService {
 
 
     public ServerResponse judgeSameSponsorId(Integer userId) {
-        //从购物车中获取数据
+        //从收藏夹中获取数据
         List<Cart> cartList = cartMapper.selectCheckedCartByUserId(userId);
 
         Cart cart = cartList.get(0);
@@ -139,9 +135,10 @@ public class CartServiceImpl implements ICartService {
                 cartProductVo.setProductId(cartItem.getProductId());
 
                 Product product = productMapper.selectByPrimaryKey(cartItem.getProductId());
-                if(product != null){
+                //这里要判断商品存在，并且处于上架状态1,并且库存至少要有一个
+                if(product != null && product.getStatus() == 1 && product.getStock() > 0){
 
-                    //用于前台顾客购物车显示商品对应的sponsor
+                    //用于前台顾客收藏夹显示比赛对应的sponsor
                     String sponsorName = iUserService.getInformation(product.getSponsorId()).getData().getUsername();
                     cartProductVo.setSponsorName(sponsorName);
 
@@ -151,16 +148,16 @@ public class CartServiceImpl implements ICartService {
                     cartProductVo.setProductStatus(product.getStatus());
                     cartProductVo.setProductPrice(product.getPrice());
                     cartProductVo.setProductStock(product.getStock());
-                    //判断库存
+                    //判断名额
                     int buyLimitCount = 0;
                     if(product.getStock() >= cartItem.getQuantity()){
-                        //库存充足的时候
+                        //名额充足的时候
                         buyLimitCount = cartItem.getQuantity();
                         cartProductVo.setLimitQuantity(Const.Cart.LIMIT_NUM_SUCCESS);
                     }else{
                         buyLimitCount = product.getStock();
                         cartProductVo.setLimitQuantity(Const.Cart.LIMIT_NUM_FAIL);
-                        //购物车中更新有效库存
+                        //收藏夹中更新有效名额
                         Cart cartForQuantity = new Cart();
                         cartForQuantity.setId(cartItem.getId());
                         cartForQuantity.setQuantity(buyLimitCount);
@@ -173,7 +170,7 @@ public class CartServiceImpl implements ICartService {
                 }
 
                 if(cartItem.getChecked() == Const.Cart.CHECKED){
-                    //如果已经勾选,增加到整个的购物车总价中
+                    //如果已经勾选,增加到整个的收藏夹总价中
                     cartTotalPrice = BigDecimalUtil.add(cartTotalPrice.doubleValue(),cartProductVo.getProductTotalPrice().doubleValue());
                 }
                 cartProductVoList.add(cartProductVo);

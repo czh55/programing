@@ -136,7 +136,7 @@ public class CartServiceImpl implements ICartService {
 
                 Product product = productMapper.selectByPrimaryKey(cartItem.getProductId());
                 //这里要判断商品存在，并且处于上架状态1,并且库存至少要有一个
-                if(product != null && product.getStatus() == 1 && product.getStock() > 0){
+                if(product != null && product.getStatus() == Const.ProductStatusEnum.ON_SALE.getCode() && product.getStock() > 0){
 
                     //用于前台顾客收藏夹显示比赛对应的sponsor
                     String sponsorName = iUserService.getInformation(product.getSponsorId()).getData().getUsername();
@@ -155,6 +155,7 @@ public class CartServiceImpl implements ICartService {
                         buyLimitCount = cartItem.getQuantity();
                         cartProductVo.setLimitQuantity(Const.Cart.LIMIT_NUM_SUCCESS);
                     }else{
+                        //这种情况在不会发生，因为我们默认的数量为1
                         buyLimitCount = product.getStock();
                         cartProductVo.setLimitQuantity(Const.Cart.LIMIT_NUM_FAIL);
                         //收藏夹中更新有效名额

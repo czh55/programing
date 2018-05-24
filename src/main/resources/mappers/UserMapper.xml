@@ -218,7 +218,7 @@
     from programing_user
     <where>
       <if test="role != null" >
-        role = #{role,jdbcType=VARCHAR},
+        role = #{role,jdbcType=INTEGER}
       </if>
     </where>
   </select>

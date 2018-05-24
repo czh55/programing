@@ -50,7 +50,14 @@ public class UserManageController {
 
     @RequestMapping("list.do")
     @ResponseBody
-    public ServerResponse getList(HttpServletRequest httpServletRequest,int role, @RequestParam(value = "pageNum", defaultValue = "1") int pageNum, @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
+    public ServerResponse getList(HttpServletRequest httpServletRequest, @RequestParam(value = "pageNum", defaultValue = "1") int pageNum, @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
+
+        return iUserService.selectListByRole(null,pageNum,pageSize);
+    }
+
+    @RequestMapping("search.do")
+    @ResponseBody
+    public ServerResponse userSearch(HttpServletRequest httpServletRequest,Integer role, @RequestParam(value = "pageNum", defaultValue = "1") int pageNum, @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
 
         return iUserService.selectListByRole(role,pageNum,pageSize);
     }

@@ -28,5 +28,5 @@ public interface IUserService {
 
     ServerResponse checkAdminRole(User user);
 
-    ServerResponse<PageInfo> selectListByRole(int role, int pageNum, int pageSize);
+    ServerResponse<PageInfo> selectListByRole(Integer role, int pageNum, int pageSize);
 }

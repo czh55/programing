@@ -206,15 +206,15 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public ServerResponse<PageInfo> selectListByRole(int role, int pageNum, int pageSize) {
+    public ServerResponse<PageInfo> selectListByRole(Integer role, int pageNum, int pageSize) {
         //startPage--start
         //填充自己的sql查询逻辑
         //pageHelper-收尾
         PageHelper.startPage(pageNum,pageSize);
-        List<Code> codeList = userMapper.selectListByRole(role);
+        List<User> userList = userMapper.selectListByRole(role);
 
-        PageInfo pageResult = new PageInfo(codeList);
-        pageResult.setList(codeList);
+        PageInfo pageResult = new PageInfo(userList);
+        pageResult.setList(userList);
         return ServerResponse.createBySuccess(pageResult);
     }
 

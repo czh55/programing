@@ -47,7 +47,7 @@ public class ProductController {
     }
 
 
-    //http://www.happymmall.com/product/手机/100012/1/10/price_asc
+    //http://www.programing.com/product/C++/100012/1/10/price_asc
     @RequestMapping(value = "/{keyword}/{categoryId}/{pageNum}/{pageSize}/{orderBy}",method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse<PageInfo> listRESTful(@PathVariable(value = "keyword")String keyword,
@@ -69,7 +69,7 @@ public class ProductController {
     }
 
 
-//    http://www.happymmall.com/product/100012/1/10/price_asc
+//    http://www.programing.com/product/100012/1/10/price_asc
     @RequestMapping(value = "/{categoryId}/{pageNum}/{pageSize}/{orderBy}",method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse<PageInfo> listRESTfulBadcase(@PathVariable(value = "categoryId")Integer categoryId,
@@ -110,7 +110,7 @@ public class ProductController {
     }
 
 
-    //http://www.happymmall.com/product/keyword/手机/1/10/price_asc
+    //http://www.programing.com/product/keyword/C++/1/10/price_asc
     @RequestMapping(value = "/keyword/{keyword}/{pageNum}/{pageSize}/{orderBy}",method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse<PageInfo> listRESTful(@PathVariable(value = "keyword")String keyword,
@@ -131,7 +131,7 @@ public class ProductController {
     }
 
 
-    //http://www.happymmall.com/product/category/100012/1/10/price_asc
+    //http://www.programing.com/product/category/100012/1/10/price_asc
     @RequestMapping(value = "/category/{categoryId}/{pageNum}/{pageSize}/{orderBy}",method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse<PageInfo> listRESTful(@PathVariable(value = "categoryId")Integer categoryId,

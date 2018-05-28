@@ -8,7 +8,7 @@ public interface ICodeService {
 
     ServerResponse saveOrUpdateCode(Code code);
 
-    ServerResponse<Code> getCodeDetail(Integer productId, Integer userId);
+    ServerResponse<Code> getCodeDetail(Integer competitionId, Integer userId);
 
-    ServerResponse<PageInfo> getCodeListByProductId(Integer productId,int pageNum,int pageSize);
+    ServerResponse<PageInfo> getCodeListByCompetitionId(Integer competitionId,int pageNum,int pageSize);
 }

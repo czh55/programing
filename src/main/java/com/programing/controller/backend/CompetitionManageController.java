@@ -2,10 +2,10 @@ package com.programing.controller.backend;
 
 import com.google.common.collect.Maps;
 import com.programing.common.ServerResponse;
-import com.programing.pojo.Product;
+import com.programing.pojo.Competition;
 import com.programing.pojo.User;
+import com.programing.service.ICompetitionService;
 import com.programing.service.IFileService;
-import com.programing.service.IProductService;
 import com.programing.service.IUserService;
 import com.programing.util.CookieUtil;
 import com.programing.util.JsonUtil;
@@ -25,19 +25,19 @@ import java.util.Map;
 
 
 @Controller
-@RequestMapping("/manage/product")
-public class ProductManageController {
+@RequestMapping("/manage/competition")
+public class CompetitionManageController {
 
     @Autowired
     private IUserService iUserService;
     @Autowired
-    private IProductService iProductService;
+    private ICompetitionService iCompetitionService;
     @Autowired
     private IFileService iFileService;
 
     @RequestMapping("save.do")
     @ResponseBody
-    public ServerResponse productSave(HttpServletRequest httpServletRequest, Product product){
+    public ServerResponse competitionSave(HttpServletRequest httpServletRequest, Competition competition){
 //        String loginToken = CookieUtil.readLoginToken(httpServletRequest);
 //        if(StringUtils.isEmpty(loginToken)){
 //            return ServerResponse.createByErrorMessage("用户未登录,无法获取当前用户的信息");
@@ -51,7 +51,7 @@ public class ProductManageController {
 //        }
 //        if(iUserService.checkAdminRole(user).isSuccess()){
 //            //填充我们增加产品的业务逻辑
-//            return iProductService.saveOrUpdateProduct(product);
+//            return iCompetitionService.saveOrUpdateCompetition(competition);
 //        }else{
 //            return ServerResponse.createByErrorMessage("无权限操作");
 //        }
@@ -60,13 +60,13 @@ public class ProductManageController {
         String loginToken = CookieUtil.readLoginToken(httpServletRequest);
         String userJsonStr = RedisShardedPoolUtil.get(loginToken);
         User user = JsonUtil.string2Obj(userJsonStr,User.class);
-        product.setSponsorId(user.getId());
-        return iProductService.saveOrUpdateProduct(product);
+        competition.setSponsorId(user.getId());
+        return iCompetitionService.saveOrUpdateCompetition(competition);
     }
 
     @RequestMapping("set_sale_status.do")
     @ResponseBody
-    public ServerResponse setSaleStatus(HttpServletRequest httpServletRequest, Integer productId,Integer status){
+    public ServerResponse setSaleStatus(HttpServletRequest httpServletRequest, Integer competitionId,Integer status){
 //        String loginToken = CookieUtil.readLoginToken(httpServletRequest);
 //        if(StringUtils.isEmpty(loginToken)){
 //            return ServerResponse.createByErrorMessage("用户未登录,无法获取当前用户的信息");
@@ -79,16 +79,16 @@ public class ProductManageController {
 //
 //        }
 //        if(iUserService.checkAdminRole(user).isSuccess()){
-//            return iProductService.setSaleStatus(productId,status);
+//            return iCompetitionService.setSaleStatus(competitionId,status);
 //        }else{
 //            return ServerResponse.createByErrorMessage("无权限操作");
 //        }
-        return iProductService.setSaleStatus(productId,status);
+        return iCompetitionService.setSaleStatus(competitionId,status);
     }
 
     @RequestMapping("detail.do")
     @ResponseBody
-    public ServerResponse getDetail(HttpServletRequest httpServletRequest, Integer productId){
+    public ServerResponse getDetail(HttpServletRequest httpServletRequest, Integer competitionId){
 //        String loginToken = CookieUtil.readLoginToken(httpServletRequest);
 //        if(StringUtils.isEmpty(loginToken)){
 //            return ServerResponse.createByErrorMessage("用户未登录,无法获取当前用户的信息");
@@ -102,12 +102,12 @@ public class ProductManageController {
 //        }
 //        if(iUserService.checkAdminRole(user).isSuccess()){
 //            //填充业务
-//            return iProductService.manageProductDetail(productId);
+//            return iCompetitionService.manageCompetitionDetail(competitionId);
 //
 //        }else{
 //            return ServerResponse.createByErrorMessage("无权限操作");
 //        }
-        return iProductService.manageProductDetail(productId);
+        return iCompetitionService.manageCompetitionDetail(competitionId);
     }
 
     @RequestMapping("list.do")
@@ -126,7 +126,7 @@ public class ProductManageController {
 //        }
 //        if(iUserService.checkAdminRole(user).isSuccess()){
 //            //填充业务
-//            return iProductService.getProductList(pageNum,pageSize);
+//            return iCompetitionService.getCompetitionList(pageNum,pageSize);
 //        }else{
 //            return ServerResponse.createByErrorMessage("无权限操作");
 //        }
@@ -136,12 +136,12 @@ public class ProductManageController {
         User user = JsonUtil.string2Obj(userJsonStr,User.class);
         Integer sponsorId = user.getId();
 
-        return iProductService.getProductListBySponsorId(sponsorId, pageNum,pageSize);
+        return iCompetitionService.getCompetitionListBySponsorId(sponsorId, pageNum,pageSize);
     }
 
     @RequestMapping("search.do")
     @ResponseBody
-    public ServerResponse productSearch(HttpServletRequest httpServletRequest,String productName,Integer productId,Integer status,  @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,@RequestParam(value = "pageSize",defaultValue = "10") int pageSize){
+    public ServerResponse competitionSearch(HttpServletRequest httpServletRequest,String competitionName,Integer competitionId,Integer status,  @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,@RequestParam(value = "pageSize",defaultValue = "10") int pageSize){
 //        String loginToken = CookieUtil.readLoginToken(httpServletRequest);
 //        if(StringUtils.isEmpty(loginToken)){
 //            return ServerResponse.createByErrorMessage("用户未登录,无法获取当前用户的信息");
@@ -155,7 +155,7 @@ public class ProductManageController {
 //        }
 //        if(iUserService.checkAdminRole(user).isSuccess()){
 //            //填充业务
-//            return iProductService.searchProduct(productName,productId,pageNum,pageSize);
+//            return iCompetitionService.searchCompetition(competitionName,competitionId,pageNum,pageSize);
 //        }else{
 //            return ServerResponse.createByErrorMessage("无权限操作");
 //        }
@@ -165,7 +165,7 @@ public class ProductManageController {
         User user = JsonUtil.string2Obj(userJsonStr,User.class);
         Integer sponsorId = user.getId();
 
-        return iProductService.searchProduct(productName,productId,status,sponsorId,pageNum,pageSize);
+        return iCompetitionService.searchCompetition(competitionName,competitionId,status,sponsorId,pageNum,pageSize);
     }
 
     @RequestMapping("upload.do")

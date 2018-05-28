@@ -5,7 +5,7 @@
         <constructor >
             <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
             <arg column="sponsor_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-            <arg column="product_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+            <arg column="competition_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
             <arg column="title" jdbcType="VARCHAR" javaType="java.lang.String" />
             <arg column="detail" jdbcType="VARCHAR" javaType="java.lang.String" />
             <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
@@ -13,19 +13,19 @@
         </constructor>
     </resultMap>
     <sql id="Base_Column_List" >
-        id, sponsor_id, product_id, title, detail,create_time, update_time
+        id, sponsor_id, competition_id, title, detail,create_time, update_time
     </sql>
 
-    <select id="selectByProductId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    <select id="selectByCompetitionId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
         select
         <include refid="Base_Column_List" />
         from programing_result
-        where product_id = #{id,jdbcType=INTEGER}
+        where competition_id = #{id,jdbcType=INTEGER}
     </select>
 
     <insert id="insert" parameterType="com.programing.pojo.Result" >
-        insert into programing_result (id, sponsor_id, product_id, title, detail,create_time, update_time)
-        values (#{id,jdbcType=INTEGER}, #{sponsorId,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER},
+        insert into programing_result (id, sponsor_id, competition_id, title, detail,create_time, update_time)
+        values (#{id,jdbcType=INTEGER}, #{sponsorId,jdbcType=INTEGER}, #{competitionId,jdbcType=INTEGER},
         #{title,jdbcType=VARCHAR},#{detail,jdbcType=VARCHAR},now(), now()
         )
     </insert>
@@ -33,7 +33,7 @@
     <update id="updateByPrimaryKey" parameterType="com.programing.pojo.Result" >
         update programing_result
         set sponsor_id = #{sponsorId,jdbcType=INTEGER},
-        product_id = #{productId,jdbcType=INTEGER},
+        competition_id = #{competitionId,jdbcType=INTEGER},
         title = #{title,jdbcType=VARCHAR},
         detail = #{detail,jdbcType=VARCHAR},
         create_time = #{createTime,jdbcType=TIMESTAMP},

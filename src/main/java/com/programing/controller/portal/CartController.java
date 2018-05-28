@@ -45,7 +45,7 @@ public class CartController {
 
     @RequestMapping("add.do")
     @ResponseBody
-    public ServerResponse<CartVo> add(HttpServletRequest httpServletRequest, Integer count, Integer productId){
+    public ServerResponse<CartVo> add(HttpServletRequest httpServletRequest, Integer count, Integer competitionId){
         String loginToken = CookieUtil.readLoginToken(httpServletRequest);
         if(StringUtils.isEmpty(loginToken)){
             return ServerResponse.createByErrorMessage("用户未登录,无法获取当前用户的信息");
@@ -56,14 +56,14 @@ public class CartController {
         if(user ==null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
         }
-        return iCartService.add(user.getId(),productId,count);
+        return iCartService.add(user.getId(),competitionId,count);
     }
 
 
 
     @RequestMapping("update.do")
     @ResponseBody
-    public ServerResponse<CartVo> update(HttpServletRequest httpServletRequest, Integer count, Integer productId){
+    public ServerResponse<CartVo> update(HttpServletRequest httpServletRequest, Integer count, Integer competitionId){
         String loginToken = CookieUtil.readLoginToken(httpServletRequest);
         if(StringUtils.isEmpty(loginToken)){
             return ServerResponse.createByErrorMessage("用户未登录,无法获取当前用户的信息");
@@ -74,12 +74,12 @@ public class CartController {
         if(user ==null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
         }
-        return iCartService.update(user.getId(),productId,count);
+        return iCartService.update(user.getId(),competitionId,count);
     }
 
-    @RequestMapping("delete_product.do")
+    @RequestMapping("delete_competition.do")
     @ResponseBody
-    public ServerResponse<CartVo> deleteProduct(HttpServletRequest httpServletRequest,String productIds){
+    public ServerResponse<CartVo> deleteCompetition(HttpServletRequest httpServletRequest,String competitionIds){
         String loginToken = CookieUtil.readLoginToken(httpServletRequest);
         if(StringUtils.isEmpty(loginToken)){
             return ServerResponse.createByErrorMessage("用户未登录,无法获取当前用户的信息");
@@ -90,7 +90,7 @@ public class CartController {
         if(user ==null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
         }
-        return iCartService.deleteProduct(user.getId(),productIds);
+        return iCartService.deleteCompetition(user.getId(),competitionIds);
     }
 
 
@@ -129,7 +129,7 @@ public class CartController {
 
     @RequestMapping("select.do")
     @ResponseBody
-    public ServerResponse<CartVo> select(HttpServletRequest httpServletRequest,Integer productId){
+    public ServerResponse<CartVo> select(HttpServletRequest httpServletRequest,Integer competitionId){
         String loginToken = CookieUtil.readLoginToken(httpServletRequest);
         if(StringUtils.isEmpty(loginToken)){
             return ServerResponse.createByErrorMessage("用户未登录,无法获取当前用户的信息");
@@ -140,12 +140,12 @@ public class CartController {
         if(user ==null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
         }
-        return iCartService.selectOrUnSelect(user.getId(),productId,Const.Cart.CHECKED);
+        return iCartService.selectOrUnSelect(user.getId(),competitionId,Const.Cart.CHECKED);
     }
 
     @RequestMapping("un_select.do")
     @ResponseBody
-    public ServerResponse<CartVo> unSelect(HttpServletRequest httpServletRequest,Integer productId){
+    public ServerResponse<CartVo> unSelect(HttpServletRequest httpServletRequest,Integer competitionId){
         String loginToken = CookieUtil.readLoginToken(httpServletRequest);
         if(StringUtils.isEmpty(loginToken)){
             return ServerResponse.createByErrorMessage("用户未登录,无法获取当前用户的信息");
@@ -155,14 +155,14 @@ public class CartController {
         if(user ==null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
         }
-        return iCartService.selectOrUnSelect(user.getId(),productId,Const.Cart.UN_CHECKED);
+        return iCartService.selectOrUnSelect(user.getId(),competitionId,Const.Cart.UN_CHECKED);
     }
 
 
 
-    @RequestMapping("get_cart_product_count.do")
+    @RequestMapping("get_cart_competition_count.do")
     @ResponseBody
-    public ServerResponse<Integer> getCartProductCount(HttpServletRequest httpServletRequest){
+    public ServerResponse<Integer> getCartCompetitionCount(HttpServletRequest httpServletRequest){
         String loginToken = CookieUtil.readLoginToken(httpServletRequest);
         if(StringUtils.isEmpty(loginToken)){
             return ServerResponse.createByErrorMessage("用户未登录,无法获取当前用户的信息");
@@ -173,7 +173,7 @@ public class CartController {
         if(user ==null){
             return ServerResponse.createBySuccess(0);
         }
-        return iCartService.getCartProductCount(user.getId());
+        return iCartService.getCartCompetitionCount(user.getId());
     }
 
 

@@ -3,9 +3,9 @@ package com.programing.vo;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class OrderProductVo {
+public class OrderCompetitionVo {
     private List<OrderItemVo> orderItemVoList;
-    private BigDecimal productTotalPrice;
+    private BigDecimal competitionTotalPrice;
     private String imageHost;
 
     public List<OrderItemVo> getOrderItemVoList() {
@@ -16,12 +16,12 @@ public class OrderProductVo {
         this.orderItemVoList = orderItemVoList;
     }
 
-    public BigDecimal getProductTotalPrice() {
-        return productTotalPrice;
+    public BigDecimal getCompetitionTotalPrice() {
+        return competitionTotalPrice;
     }
 
-    public void setProductTotalPrice(BigDecimal productTotalPrice) {
-        this.productTotalPrice = productTotalPrice;
+    public void setCompetitionTotalPrice(BigDecimal competitionTotalPrice) {
+        this.competitionTotalPrice = competitionTotalPrice;
     }
 
     public String getImageHost() {

@@ -38,11 +38,11 @@ public class ResultServiceImpl implements IResultService {
     }
 
     @Override
-    public ServerResponse<Result> manageResultDetail(Integer productId) {
-        if(productId == null){
+    public ServerResponse<Result> manageResultDetail(Integer competitionId) {
+        if(competitionId == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(),ResponseCode.ILLEGAL_ARGUMENT.getDesc());
         }
-        Result result = resultMapper.selectByProductId(productId);
+        Result result = resultMapper.selectByCompetitionId(competitionId);
         if(result == null){
             return ServerResponse.createByErrorMessage("没有查询到");
         }

@@ -12,7 +12,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Product {
+public class Competition {
     private Integer id;
 
     private Integer categoryId;

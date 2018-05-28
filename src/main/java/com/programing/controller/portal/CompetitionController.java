@@ -2,8 +2,8 @@ package com.programing.controller.portal;
 
 import com.github.pagehelper.PageInfo;
 import com.programing.common.ServerResponse;
-import com.programing.service.IProductService;
-import com.programing.vo.ProductDetailVo;
+import com.programing.service.ICompetitionService;
+import com.programing.vo.CompetitionDetailVo;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,25 +15,25 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
-@RequestMapping("/product/")
-public class ProductController {
+@RequestMapping("/competition/")
+public class CompetitionController {
 
     @Autowired
-    private IProductService iProductService;
+    private ICompetitionService iCompetitionService;
 
 
 
     @RequestMapping("detail.do")
     @ResponseBody
-    public ServerResponse<ProductDetailVo> detail(Integer productId){
-        return iProductService.getProductDetail(productId);
+    public ServerResponse<CompetitionDetailVo> detail(Integer competitionId){
+        return iCompetitionService.getCompetitionDetail(competitionId);
     }
 
 
-    @RequestMapping(value = "/{productId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{competitionId}", method = RequestMethod.GET)
     @ResponseBody
-    public ServerResponse<ProductDetailVo> detailRESTful(@PathVariable Integer productId){
-        return iProductService.getProductDetail(productId);
+    public ServerResponse<CompetitionDetailVo> detailRESTful(@PathVariable Integer competitionId){
+        return iCompetitionService.getCompetitionDetail(competitionId);
     }
 
     @RequestMapping("list.do")
@@ -43,11 +43,11 @@ public class ProductController {
                                          @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
                                          @RequestParam(value = "pageSize",defaultValue = "10") int pageSize,
                                          @RequestParam(value = "orderBy",defaultValue = "") String orderBy){
-        return iProductService.getProductByKeywordCategory(keyword,categoryId,pageNum,pageSize,orderBy);
+        return iCompetitionService.getCompetitionByKeywordCategory(keyword,categoryId,pageNum,pageSize,orderBy);
     }
 
 
-    //http://www.programing.com/product/C++/100012/1/10/price_asc
+    //http://www.programing.com/competition/C++/100012/1/10/price_asc
     @RequestMapping(value = "/{keyword}/{categoryId}/{pageNum}/{pageSize}/{orderBy}",method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse<PageInfo> listRESTful(@PathVariable(value = "keyword")String keyword,
@@ -65,11 +65,11 @@ public class ProductController {
             orderBy = "price_asc";
         }
 
-        return iProductService.getProductByKeywordCategory(keyword,categoryId,pageNum,pageSize,orderBy);
+        return iCompetitionService.getCompetitionByKeywordCategory(keyword,categoryId,pageNum,pageSize,orderBy);
     }
 
 
-//    http://www.programing.com/product/100012/1/10/price_asc
+//    http://www.programing.com/competition/100012/1/10/price_asc
     @RequestMapping(value = "/{categoryId}/{pageNum}/{pageSize}/{orderBy}",method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse<PageInfo> listRESTfulBadcase(@PathVariable(value = "categoryId")Integer categoryId,
@@ -86,7 +86,7 @@ public class ProductController {
             orderBy = "price_asc";
         }
 
-        return iProductService.getProductByKeywordCategory("",categoryId,pageNum,pageSize,orderBy);
+        return iCompetitionService.getCompetitionByKeywordCategory("",categoryId,pageNum,pageSize,orderBy);
     }
 
 
@@ -106,11 +106,11 @@ public class ProductController {
             orderBy = "price_asc";
         }
 
-        return iProductService.getProductByKeywordCategory(keyword,null,pageNum,pageSize,orderBy);
+        return iCompetitionService.getCompetitionByKeywordCategory(keyword,null,pageNum,pageSize,orderBy);
     }
 
 
-    //http://www.programing.com/product/keyword/C++/1/10/price_asc
+    //http://www.programing.com/competition/keyword/C++/1/10/price_asc
     @RequestMapping(value = "/keyword/{keyword}/{pageNum}/{pageSize}/{orderBy}",method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse<PageInfo> listRESTful(@PathVariable(value = "keyword")String keyword,
@@ -127,11 +127,11 @@ public class ProductController {
             orderBy = "price_asc";
         }
 
-        return iProductService.getProductByKeywordCategory(keyword,null,pageNum,pageSize,orderBy);
+        return iCompetitionService.getCompetitionByKeywordCategory(keyword,null,pageNum,pageSize,orderBy);
     }
 
 
-    //http://www.programing.com/product/category/100012/1/10/price_asc
+    //http://www.programing.com/competition/category/100012/1/10/price_asc
     @RequestMapping(value = "/category/{categoryId}/{pageNum}/{pageSize}/{orderBy}",method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse<PageInfo> listRESTful(@PathVariable(value = "categoryId")Integer categoryId,
@@ -148,6 +148,6 @@ public class ProductController {
             orderBy = "price_asc";
         }
 
-        return iProductService.getProductByKeywordCategory("",categoryId,pageNum,pageSize,orderBy);
+        return iCompetitionService.getCompetitionByKeywordCategory("",categoryId,pageNum,pageSize,orderBy);
     }
 }

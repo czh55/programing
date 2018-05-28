@@ -12,7 +12,7 @@ public interface IOrderService {
     ServerResponse queryOrderPayStatus(Integer userId,Long orderNo);
     ServerResponse createOrder(Integer userId,Integer shippingId);
     ServerResponse<String> cancel(Integer userId,Long orderNo);
-    ServerResponse getOrderCartProduct(Integer userId);
+    ServerResponse getOrderCartCompetition(Integer userId);
     ServerResponse<OrderVo> getOrderDetail(Integer userId, Long orderNo);
     ServerResponse<PageInfo> getOrderList(Integer userId, int pageNum, int pageSize);
 

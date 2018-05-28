@@ -16,11 +16,11 @@ public class OrderItem {
 
     private Long orderNo;
 
-    private Integer productId;
+    private Integer competitionId;
 
-    private String productName;
+    private String competitionName;
 
-    private String productImage;
+    private String competitionImage;
 
     private BigDecimal currentUnitPrice;
 

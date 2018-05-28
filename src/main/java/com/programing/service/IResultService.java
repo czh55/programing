@@ -8,6 +8,6 @@ public interface IResultService {
 
     ServerResponse saveOrUpdateResult(Result result);
 
-    ServerResponse<Result> manageResultDetail(Integer productId);
+    ServerResponse<Result> manageResultDetail(Integer competitionId);
 
 }

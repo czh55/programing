@@ -16,7 +16,7 @@ public class Const {
     public interface RedisCacheExtime{
         int REDIS_SESSION_EXTIME = 60 * 30;//30分钟
     }
-    public interface ProductListOrderBy{
+    public interface CompetitionListOrderBy{
         Set<String> PRICE_ASC_DESC = Sets.newHashSet("price_desc","price_asc");
     }
 
@@ -33,11 +33,11 @@ public class Const {
         int ROLE_ADMIN = 1;//管理员
     }
 
-    public enum ProductStatusEnum{
+    public enum CompetitionStatusEnum{
         ON_SALE(1,"在线");
         private String value;
         private int code;
-        ProductStatusEnum(int code,String value){
+        CompetitionStatusEnum(int code,String value){
             this.code = code;
             this.value = value;
         }

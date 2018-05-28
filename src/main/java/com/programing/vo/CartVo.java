@@ -5,17 +5,17 @@ import java.util.List;
 
 public class CartVo {
 
-    private List<CartProductVo> cartProductVoList;
+    private List<CartCompetitionVo> cartCompetitionVoList;
     private BigDecimal cartTotalPrice;
     private Boolean allChecked;//是否已经都勾选
     private String imageHost;
 
-    public List<CartProductVo> getCartProductVoList() {
-        return cartProductVoList;
+    public List<CartCompetitionVo> getCartCompetitionVoList() {
+        return cartCompetitionVoList;
     }
 
-    public void setCartProductVoList(List<CartProductVo> cartProductVoList) {
-        this.cartProductVoList = cartProductVoList;
+    public void setCartCompetitionVoList(List<CartCompetitionVo> cartCompetitionVoList) {
+        this.cartCompetitionVoList = cartCompetitionVoList;
     }
 
     public BigDecimal getCartTotalPrice() {

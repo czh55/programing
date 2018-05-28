@@ -20,8 +20,8 @@ public class CodeManageController {
 
     @RequestMapping("list.do")
     @ResponseBody
-    public ServerResponse getList(HttpServletRequest httpServletRequest,Integer productId, @RequestParam(value = "pageNum", defaultValue = "1") int pageNum, @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
+    public ServerResponse getList(HttpServletRequest httpServletRequest,Integer competitionId, @RequestParam(value = "pageNum", defaultValue = "1") int pageNum, @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
 
-        return iCodeService.getCodeListByProductId(productId,pageNum,pageSize);
+        return iCodeService.getCodeListByCompetitionId(competitionId,pageNum,pageSize);
     }
 }

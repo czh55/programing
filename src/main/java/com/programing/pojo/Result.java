@@ -16,7 +16,7 @@ public class Result {
 
     private Integer sponsorId;
 
-    private Integer productId;
+    private Integer competitionId;
 
     private String title;
 

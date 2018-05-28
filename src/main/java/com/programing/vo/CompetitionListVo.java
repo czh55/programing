@@ -2,7 +2,7 @@ package com.programing.vo;
 
 import java.math.BigDecimal;
 
-public class ProductListVo {
+public class CompetitionListVo {
 
     private Integer id;
     private Integer categoryId;

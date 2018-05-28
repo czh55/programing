@@ -8,5 +8,5 @@ public interface ResultMapper {
 
     int updateByPrimaryKey(Result record);
 
-    Result selectByProductId(Integer id);
+    Result selectByCompetitionId(Integer id);
 }

@@ -4,7 +4,7 @@
     <resultMap id="BaseCodeMap" type="com.programing.pojo.Code" >
         <constructor >
             <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-            <arg column="product_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+            <arg column="competition_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
             <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
             <arg column="user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
             <arg column="title" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -14,33 +14,33 @@
         </constructor>
     </resultMap>
     <sql id="Base_Column_List" >
-        id, product_id, user_id, user_name, title, src,create_time, update_time
+        id, competition_id, user_id, user_name, title, src,create_time, update_time
     </sql>
 
-    <select id="selectByProductIdAndUserId" resultMap="BaseCodeMap" parameterType="map" >
+    <select id="selectByCompetitionIdAndUserId" resultMap="BaseCodeMap" parameterType="map" >
         select
         <include refid="Base_Column_List" />
         from programing_code
-        where user_id = #{userId,jdbcType=INTEGER} and product_id = #{productId,jdbcType=INTEGER}
+        where user_id = #{userId,jdbcType=INTEGER} and competition_id = #{competitionId,jdbcType=INTEGER}
     </select>
 
-    <select id="selectListByProductId" resultMap="BaseCodeMap" parameterType="java.lang.Integer" >
+    <select id="selectListByCompetitionId" resultMap="BaseCodeMap" parameterType="java.lang.Integer" >
         select
         <include refid="Base_Column_List" />
         from programing_code
-        where product_id = #{productId,jdbcType=INTEGER}
+        where competition_id = #{competitionId,jdbcType=INTEGER}
     </select>
 
     <insert id="insert" parameterType="com.programing.pojo.Code" >
-        insert into programing_code (id, product_id, user_id, user_name, title, src,create_time, update_time)
-        values (#{id,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER},
+        insert into programing_code (id, competition_id, user_id, user_name, title, src,create_time, update_time)
+        values (#{id,jdbcType=INTEGER}, #{competitionId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER},
         #{userName,jdbcType=VARCHAR},#{title,jdbcType=VARCHAR},#{src,jdbcType=VARCHAR},now(), now()
         )
     </insert>
 
     <update id="updateByPrimaryKey" parameterType="com.programing.pojo.Code" >
         update programing_code
-        set product_id = #{productId,jdbcType=INTEGER},
+        set competition_id = #{competitionId,jdbcType=INTEGER},
         user_id = #{userId,jdbcType=INTEGER},
         user_name = #{userName,jdbcType=VARCHAR},
         title = #{title,jdbcType=VARCHAR},

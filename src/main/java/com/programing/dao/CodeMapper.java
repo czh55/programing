@@ -11,7 +11,7 @@ public interface CodeMapper {
 
     int updateByPrimaryKey(Code record);
 
-    Code selectByProductIdAndUserId(@Param("productId")Integer productId, @Param("userId")Integer userId);
+    Code selectByCompetitionIdAndUserId(@Param("competitionId")Integer competitionId, @Param("userId")Integer userId);
 
-    List<Code>  selectListByProductId(@Param("productId")Integer productId);
+    List<Code>  selectListByCompetitionId(@Param("competitionId")Integer competitionId);
 }

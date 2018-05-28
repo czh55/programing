@@ -7,10 +7,10 @@ public class OrderItemVo {
 
     private Long orderNo;
 
-    private Integer productId;
+    private Integer competitionId;
 
-    private String productName;
-    private String productImage;
+    private String competitionName;
+    private String competitionImage;
 
     private BigDecimal currentUnitPrice;
 
@@ -28,28 +28,28 @@ public class OrderItemVo {
         this.orderNo = orderNo;
     }
 
-    public Integer getProductId() {
-        return productId;
+    public Integer getCompetitionId() {
+        return competitionId;
     }
 
-    public void setProductId(Integer productId) {
-        this.productId = productId;
+    public void setCompetitionId(Integer competitionId) {
+        this.competitionId = competitionId;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getCompetitionName() {
+        return competitionName;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setCompetitionName(String competitionName) {
+        this.competitionName = competitionName;
     }
 
-    public String getProductImage() {
-        return productImage;
+    public String getCompetitionImage() {
+        return competitionImage;
     }
 
-    public void setProductImage(String productImage) {
-        this.productImage = productImage;
+    public void setCompetitionImage(String competitionImage) {
+        this.competitionImage = competitionImage;
     }
 
     public BigDecimal getCurrentUnitPrice() {

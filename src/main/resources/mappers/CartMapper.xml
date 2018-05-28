@@ -5,7 +5,7 @@
     <constructor >
       <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="product_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="competition_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="quantity" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="checked" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
@@ -13,7 +13,7 @@
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, user_id, product_id, quantity, checked, create_time, update_time
+    id, user_id, competition_id, quantity, checked, create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
@@ -26,10 +26,10 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.programing.pojo.Cart" >
-    insert into programing_cart (id, user_id, product_id,
+    insert into programing_cart (id, user_id, competition_id,
     quantity, checked, create_time,
     update_time)
-    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER},
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{competitionId,jdbcType=INTEGER},
     #{quantity,jdbcType=INTEGER}, #{checked,jdbcType=INTEGER}, now(),
     now())
   </insert>
@@ -42,8 +42,8 @@
       <if test="userId != null" >
         user_id,
       </if>
-      <if test="productId != null" >
-        product_id,
+      <if test="competitionId != null" >
+        competition_id,
       </if>
       <if test="quantity != null" >
         quantity,
@@ -65,8 +65,8 @@
       <if test="userId != null" >
         #{userId,jdbcType=INTEGER},
       </if>
-      <if test="productId != null" >
-        #{productId,jdbcType=INTEGER},
+      <if test="competitionId != null" >
+        #{competitionId,jdbcType=INTEGER},
       </if>
       <if test="quantity != null" >
         #{quantity,jdbcType=INTEGER},
@@ -88,8 +88,8 @@
       <if test="userId != null" >
         user_id = #{userId,jdbcType=INTEGER},
       </if>
-      <if test="productId != null" >
-        product_id = #{productId,jdbcType=INTEGER},
+      <if test="competitionId != null" >
+        competition_id = #{competitionId,jdbcType=INTEGER},
       </if>
       <if test="quantity != null" >
         quantity = #{quantity,jdbcType=INTEGER},
@@ -109,7 +109,7 @@
   <update id="updateByPrimaryKey" parameterType="com.programing.pojo.Cart" >
     update programing_cart
     set user_id = #{userId,jdbcType=INTEGER},
-    product_id = #{productId,jdbcType=INTEGER},
+    competition_id = #{competitionId,jdbcType=INTEGER},
     quantity = #{quantity,jdbcType=INTEGER},
     checked = #{checked,jdbcType=INTEGER},
     create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -118,12 +118,12 @@
   </update>
 
 
-  <select id="selectCartByUserIdProductId" resultMap="BaseResultMap" parameterType="map">
+  <select id="selectCartByUserIdCompetitionId" resultMap="BaseResultMap" parameterType="map">
     SELECT
     <include refid="Base_Column_List"/>
     from programing_cart
     where user_id = #{userId}
-    and product_id = #{productId}
+    and competition_id = #{competitionId}
   </select>
 
 
@@ -135,17 +135,17 @@
     where user_id = #{userId}
   </select>
 
-  <select id="selectCartProductCheckedStatusByUserId" resultType="int" parameterType="int">
+  <select id="selectCartCompetitionCheckedStatusByUserId" resultType="int" parameterType="int">
     SELECT  count(1) from programing_cart where checked = 0 and user_id = #{userId}
   </select>
 
 
-  <delete id="deleteByUserIdProductIds" parameterType="map">
+  <delete id="deleteByUserIdCompetitionIds" parameterType="map">
     delete from programing_cart
     where user_id = #{userId}
-    <if test="productIdList != null">
-      and product_id in
-      <foreach collection="productIdList" item="item" index="index" open="(" separator="," close=")">
+    <if test="competitionIdList != null">
+      and competition_id in
+      <foreach collection="competitionIdList" item="item" index="index" open="(" separator="," close=")">
         #{item}
       </foreach>
     </if>
@@ -153,18 +153,18 @@
 
 
 
-  <update id="checkedOrUncheckedProduct" parameterType="map">
+  <update id="checkedOrUncheckedCompetition" parameterType="map">
     UPDATE  programing_cart
     set checked = #{checked},
     update_time = now()
     where user_id = #{userId}
-    <if test="productId != null">
-      and product_id = #{productId}
+    <if test="competitionId != null">
+      and competition_id = #{competitionId}
     </if>
   </update>
 
 
-  <select id="selectCartProductCount" parameterType="int" resultType="int">
+  <select id="selectCartCompetitionCount" parameterType="int" resultType="int">
     select IFNULL(sum(quantity),0) as count from programing_cart where user_id = #{userId}
   </select>
 

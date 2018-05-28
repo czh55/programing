@@ -16,7 +16,7 @@ public class Code {
 
     private Integer id;
 
-    private Integer productId;
+    private Integer competitionId;
 
     private Integer userId;
 

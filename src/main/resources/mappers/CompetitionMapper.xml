@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.programing.dao.ProductMapper" >
-  <resultMap id="BaseResultMap" type="com.programing.pojo.Product" >
+<mapper namespace="com.programing.dao.CompetitionMapper" >
+  <resultMap id="BaseResultMap" type="com.programing.pojo.Competition" >
     <constructor >
       <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="category_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
@@ -25,15 +25,15 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
     <include refid="Base_Column_List" />
-    from programing_product
+    from programing_competition
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from programing_product
+    delete from programing_competition
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.programing.pojo.Product" >
-    insert into programing_product (id, category_id, sponsor_id, name,
+  <insert id="insert" parameterType="com.programing.pojo.Competition" >
+    insert into programing_competition (id, category_id, sponsor_id, name,
     subtitle, main_image, sub_images,
     detail, price, stock,
     status, create_time, update_time
@@ -44,8 +44,8 @@
     #{status,jdbcType=INTEGER}, now(), now()
     )
   </insert>
-  <insert id="insertSelective" parameterType="com.programing.pojo.Product" >
-    insert into programing_product
+  <insert id="insertSelective" parameterType="com.programing.pojo.Competition" >
+    insert into programing_competition
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -126,8 +126,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.programing.pojo.Product" >
-    update programing_product
+  <update id="updateByPrimaryKeySelective" parameterType="com.programing.pojo.Competition" >
+    update programing_competition
     <set >
       <if test="categoryId != null" >
         category_id = #{categoryId,jdbcType=INTEGER},
@@ -168,8 +168,8 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.programing.pojo.Product" >
-    update programing_product
+  <update id="updateByPrimaryKey" parameterType="com.programing.pojo.Competition" >
+    update programing_competition
     set category_id = #{categoryId,jdbcType=INTEGER},
     sponsor_id = #{sponsorId,jdbcType=INTEGER},
     name = #{name,jdbcType=VARCHAR},
@@ -189,14 +189,14 @@
   <select id="selectList" resultMap="BaseResultMap" >
     SELECT
     <include refid="Base_Column_List"/>
-    from programing_product
+    from programing_competition
     ORDER BY id asc
   </select>
 
   <select id="selectListBySponsorId" resultMap="BaseResultMap" >
     SELECT
     <include refid="Base_Column_List"/>
-    from programing_product
+    from programing_competition
     <where>
       <if test="sponsorId != 1">
         and sponsor_id = #{sponsorId}
@@ -206,30 +206,30 @@
   </select>
 
 
-  <select id="selectByNameAndProductId" resultMap="BaseResultMap" parameterType="map">
+  <select id="selectByNameAndCompetitionId" resultMap="BaseResultMap" parameterType="map">
     SELECT
     <include refid="Base_Column_List"/>
-    from programing_product
+    from programing_competition
     <where>
-      <if test="productName != null">
-        and name like #{productName}
+      <if test="competitionName != null">
+        and name like #{competitionName}
       </if>
-      <if test="productId != null">
-        and id = #{productId}
+      <if test="competitionId != null">
+        and id = #{competitionId}
       </if>
     </where>
   </select>
 
-  <select id="selectByNameAndProductIdAndStatusAndSponsorId" resultMap="BaseResultMap" parameterType="map">
+  <select id="selectByNameAndCompetitionIdAndStatusAndSponsorId" resultMap="BaseResultMap" parameterType="map">
     SELECT
     <include refid="Base_Column_List"/>
-    from programing_product
+    from programing_competition
     <where>
-      <if test="productName != null">
-        and name like #{productName}
+      <if test="competitionName != null">
+        and name like #{competitionName}
       </if>
-      <if test="productId != null">
-        and id = #{productId}
+      <if test="competitionId != null">
+        and id = #{competitionId}
       </if>
       <if test="status != null">
         and status like #{status}
@@ -243,10 +243,10 @@
   <select id="selectByNameAndCategoryIds" resultMap="BaseResultMap" parameterType="map">
     SELECT
     <include refid="Base_Column_List"></include>
-    from programing_product
+    from programing_competition
     where status = 1
-    <if test="productName != null">
-      and name like #{productName}
+    <if test="competitionName != null">
+      and name like #{competitionName}
     </if>
     <if test="categoryIdList != null" >
       and category_id in
@@ -256,10 +256,10 @@
     </if>
   </select>
 
-  <select id="selectStockByProductId" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+  <select id="selectStockByCompetitionId" resultType="java.lang.Integer" parameterType="java.lang.Integer">
     select
     stock
-    from programing_product
+    from programing_competition
     where id = #{id}
     for update
 

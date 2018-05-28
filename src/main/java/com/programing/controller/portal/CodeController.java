@@ -40,20 +40,20 @@ public class CodeController {
         User user = JsonUtil.string2Obj(userJsonStr, User.class);
         code.setUserId(user.getId());
         code.setUserName(user.getUsername());
-        //productId,title,src是从前台传来，其他的userId是服务器端处理出来的,id的存在与否，区分两种情况
+        //competitionId,title,src是从前台传来，其他的userId是服务器端处理出来的,id的存在与否，区分两种情况
         return iCodeService.saveOrUpdateCode(code);
     }
 
     @RequestMapping("detail.do")
     @ResponseBody
-    public ServerResponse getCodeDetail(HttpServletRequest httpServletRequest, Integer productId) {
+    public ServerResponse getCodeDetail(HttpServletRequest httpServletRequest, Integer competitionId) {
         //由于使用了拦截器，所以我们必须重新获得一次，不同的是这次不用验证了。
         String loginToken = CookieUtil.readLoginToken(httpServletRequest);
         String userJsonStr = RedisShardedPoolUtil.get(loginToken);
         User user = JsonUtil.string2Obj(userJsonStr, User.class);
         Integer userId = user.getId();
 
-        return iCodeService.getCodeDetail(productId,userId);
+        return iCodeService.getCodeDetail(competitionId,userId);
     }
 
 

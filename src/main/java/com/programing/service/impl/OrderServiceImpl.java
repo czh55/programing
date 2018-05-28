@@ -20,21 +20,17 @@ import com.programing.dao.CartMapper;
 import com.programing.dao.OrderItemMapper;
 import com.programing.dao.OrderMapper;
 import com.programing.dao.PayInfoMapper;
-import com.programing.dao.ProductMapper;
+import com.programing.dao.CompetitionMapper;
 import com.programing.dao.ShippingMapper;
-import com.programing.pojo.Cart;
-import com.programing.pojo.Order;
-import com.programing.pojo.OrderItem;
-import com.programing.pojo.PayInfo;
-import com.programing.pojo.Product;
-import com.programing.pojo.Shipping;
+import com.programing.pojo.*;
+import com.programing.pojo.Competition;
 import com.programing.service.IOrderService;
 import com.programing.util.BigDecimalUtil;
 import com.programing.util.DateTimeUtil;
 import com.programing.util.FTPUtil;
 import com.programing.util.PropertiesUtil;
 import com.programing.vo.OrderItemVo;
-import com.programing.vo.OrderProductVo;
+import com.programing.vo.OrderCompetitionVo;
 import com.programing.vo.OrderVo;
 import com.programing.vo.ShippingVo;
 import lombok.extern.slf4j.Slf4j;
@@ -82,7 +78,7 @@ public class OrderServiceImpl implements IOrderService {
     @Autowired
     private CartMapper cartMapper;
     @Autowired
-    private ProductMapper productMapper;
+    private CompetitionMapper competitionMapper;
     @Autowired
     private ShippingMapper shippingMapper;
 
@@ -93,8 +89,8 @@ public class OrderServiceImpl implements IOrderService {
         List<Cart> cartList = cartMapper.selectCheckedCartByUserId(userId);
 
         //查询货物对应的sponsor
-        Product product = productMapper.selectByPrimaryKey(cartList.get(0).getProductId());
-        int sponsorId = product.getSponsorId();
+        Competition competition = competitionMapper.selectByPrimaryKey(cartList.get(0).getCompetitionId());
+        int sponsorId = competition.getSponsorId();
 
         //计算这个订单的总价,校验购物车的数据,包括产品的状态和数量，返回封装好orderItemList
         ServerResponse serverResponse = this.getCartOrderItem(userId,cartList,sponsorId);
@@ -120,7 +116,7 @@ public class OrderServiceImpl implements IOrderService {
         orderItemMapper.batchInsert(orderItemList);
 
         //生成成功,我们要减少我们产品的库存
-        this.reduceProductStock(orderItemList);
+        this.reduceCompetitionStock(orderItemList);
         //清空一下购物车
         this.cleanCart(cartList);
 
@@ -174,9 +170,9 @@ public class OrderServiceImpl implements IOrderService {
     private OrderItemVo assembleOrderItemVo(OrderItem orderItem){
         OrderItemVo orderItemVo = new OrderItemVo();
         orderItemVo.setOrderNo(orderItem.getOrderNo());
-        orderItemVo.setProductId(orderItem.getProductId());
-        orderItemVo.setProductName(orderItem.getProductName());
-        orderItemVo.setProductImage(orderItem.getProductImage());
+        orderItemVo.setCompetitionId(orderItem.getCompetitionId());
+        orderItemVo.setCompetitionName(orderItem.getCompetitionName());
+        orderItemVo.setCompetitionImage(orderItem.getCompetitionImage());
         orderItemVo.setCurrentUnitPrice(orderItem.getCurrentUnitPrice());
         orderItemVo.setQuantity(orderItem.getQuantity());
         orderItemVo.setTotalPrice(orderItem.getTotalPrice());
@@ -208,11 +204,11 @@ public class OrderServiceImpl implements IOrderService {
 
 
 
-    private void reduceProductStock(List<OrderItem> orderItemList){
+    private void reduceCompetitionStock(List<OrderItem> orderItemList){
         for(OrderItem orderItem : orderItemList){
-            Product product = productMapper.selectByPrimaryKey(orderItem.getProductId());
-            product.setStock(product.getStock()-orderItem.getQuantity());
-            productMapper.updateByPrimaryKeySelective(product);
+            Competition competition = competitionMapper.selectByPrimaryKey(orderItem.getCompetitionId());
+            competition.setStock(competition.getStock()-orderItem.getQuantity());
+            competitionMapper.updateByPrimaryKeySelective(competition);
         }
     }
 
@@ -263,24 +259,24 @@ public class OrderServiceImpl implements IOrderService {
         //校验购物车的数据,包括产品的状态和数量
         for(Cart cartItem : cartList){
             OrderItem orderItem = new OrderItem();
-            Product product = productMapper.selectByPrimaryKey(cartItem.getProductId());
-            if(Const.ProductStatusEnum.ON_SALE.getCode() != product.getStatus()){
-                return ServerResponse.createByErrorMessage("产品"+product.getName()+"不是在线售卖状态");
+            Competition competition = competitionMapper.selectByPrimaryKey(cartItem.getCompetitionId());
+            if(Const.CompetitionStatusEnum.ON_SALE.getCode() != competition.getStatus()){
+                return ServerResponse.createByErrorMessage("产品"+ competition.getName()+"不是在线售卖状态");
             }
 
             //校验库存
-            if(cartItem.getQuantity() > product.getStock()){
-                return ServerResponse.createByErrorMessage("产品"+product.getName()+"库存不足");
+            if(cartItem.getQuantity() > competition.getStock()){
+                return ServerResponse.createByErrorMessage("产品"+ competition.getName()+"库存不足");
             }
 
             orderItem.setSponsorId(sponsorId);
             orderItem.setUserId(userId);
-            orderItem.setProductId(product.getId());
-            orderItem.setProductName(product.getName());
-            orderItem.setProductImage(product.getMainImage());
-            orderItem.setCurrentUnitPrice(product.getPrice());
+            orderItem.setCompetitionId(competition.getId());
+            orderItem.setCompetitionName(competition.getName());
+            orderItem.setCompetitionImage(competition.getMainImage());
+            orderItem.setCurrentUnitPrice(competition.getPrice());
             orderItem.setQuantity(cartItem.getQuantity());
-            orderItem.setTotalPrice(BigDecimalUtil.mul(product.getPrice().doubleValue(),cartItem.getQuantity()));
+            orderItem.setTotalPrice(BigDecimalUtil.mul(competition.getPrice().doubleValue(),cartItem.getQuantity()));
             orderItemList.add(orderItem);
         }
         return ServerResponse.createBySuccess(orderItemList);
@@ -312,15 +308,15 @@ public class OrderServiceImpl implements IOrderService {
 
 
 
-    public ServerResponse getOrderCartProduct(Integer userId){
-        OrderProductVo orderProductVo = new OrderProductVo();
+    public ServerResponse getOrderCartCompetition(Integer userId){
+        OrderCompetitionVo orderCompetitionVo = new OrderCompetitionVo();
         //从购物车中获取数据
 
         List<Cart> cartList = cartMapper.selectCheckedCartByUserId(userId);
 
         //查询货物对应的sponsor
-        Product product = productMapper.selectByPrimaryKey(cartList.get(0).getProductId());
-        int sponsorId = product.getSponsorId();
+        Competition competition = competitionMapper.selectByPrimaryKey(cartList.get(0).getCompetitionId());
+        int sponsorId = competition.getSponsorId();
 
         //这里的getCartOrderItem()还在create订单的时候使用，目的：根据cartList，检查并重组orderItem
         //到达确认页以后，可能同时又很多用户同时操作。当我们真正的提交订单时，可能库存已经不够了，所有要调用进行第二次的检查
@@ -337,10 +333,10 @@ public class OrderServiceImpl implements IOrderService {
             payment = BigDecimalUtil.add(payment.doubleValue(),orderItem.getTotalPrice().doubleValue());
             orderItemVoList.add(assembleOrderItemVo(orderItem));
         }
-        orderProductVo.setProductTotalPrice(payment);
-        orderProductVo.setOrderItemVoList(orderItemVoList);
-        orderProductVo.setImageHost(PropertiesUtil.getProperty("ftp.server.http.prefix"));
-        return ServerResponse.createBySuccess(orderProductVo);
+        orderCompetitionVo.setCompetitionTotalPrice(payment);
+        orderCompetitionVo.setOrderItemVoList(orderItemVoList);
+        orderCompetitionVo.setImageHost(PropertiesUtil.getProperty("ftp.server.http.prefix"));
+        return ServerResponse.createBySuccess(orderCompetitionVo);
     }
 
 
@@ -461,7 +457,7 @@ public class OrderServiceImpl implements IOrderService {
 
         List<OrderItem> orderItemList = orderItemMapper.getByOrderNoUserId(orderNo,userId);
         for(OrderItem orderItem : orderItemList){
-            GoodsDetail goods = GoodsDetail.newInstance(orderItem.getProductId().toString(), orderItem.getProductName(),
+            GoodsDetail goods = GoodsDetail.newInstance(orderItem.getCompetitionId().toString(), orderItem.getCompetitionName(),
                     BigDecimalUtil.mul(orderItem.getCurrentUnitPrice().doubleValue(),new Double(100).doubleValue()).longValue(),
                     orderItem.getQuantity());
             goodsDetailList.add(goods);
@@ -659,16 +655,16 @@ public class OrderServiceImpl implements IOrderService {
             for(OrderItem orderItem : orderItemList){
 
                 //一定要用主键where条件，防止锁表。同时必须是支持MySQL的InnoDB。
-                Integer stock = productMapper.selectStockByProductId(orderItem.getProductId());
+                Integer stock = competitionMapper.selectStockByCompetitionId(orderItem.getCompetitionId());
 
                 //考虑到已生成的订单里的商品，被删除的情况
                 if(stock == null){
                     continue;
                 }
-                Product product = new Product();
-                product.setId(orderItem.getProductId());
-                product.setStock(stock+orderItem.getQuantity());
-                productMapper.updateByPrimaryKeySelective(product);
+                Competition competition = new Competition();
+                competition.setId(orderItem.getCompetitionId());
+                competition.setStock(stock+orderItem.getQuantity());
+                competitionMapper.updateByPrimaryKeySelective(competition);
             }
             orderMapper.closeOrderByOrderId(order.getId());
             log.info("关闭订单OrderNo：{}",order.getOrderNo());

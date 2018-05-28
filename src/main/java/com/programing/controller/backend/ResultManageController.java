@@ -47,8 +47,8 @@ public class ResultManageController {
 
     @RequestMapping("detail.do")
     @ResponseBody
-    public ServerResponse getDetail(HttpServletRequest httpServletRequest, Integer productId) {
-        return iResultService.manageResultDetail(productId);
+    public ServerResponse getDetail(HttpServletRequest httpServletRequest, Integer competitionId) {
+        return iResultService.manageResultDetail(competitionId);
     }
 
     @RequestMapping("richtext_img_upload.do")

@@ -38,24 +38,6 @@ public class CompetitionManageController {
     @RequestMapping("save.do")
     @ResponseBody
     public ServerResponse competitionSave(HttpServletRequest httpServletRequest, Competition competition){
-//        String loginToken = CookieUtil.readLoginToken(httpServletRequest);
-//        if(StringUtils.isEmpty(loginToken)){
-//            return ServerResponse.createByErrorMessage("用户未登录,无法获取当前用户的信息");
-//        }
-//        String userJsonStr = RedisShardedPoolUtil.get(loginToken);
-//        User user = JsonUtil.string2Obj(userJsonStr,User.class);
-//
-//        if(user == null){
-//            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录,请登录管理员");
-//
-//        }
-//        if(iUserService.checkAdminRole(user).isSuccess()){
-//            //填充我们增加产品的业务逻辑
-//            return iCompetitionService.saveOrUpdateCompetition(competition);
-//        }else{
-//            return ServerResponse.createByErrorMessage("无权限操作");
-//        }
-
         //由于使用了拦截器，所以我们必须重新获得一次，不同的是这次不用验证了。
         String loginToken = CookieUtil.readLoginToken(httpServletRequest);
         String userJsonStr = RedisShardedPoolUtil.get(loginToken);
@@ -67,69 +49,18 @@ public class CompetitionManageController {
     @RequestMapping("set_sale_status.do")
     @ResponseBody
     public ServerResponse setSaleStatus(HttpServletRequest httpServletRequest, Integer competitionId,Integer status){
-//        String loginToken = CookieUtil.readLoginToken(httpServletRequest);
-//        if(StringUtils.isEmpty(loginToken)){
-//            return ServerResponse.createByErrorMessage("用户未登录,无法获取当前用户的信息");
-//        }
-//        String userJsonStr = RedisShardedPoolUtil.get(loginToken);
-//        User user = JsonUtil.string2Obj(userJsonStr,User.class);
-//
-//        if(user == null){
-//            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录,请登录管理员");
-//
-//        }
-//        if(iUserService.checkAdminRole(user).isSuccess()){
-//            return iCompetitionService.setSaleStatus(competitionId,status);
-//        }else{
-//            return ServerResponse.createByErrorMessage("无权限操作");
-//        }
         return iCompetitionService.setSaleStatus(competitionId,status);
     }
 
     @RequestMapping("detail.do")
     @ResponseBody
     public ServerResponse getDetail(HttpServletRequest httpServletRequest, Integer competitionId){
-//        String loginToken = CookieUtil.readLoginToken(httpServletRequest);
-//        if(StringUtils.isEmpty(loginToken)){
-//            return ServerResponse.createByErrorMessage("用户未登录,无法获取当前用户的信息");
-//        }
-//        String userJsonStr = RedisShardedPoolUtil.get(loginToken);
-//        User user = JsonUtil.string2Obj(userJsonStr,User.class);
-//
-//        if(user == null){
-//            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录,请登录管理员");
-//
-//        }
-//        if(iUserService.checkAdminRole(user).isSuccess()){
-//            //填充业务
-//            return iCompetitionService.manageCompetitionDetail(competitionId);
-//
-//        }else{
-//            return ServerResponse.createByErrorMessage("无权限操作");
-//        }
         return iCompetitionService.manageCompetitionDetail(competitionId);
     }
 
     @RequestMapping("list.do")
     @ResponseBody
     public ServerResponse getList(HttpServletRequest httpServletRequest, @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,@RequestParam(value = "pageSize",defaultValue = "10") int pageSize){
-//        String loginToken = CookieUtil.readLoginToken(httpServletRequest);
-//        if(StringUtils.isEmpty(loginToken)){
-//            return ServerResponse.createByErrorMessage("用户未登录,无法获取当前用户的信息");
-//        }
-//        String userJsonStr = RedisShardedPoolUtil.get(loginToken);
-//        User user = JsonUtil.string2Obj(userJsonStr,User.class);
-//
-//        if(user == null){
-//            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录,请登录管理员");
-//
-//        }
-//        if(iUserService.checkAdminRole(user).isSuccess()){
-//            //填充业务
-//            return iCompetitionService.getCompetitionList(pageNum,pageSize);
-//        }else{
-//            return ServerResponse.createByErrorMessage("无权限操作");
-//        }
         //由于使用了拦截器，所以我们必须重新获得一次，不同的是这次不用验证了。
         String loginToken = CookieUtil.readLoginToken(httpServletRequest);
         String userJsonStr = RedisShardedPoolUtil.get(loginToken);
@@ -142,23 +73,6 @@ public class CompetitionManageController {
     @RequestMapping("search.do")
     @ResponseBody
     public ServerResponse competitionSearch(HttpServletRequest httpServletRequest,String competitionName,Integer competitionId,Integer status,  @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,@RequestParam(value = "pageSize",defaultValue = "10") int pageSize){
-//        String loginToken = CookieUtil.readLoginToken(httpServletRequest);
-//        if(StringUtils.isEmpty(loginToken)){
-//            return ServerResponse.createByErrorMessage("用户未登录,无法获取当前用户的信息");
-//        }
-//        String userJsonStr = RedisShardedPoolUtil.get(loginToken);
-//        User user = JsonUtil.string2Obj(userJsonStr,User.class);
-//
-//        if(user == null){
-//            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录,请登录管理员");
-//
-//        }
-//        if(iUserService.checkAdminRole(user).isSuccess()){
-//            //填充业务
-//            return iCompetitionService.searchCompetition(competitionName,competitionId,pageNum,pageSize);
-//        }else{
-//            return ServerResponse.createByErrorMessage("无权限操作");
-//        }
         //由于使用了拦截器，所以我们必须重新获得一次，不同的是这次不用验证了。
         String loginToken = CookieUtil.readLoginToken(httpServletRequest);
         String userJsonStr = RedisShardedPoolUtil.get(loginToken);
@@ -171,28 +85,6 @@ public class CompetitionManageController {
     @RequestMapping("upload.do")
     @ResponseBody
     public ServerResponse upload(HttpServletRequest httpServletRequest,@RequestParam(value = "upload_file",required = false) MultipartFile file,HttpServletRequest request){
-//        String loginToken = CookieUtil.readLoginToken(httpServletRequest);
-//        if(StringUtils.isEmpty(loginToken)){
-//            return ServerResponse.createByErrorMessage("用户未登录,无法获取当前用户的信息");
-//        }
-//        String userJsonStr = RedisShardedPoolUtil.get(loginToken);
-//        User user = JsonUtil.string2Obj(userJsonStr,User.class);
-//        if(user == null){
-//            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录,请登录管理员");
-//        }
-//        if(iUserService.checkAdminRole(user).isSuccess()){
-//            String path = request.getSession().getServletContext().getRealPath("upload");
-//            String targetFileName = iFileService.upload(file,path);
-//            String url = PropertiesUtil.getProperty("ftp.server.http.prefix")+targetFileName;
-//
-//            Map fileMap = Maps.newHashMap();
-//            fileMap.put("uri",targetFileName);
-//            fileMap.put("url",url);
-//            return ServerResponse.createBySuccess(fileMap);
-//        }else{
-//            return ServerResponse.createByErrorMessage("无权限操作");
-//        }
-
         String path = request.getSession().getServletContext().getRealPath("upload");
         String targetFileName = iFileService.upload(file,path);
         String url = PropertiesUtil.getProperty("ftp.server.http.prefix")+targetFileName;
@@ -208,47 +100,6 @@ public class CompetitionManageController {
     @ResponseBody
     public Map richtextImgUpload(HttpServletRequest httpServletRequest, @RequestParam(value = "upload_file",required = false) MultipartFile file, HttpServletRequest request, HttpServletResponse response){
         Map resultMap = Maps.newHashMap();
-
-//        String loginToken = CookieUtil.readLoginToken(httpServletRequest);
-//        if(StringUtils.isEmpty(loginToken)){
-//            resultMap.put("success",false);
-//            resultMap.put("msg","请登录管理员");
-//            return resultMap;
-//        }
-//        String userJsonStr = RedisShardedPoolUtil.get(loginToken);
-//        User user = JsonUtil.string2Obj(userJsonStr,User.class);
-//
-//        if(user == null){
-//            resultMap.put("success",false);
-//            resultMap.put("msg","请登录管理员");
-//            return resultMap;
-//        }
-//        //富文本中对于返回值有自己的要求,我们使用是simditor所以按照simditor的要求进行返回
-////        {
-////            "success": true/false,
-////                "msg": "error message", # optional
-////            "file_path": "[real file path]"
-////        }
-//        if(iUserService.checkAdminRole(user).isSuccess()){
-//            String path = request.getSession().getServletContext().getRealPath("upload");
-//            String targetFileName = iFileService.upload(file,path);
-//            if(StringUtils.isBlank(targetFileName)){
-//                resultMap.put("success",false);
-//                resultMap.put("msg","上传失败");
-//                return resultMap;
-//            }
-//            String url = PropertiesUtil.getProperty("ftp.server.http.prefix")+targetFileName;
-//            resultMap.put("success",true);
-//            resultMap.put("msg","上传成功");
-//            resultMap.put("file_path",url);
-//            response.addHeader("Access-Control-Allow-Headers","X-File-Name");
-//            return resultMap;
-//        }else{
-//            resultMap.put("success",false);
-//            resultMap.put("msg","无权限操作");
-//            return resultMap;
-//        }
-
 
         String path = request.getSession().getServletContext().getRealPath("upload");
         String targetFileName = iFileService.upload(file,path);

@@ -2,6 +2,7 @@ package com.programing.controller.common.interceptor;
 
 import com.google.common.collect.Maps;
 import com.programing.common.Const;
+import com.programing.common.ResponseCode;
 import com.programing.common.ServerResponse;
 import com.programing.pojo.User;
 import com.programing.util.CookieUtil;
@@ -73,33 +74,33 @@ public class AuthorityInterceptor implements HandlerInterceptor{
         if(user == null || (user.getRole().intValue() != Const.Role.ROLE_ADMIN)){
             //返回false.即不会调用controller里的方法
             response.reset();//geelynote 这里要添加reset，否则报异常 getWriter() has already been called for this response.
-            response.setCharacterEncoding("UTF-8");//geelynote 这里要设置编码，否则会乱码
-            response.setContentType("application/json;charset=UTF-8");//geelynote 这里要设置返回值的类型，因为全部是json接口。
+            response.setCharacterEncoding("UTF-8");//这里要设置编码，否则会乱码
+            response.setContentType("application/json;charset=UTF-8");//这里要设置返回值的类型，因为全部是json接口。
 
             PrintWriter out = response.getWriter();
 
             //上传由于富文本的控件要求，要特殊处理返回值，这里面区分是否登录以及是否有权限
             if(user == null){
-                if(StringUtils.equals(className,"ProductManageController") && StringUtils.equals(methodName,"richtextImgUpload")){
+                if(StringUtils.equals(className,"CompetitionManageController") && StringUtils.equals(methodName,"richtextImgUpload")){
                     Map resultMap = Maps.newHashMap();
                     resultMap.put("success",false);
-                    resultMap.put("msg","请登录管理员");
+                    resultMap.put("msg","用户未登录");
                     out.print(JsonUtil.obj2String(resultMap));
                 }else{
-                    out.print(JsonUtil.obj2String(ServerResponse.createByErrorMessage("拦截器拦截,用户未登录")));
+                    out.print(JsonUtil.obj2String(ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"拦截器拦截,用户未登录")));
                 }
             }else{
-                if(StringUtils.equals(className,"ProductManageController") && StringUtils.equals(methodName,"richtextImgUpload")){
+                if(StringUtils.equals(className,"CompetitionManageController") && StringUtils.equals(methodName,"richtextImgUpload")){
                     Map resultMap = Maps.newHashMap();
                     resultMap.put("success",false);
                     resultMap.put("msg","无权限操作");
                     out.print(JsonUtil.obj2String(resultMap));
                 }else{
-                    out.print(JsonUtil.obj2String(ServerResponse.createByErrorMessage("拦截器拦截,用户无权限操作")));
+                    out.print(JsonUtil.obj2String(ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"拦截器拦截,用户无权限操作")));
                 }
             }
             out.flush();
-            out.close();//geelynote 这里要关闭
+            out.close();// 这里要关闭
 
             return false;
 

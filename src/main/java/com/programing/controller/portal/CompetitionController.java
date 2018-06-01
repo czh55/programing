@@ -40,4 +40,10 @@ public class CompetitionController {
         return iCompetitionService.getCompetitionByKeywordCategory(keyword,categoryId,pageNum,pageSize,orderBy);
     }
 
+    @RequestMapping("listWithResult.do")
+    @ResponseBody
+    public ServerResponse<PageInfo> list(@RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
+                                         @RequestParam(value = "pageSize",defaultValue = "10") int pageSize){
+        return iCompetitionService.getCompetitionWithResult(pageNum,pageSize);
+    }
 }

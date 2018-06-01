@@ -32,6 +32,8 @@ public interface CompetitionMapper {
 
     List<Competition> selectByNameAndCategoryIds(@Param("competitionName")String competitionName, @Param("categoryIdList")List<Integer> categoryIdList);
 
+    List<Competition> selectWithResult();
+
     //这里一定要用Integer，因为int无法为NULL，考虑到很多商品已经删除的情况。
     Integer selectStockByCompetitionId(Integer id);
 

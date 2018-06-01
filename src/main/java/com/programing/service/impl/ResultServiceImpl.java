@@ -36,7 +36,7 @@ public class ResultServiceImpl implements IResultService {
         }
         return ServerResponse.createByErrorMessage("新增或更新结果参数不正确");
     }
-
+    //这个方法可以前后端公用
     @Override
     public ServerResponse<Result> manageResultDetail(Integer competitionId) {
         if(competitionId == null){
@@ -48,6 +48,5 @@ public class ResultServiceImpl implements IResultService {
         }
         return ServerResponse.createBySuccess(result);
     }
-
 
 }

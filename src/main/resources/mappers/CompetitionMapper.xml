@@ -265,5 +265,11 @@
 
   </select>
 
+  <select id="selectWithResult" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"></include>
+    from programing_competition
+    where id in (select competition_id from programing_result)
+  </select>
+
 
 </mapper>

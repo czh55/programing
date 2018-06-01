@@ -265,6 +265,22 @@ public class CompetitionServiceImpl implements ICompetitionService {
     }
 
 
+    public ServerResponse<PageInfo> getCompetitionWithResult(int pageNum,int pageSize){
+        PageHelper.startPage(pageNum,pageSize);
+
+        List<Competition> competitionList = competitionMapper.selectWithResult();
+
+        List<CompetitionListVo> competitionListVoList = Lists.newArrayList();
+        for(Competition competition : competitionList){
+            CompetitionListVo competitionListVo = assembleCompetitionListVo(competition);
+            competitionListVoList.add(competitionListVo);
+        }
+
+        PageInfo pageInfo = new PageInfo(competitionList);
+        pageInfo.setList(competitionListVoList);
+        return ServerResponse.createBySuccess(pageInfo);
+    }
+
     public ServerResponse<Integer> getSponsorIdByCompetitionId(Integer competitionId) {
         //调用competitionMapper去查询sponsorId
         Competition competition = competitionMapper.selectByPrimaryKey(competitionId);

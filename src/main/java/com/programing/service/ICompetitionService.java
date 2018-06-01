@@ -27,6 +27,8 @@ public interface ICompetitionService {
 
     ServerResponse<PageInfo> getCompetitionByKeywordCategory(String keyword,Integer categoryId,int pageNum,int pageSize,String orderBy);
 
+    ServerResponse<PageInfo> getCompetitionWithResult(int pageNum,int pageSize);
+
     ServerResponse<Integer> getSponsorIdByCompetitionId(Integer competitionId);
 
 }

@@ -4,13 +4,13 @@ import java.math.BigDecimal;
 
 public class CartCompetitionVo {
 
-//结合了产品和购物车的一个抽象对象
+//结合了比赛和收藏夹的一个抽象对象
 
     private Integer id;
     private Integer userId;
     private Integer competitionId;
-    private String sponsorName;//用于前台顾客购物车显示商品对应的sponsor
-    private Integer quantity;//购物车中此商品的数量
+    private String sponsorName;//用于前台顾客收藏夹显示比赛对应的sponsor
+    private Integer quantity;//收藏夹中此比赛的数量
     private String competitionName;
     private String competitionSubtitle;
     private String competitionMainImage;
@@ -18,7 +18,7 @@ public class CartCompetitionVo {
     private Integer competitionStatus;
     private BigDecimal competitionTotalPrice;
     private Integer competitionStock;
-    private Integer competitionChecked;//此商品是否勾选
+    private Integer competitionChecked;//此比赛是否勾选
 
     private String limitQuantity;//限制数量的一个返回结果
 

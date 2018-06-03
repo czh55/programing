@@ -58,17 +58,6 @@ public class CartServiceImpl implements ICartService {
         return this.list(userId);
     }
 
-    public ServerResponse<CartVo> update(Integer userId,Integer competitionId,Integer count){
-        if(competitionId == null || count == null){
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(),ResponseCode.ILLEGAL_ARGUMENT.getDesc());
-        }
-        Cart cart = cartMapper.selectCartByUserIdCompetitionId(userId,competitionId);
-        if(cart != null){
-            cart.setQuantity(count);
-        }
-        cartMapper.updateByPrimaryKey(cart);
-        return this.list(userId);
-    }
 
     public ServerResponse<CartVo> deleteCompetition(Integer userId,String competitionIds){
         List<String> competitionList = Splitter.on(",").splitToList(competitionIds);

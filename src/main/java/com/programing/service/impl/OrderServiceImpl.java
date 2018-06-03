@@ -85,14 +85,14 @@ public class OrderServiceImpl implements IOrderService {
 
     public ServerResponse createOrder(Integer userId, Integer shippingId){
 
-        //从购物车中获取数据
+        //从收藏夹中获取数据
         List<Cart> cartList = cartMapper.selectCheckedCartByUserId(userId);
 
         //查询货物对应的sponsor
         Competition competition = competitionMapper.selectByPrimaryKey(cartList.get(0).getCompetitionId());
         int sponsorId = competition.getSponsorId();
 
-        //计算这个订单的总价,校验购物车的数据,包括产品的状态和数量，返回封装好orderItemList
+        //计算这个订单的总价,校验收藏夹的数据,包括比赛的状态和数量，返回封装好orderItemList
         ServerResponse serverResponse = this.getCartOrderItem(userId,cartList,sponsorId);
         if(!serverResponse.isSuccess()){
             return serverResponse;
@@ -107,7 +107,7 @@ public class OrderServiceImpl implements IOrderService {
             return ServerResponse.createByErrorMessage("生成订单错误");
         }
         if(CollectionUtils.isEmpty(orderItemList)){
-            return ServerResponse.createByErrorMessage("购物车为空");
+            return ServerResponse.createByErrorMessage("收藏夹为空");
         }
         for(OrderItem orderItem : orderItemList){
             orderItem.setOrderNo(order.getOrderNo());
@@ -115,9 +115,9 @@ public class OrderServiceImpl implements IOrderService {
         //mybatis 批量插入,这时操作的是order_item表
         orderItemMapper.batchInsert(orderItemList);
 
-        //生成成功,我们要减少我们产品的库存
+        //生成成功,我们要减少我们比赛的库存
         this.reduceCompetitionStock(orderItemList);
-        //清空一下购物车
+        //清空一下收藏夹
         this.cleanCart(cartList);
 
         //返回给前端数据
@@ -249,24 +249,24 @@ public class OrderServiceImpl implements IOrderService {
         }
         return payment;
     }
-    //计算这个订单的总价,校验购物车的数据,包括产品的状态和数量，返回封装好orderItemList
+    //计算这个订单的总价,校验收藏夹的数据,包括比赛的状态和数量，返回封装好orderItemList
     private ServerResponse getCartOrderItem(Integer userId,List<Cart> cartList,Integer sponsorId){
         List<OrderItem> orderItemList = Lists.newArrayList();
         if(CollectionUtils.isEmpty(cartList)){
-            return ServerResponse.createByErrorMessage("购物车为空");
+            return ServerResponse.createByErrorMessage("收藏夹为空");
         }
 
-        //校验购物车的数据,包括产品的状态和数量
+        //校验收藏夹的数据,包括比赛的状态和数量
         for(Cart cartItem : cartList){
             OrderItem orderItem = new OrderItem();
             Competition competition = competitionMapper.selectByPrimaryKey(cartItem.getCompetitionId());
             if(Const.CompetitionStatusEnum.ON_SALE.getCode() != competition.getStatus()){
-                return ServerResponse.createByErrorMessage("产品"+ competition.getName()+"不是在线售卖状态");
+                return ServerResponse.createByErrorMessage("比赛"+ competition.getName()+"不是在线售卖状态");
             }
 
             //校验库存
             if(cartItem.getQuantity() > competition.getStock()){
-                return ServerResponse.createByErrorMessage("产品"+ competition.getName()+"库存不足");
+                return ServerResponse.createByErrorMessage("比赛"+ competition.getName()+"库存不足");
             }
 
             orderItem.setSponsorId(sponsorId);
@@ -310,7 +310,7 @@ public class OrderServiceImpl implements IOrderService {
 
     public ServerResponse getOrderCartCompetition(Integer userId){
         OrderCompetitionVo orderCompetitionVo = new OrderCompetitionVo();
-        //从购物车中获取数据
+        //从收藏夹中获取数据
 
         List<Cart> cartList = cartMapper.selectCheckedCartByUserId(userId);
 

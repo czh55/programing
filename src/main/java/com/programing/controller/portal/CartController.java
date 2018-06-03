@@ -60,23 +60,6 @@ public class CartController {
     }
 
 
-
-    @RequestMapping("update.do")
-    @ResponseBody
-    public ServerResponse<CartVo> update(HttpServletRequest httpServletRequest, Integer count, Integer competitionId){
-        String loginToken = CookieUtil.readLoginToken(httpServletRequest);
-        if(StringUtils.isEmpty(loginToken)){
-            return ServerResponse.createByErrorMessage("用户未登录,无法获取当前用户的信息");
-        }
-        String userJsonStr = RedisShardedPoolUtil.get(loginToken);
-        User user = JsonUtil.string2Obj(userJsonStr,User.class);
-
-        if(user ==null){
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
-        }
-        return iCartService.update(user.getId(),competitionId,count);
-    }
-
     @RequestMapping("delete_competition.do")
     @ResponseBody
     public ServerResponse<CartVo> deleteCompetition(HttpServletRequest httpServletRequest,String competitionIds){

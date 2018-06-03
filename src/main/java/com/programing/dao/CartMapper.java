@@ -16,8 +16,6 @@ public interface CartMapper {
 
     int updateByPrimaryKeySelective(Cart record);
 
-    int updateByPrimaryKey(Cart record);
-
     Cart selectCartByUserIdCompetitionId(@Param("userId") Integer userId, @Param("competitionId")Integer competitionId);
 
     List<Cart> selectCartByUserId(Integer userId);

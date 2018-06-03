@@ -106,17 +106,6 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.programing.pojo.Cart" >
-    update programing_cart
-    set user_id = #{userId,jdbcType=INTEGER},
-    competition_id = #{competitionId,jdbcType=INTEGER},
-    quantity = #{quantity,jdbcType=INTEGER},
-    checked = #{checked,jdbcType=INTEGER},
-    create_time = #{createTime,jdbcType=TIMESTAMP},
-    update_time = now()
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-
 
   <select id="selectCartByUserIdCompetitionId" resultMap="BaseResultMap" parameterType="map">
     SELECT

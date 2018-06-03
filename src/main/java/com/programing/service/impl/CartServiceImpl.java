@@ -38,17 +38,18 @@ public class CartServiceImpl implements ICartService {
     private IUserService iUserService;
 
     //只有比赛没有被添加到收藏夹中，才可以添加
-    public ServerResponse<CartVo> add(Integer userId, Integer competitionId, Integer count){
-        if(competitionId == null || count == null){
+    public ServerResponse<CartVo> add(Integer userId, Integer competitionId){
+        if(competitionId == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(),ResponseCode.ILLEGAL_ARGUMENT.getDesc());
         }
 
 
         Cart cart = cartMapper.selectCartByUserIdCompetitionId(userId,competitionId);
         if(cart == null){
-            //这个产品不在这个收藏夹里,需要新增一个这个产品的记录
+            //这个比赛不在这个收藏夹里,需要新增一个这个比赛的记录
             Cart cartItem = new Cart();
-            cartItem.setQuantity(count);
+            //这里我们直接设置成1，成为默认值
+            cartItem.setQuantity(1);
             cartItem.setChecked(Const.Cart.CHECKED);
             cartItem.setCompetitionId(competitionId);
             cartItem.setUserId(userId);

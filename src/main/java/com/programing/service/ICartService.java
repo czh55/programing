@@ -5,7 +5,7 @@ import com.programing.vo.CartVo;
 
 
 public interface ICartService {
-    ServerResponse<CartVo> add(Integer userId, Integer competitionId, Integer count);
+    ServerResponse<CartVo> add(Integer userId, Integer competitionId);
     ServerResponse<CartVo> deleteCompetition(Integer userId,String competitionIds);
 
     ServerResponse<CartVo> list (Integer userId);

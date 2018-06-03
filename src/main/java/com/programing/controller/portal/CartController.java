@@ -45,7 +45,7 @@ public class CartController {
 
     @RequestMapping("add.do")
     @ResponseBody
-    public ServerResponse<CartVo> add(HttpServletRequest httpServletRequest, Integer count, Integer competitionId){
+    public ServerResponse<CartVo> add(HttpServletRequest httpServletRequest, Integer competitionId){
         String loginToken = CookieUtil.readLoginToken(httpServletRequest);
         if(StringUtils.isEmpty(loginToken)){
             return ServerResponse.createByErrorMessage("用户未登录,无法获取当前用户的信息");
@@ -56,7 +56,7 @@ public class CartController {
         if(user ==null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
         }
-        return iCartService.add(user.getId(),competitionId,count);
+        return iCartService.add(user.getId(),competitionId);
     }
 
 

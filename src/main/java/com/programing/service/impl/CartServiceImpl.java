@@ -119,14 +119,15 @@ public class CartServiceImpl implements ICartService {
 
         if(CollectionUtils.isNotEmpty(cartList)){
             for(Cart cartItem : cartList){
-                CartCompetitionVo cartCompetitionVo = new CartCompetitionVo();
-                cartCompetitionVo.setId(cartItem.getId());
-                cartCompetitionVo.setUserId(userId);
-                cartCompetitionVo.setCompetitionId(cartItem.getCompetitionId());
 
                 Competition competition = competitionMapper.selectByPrimaryKey(cartItem.getCompetitionId());
                 //这里要判断商品存在，并且处于上架状态1,并且库存至少要有一个
                 if(competition != null && competition.getStatus() == Const.CompetitionStatusEnum.ON_SALE.getCode() && competition.getStock() > 0){
+
+                    CartCompetitionVo cartCompetitionVo = new CartCompetitionVo();
+                    cartCompetitionVo.setId(cartItem.getId());
+                    cartCompetitionVo.setUserId(userId);
+                    cartCompetitionVo.setCompetitionId(cartItem.getCompetitionId());
 
                     //用于前台顾客收藏夹显示比赛对应的sponsor
                     String sponsorName = iUserService.getInformation(competition.getSponsorId()).getData().getUsername();
@@ -146,6 +147,7 @@ public class CartServiceImpl implements ICartService {
                         cartCompetitionVo.setLimitQuantity(Const.Cart.LIMIT_NUM_SUCCESS);
                     }else{
                         //这种情况在不会发生，因为我们默认的数量为1
+                        //写在这里的原因是为了以后高并发做准备
                         buyLimitCount = competition.getStock();
                         cartCompetitionVo.setLimitQuantity(Const.Cart.LIMIT_NUM_FAIL);
                         //收藏夹中更新有效名额
@@ -158,13 +160,13 @@ public class CartServiceImpl implements ICartService {
                     //计算总价
                     cartCompetitionVo.setCompetitionTotalPrice(BigDecimalUtil.mul(competition.getPrice().doubleValue(),cartCompetitionVo.getQuantity()));
                     cartCompetitionVo.setCompetitionChecked(cartItem.getChecked());
-                }
 
-                if(cartItem.getChecked() == Const.Cart.CHECKED){
-                    //如果已经勾选,增加到整个的收藏夹总价中
-                    cartTotalPrice = BigDecimalUtil.add(cartTotalPrice.doubleValue(),cartCompetitionVo.getCompetitionTotalPrice().doubleValue());
+                    if(cartItem.getChecked() == Const.Cart.CHECKED){
+                        //如果已经勾选,增加到整个的收藏夹总价中
+                        cartTotalPrice = BigDecimalUtil.add(cartTotalPrice.doubleValue(),cartCompetitionVo.getCompetitionTotalPrice().doubleValue());
+                    }
+                    cartCompetitionVoList.add(cartCompetitionVo);
                 }
-                cartCompetitionVoList.add(cartCompetitionVo);
             }
         }
         cartVo.setCartTotalPrice(cartTotalPrice);

@@ -28,13 +28,6 @@ public class UserController {
     private IUserService iUserService;
 
 
-    /**
-     * 用户登录
-     * @param username
-     * @param password
-     * @param session
-     * @return
-     */
     @RequestMapping(value = "login.do",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<User> login(String username, String password, HttpSession session, HttpServletResponse httpServletResponse){

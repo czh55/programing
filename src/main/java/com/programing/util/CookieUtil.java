@@ -28,12 +28,12 @@ public class CookieUtil {
         return null;
     }
 
-    //X:domain=".happymmall.com"
-    //a:A.happymmall.com            cookie:domain=A.happymmall.com;path="/"
-    //b:B.happymmall.com            cookie:domain=B.happymmall.com;path="/"
-    //c:A.happymmall.com/test/cc    cookie:domain=A.happymmall.com;path="/test/cc"
-    //d:A.happymmall.com/test/dd    cookie:domain=A.happymmall.com;path="/test/dd"
-    //e:A.happymmall.com/test       cookie:domain=A.happymmall.com;path="/test"
+    //X:domain=".programing.com"
+    //a:A.programing.com            cookie:domain=A.programing.com;path="/"
+    //b:B.programing.com            cookie:domain=B.programing.com;path="/"
+    //c:A.programing.com/test/cc    cookie:domain=A.programing.com;path="/test/cc"
+    //d:A.programing.com/test/dd    cookie:domain=A.programing.com;path="/test/dd"
+    //e:A.programing.com/test       cookie:domain=A.programing.com;path="/test"
 
     public static void writeLoginToken(HttpServletResponse response,String token){
         Cookie ck = new Cookie(COOKIE_NAME,token);

@@ -121,7 +121,7 @@ public class CartServiceImpl implements ICartService {
             for(Cart cartItem : cartList){
 
                 Competition competition = competitionMapper.selectByPrimaryKey(cartItem.getCompetitionId());
-                //这里要判断商品存在，并且处于上架状态1,并且库存至少要有一个
+                //这里要判断比赛存在，并且处于上架状态1,并且库存至少要有一个
                 if(competition != null && competition.getStatus() == Const.CompetitionStatusEnum.ON_SALE.getCode() && competition.getStock() > 0){
 
                     CartCompetitionVo cartCompetitionVo = new CartCompetitionVo();

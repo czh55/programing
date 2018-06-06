@@ -1,0 +1,3097 @@
+{
+  "front-version": "2.17.2",
+  "version": 3,
+  "nodes": [
+    {
+      "type": "Project",
+      "id": "5ff63ad2-afae-4b46-a594-da36c4424f50",
+      "lastModified": "2018-06-06T15:45:20.025+08:00",
+      "name": "programing_new"
+    },
+    {
+      "type": "Service",
+      "id": "5a973241-0523-4bdc-ab9f-90e19c29b649",
+      "lastModified": "2018-06-06T15:12:33.664+08:00",
+      "name": "后台_代码",
+      "parentId": "5ff63ad2-afae-4b46-a594-da36c4424f50"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "competitionId",
+              "value": "31"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/manage/code/list.do"
+      },
+      "id": "8327c788-dc1d-4914-ab7c-c1ba98adbf5e",
+      "lastModified": "2018-06-06T15:14:56.155+08:00",
+      "name": "代码列表",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "5a973241-0523-4bdc-ab9f-90e19c29b649"
+    },
+    {
+      "type": "Service",
+      "id": "bf37af96-30aa-40ac-8719-bd857933fd99",
+      "lastModified": "2018-06-06T14:58:40.199+08:00",
+      "name": "后台_品类接口",
+      "parentId": "5ff63ad2-afae-4b46-a594-da36c4424f50"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "categoryId",
+              "value": "100031"
+            },
+            {
+              "enabled": true,
+              "name": "categoryName",
+              "value": "修改品类名称"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/manage/category/set_category_name.do"
+      },
+      "id": "74d24ad7-c6d3-4480-9952-f924dde0f56b",
+      "lastModified": "2018-06-06T15:04:42.385+08:00",
+      "name": "修改品类名字",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "bf37af96-30aa-40ac-8719-bd857933fd99"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "parentId",
+              "value": "0"
+            },
+            {
+              "enabled": true,
+              "name": "categoryName",
+              "value": "新增节点"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/manage/category/add_category.do"
+      },
+      "id": "b28c9cfa-0d0c-47dd-8e77-e14012832883",
+      "lastModified": "2018-06-06T15:03:17.074+08:00",
+      "name": "增加节点",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "bf37af96-30aa-40ac-8719-bd857933fd99"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "categoryId",
+              "value": "0"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/manage/category/get_category.do"
+      },
+      "id": "4cc3715d-6a8a-475a-ae55-7e91567df785",
+      "lastModified": "2018-06-06T15:01:21.759+08:00",
+      "name": "获取品类子节点(平级)",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "bf37af96-30aa-40ac-8719-bd857933fd99"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "categoryId",
+              "value": "0"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/manage/category/get_deep_category.do"
+      },
+      "id": "18266f8d-5d50-4e92-99cd-745d90cbc94e",
+      "lastModified": "2018-06-06T15:05:12.648+08:00",
+      "name": "获取当前分类id及递归子节点categoryId",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "bf37af96-30aa-40ac-8719-bd857933fd99"
+    },
+    {
+      "type": "Service",
+      "description": "",
+      "id": "f4748e3d-3f23-49a8-93d1-1a06b4d53f59",
+      "lastModified": "2018-06-06T14:36:26.187+08:00",
+      "name": "后台_比赛接口",
+      "parentId": "5ff63ad2-afae-4b46-a594-da36c4424f50"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/manage/product/upload.do"
+      },
+      "id": "634b5e06-cd8d-4b66-83bb-bd83ddd65a52",
+      "lastModified": "2018-06-06T14:50:39.278+08:00",
+      "name": "图片上传",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "f4748e3d-3f23-49a8-93d1-1a06b4d53f59"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/manage/product/richtext_img_upload.do"
+      },
+      "id": "88eec1df-f973-42c9-bb69-3e4e7e85fabb",
+      "lastModified": "2018-06-06T14:38:03.574+08:00",
+      "name": "富文本上传图片",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "f4748e3d-3f23-49a8-93d1-1a06b4d53f59"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "categoryId",
+              "value": "1"
+            },
+            {
+              "enabled": true,
+              "name": "name",
+              "value": "比赛名称"
+            },
+            {
+              "enabled": true,
+              "name": "subtitle",
+              "value": "比赛的子标题"
+            },
+            {
+              "enabled": true,
+              "name": "subImages",
+              "value": "test.jpg,11.jpg,2.jpg,3.jpg"
+            },
+            {
+              "enabled": true,
+              "name": "detail",
+              "value": "detailtext"
+            },
+            {
+              "enabled": true,
+              "name": "price",
+              "value": "1000"
+            },
+            {
+              "enabled": true,
+              "name": "stock",
+              "value": "100"
+            },
+            {
+              "enabled": true,
+              "name": "status",
+              "value": "1"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/manage/competition/save.do"
+      },
+      "id": "1230f5dc-4bb2-4284-b786-25267f2aea5b",
+      "lastModified": "2018-06-06T14:42:01.675+08:00",
+      "name": "新增比赛",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "f4748e3d-3f23-49a8-93d1-1a06b4d53f59"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "categoryId",
+              "value": "1"
+            },
+            {
+              "enabled": true,
+              "name": "name",
+              "value": "修改比赛名称"
+            },
+            {
+              "enabled": true,
+              "name": "subtitle",
+              "value": "修改比赛子名称"
+            },
+            {
+              "enabled": true,
+              "name": "subImages",
+              "value": "test.jpg"
+            },
+            {
+              "enabled": true,
+              "name": "detail",
+              "value": "detailtext"
+            },
+            {
+              "enabled": true,
+              "name": "price",
+              "value": "1"
+            },
+            {
+              "enabled": true,
+              "name": "stock",
+              "value": "10"
+            },
+            {
+              "enabled": true,
+              "name": "status",
+              "value": "1"
+            },
+            {
+              "enabled": true,
+              "name": "id",
+              "value": "35"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/manage/competition/save.do"
+      },
+      "id": "b9f748b9-9b5a-4b85-a171-c193f8af9a44",
+      "lastModified": "2018-06-06T14:50:14.775+08:00",
+      "name": "更新比赛",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "f4748e3d-3f23-49a8-93d1-1a06b4d53f59"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/manage/competition/list.do"
+      },
+      "id": "1e48d11a-fc15-429e-969e-bed88f8c7e94",
+      "lastModified": "2018-06-06T14:57:32.138+08:00",
+      "name": "比赛list",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "f4748e3d-3f23-49a8-93d1-1a06b4d53f59"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "competitionId",
+              "value": "1"
+            },
+            {
+              "enabled": true,
+              "name": "status",
+              "value": "1"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/manage/competition/set_sale_status.do"
+      },
+      "id": "5360d416-ddd9-427c-b19b-8d0c97d39dac",
+      "lastModified": "2018-06-06T14:45:42.413+08:00",
+      "name": "比赛上下架",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "f4748e3d-3f23-49a8-93d1-1a06b4d53f59"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "competitionName",
+              "value": "p"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/manage/competition/search.do"
+      },
+      "id": "e406da71-4fd8-416b-a7cd-ca611d5d2128",
+      "lastModified": "2018-06-06T14:54:48.443+08:00",
+      "name": "比赛搜索byCompetitionName",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "f4748e3d-3f23-49a8-93d1-1a06b4d53f59"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "competitionName",
+              "value": "修改"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/manage/competition/search.do"
+      },
+      "id": "8c21ab26-8e9e-46a5-84b2-bf25c865d920",
+      "lastModified": "2018-06-06T14:57:19.797+08:00",
+      "name": "比赛搜索byId",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "f4748e3d-3f23-49a8-93d1-1a06b4d53f59"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "competitionId",
+              "value": "35"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/manage/competition/detail.do"
+      },
+      "id": "b56dd73f-d9fc-4423-bab4-28bd33e6e8e5",
+      "lastModified": "2018-06-06T14:46:47.875+08:00",
+      "name": "比赛详情",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "f4748e3d-3f23-49a8-93d1-1a06b4d53f59"
+    },
+    {
+      "type": "Service",
+      "id": "4b9cb98b-e29a-47d5-88b2-a2d1d65111a9",
+      "lastModified": "2018-06-06T14:32:01.671+08:00",
+      "name": "后台_用户接口",
+      "parentId": "5ff63ad2-afae-4b46-a594-da36c4424f50"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "username",
+              "value": "admin"
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "password",
+              "value": "admin"
+            }
+          ]
+        },
+        "bodyType": "Form",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/manage/user/login.do"
+      },
+      "id": "9e26e4d7-c790-486b-85e4-c84a040db1ab",
+      "lastModified": "2018-06-06T14:34:36.036+08:00",
+      "name": "后台管理员登录",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/x-www-form-urlencoded"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "4b9cb98b-e29a-47d5-88b2-a2d1d65111a9"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/manage/user/list.do"
+      },
+      "id": "65eda995-6d66-4236-b9f6-6c517f9189ea",
+      "lastModified": "2018-06-06T14:35:17.160+08:00",
+      "name": "用户列表",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "4b9cb98b-e29a-47d5-88b2-a2d1d65111a9"
+    },
+    {
+      "type": "Service",
+      "id": "00fe0ae3-87d2-4b92-87e5-e5bde1e5237f",
+      "lastModified": "2018-06-06T15:15:09.142+08:00",
+      "name": "后台_结果",
+      "parentId": "5ff63ad2-afae-4b46-a594-da36c4424f50"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "competitionId",
+              "value": "35"
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "title",
+              "value": "修改标题"
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "detail",
+              "value": "修改结果"
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "id",
+              "value": "2"
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "sponsorId",
+              "value": "1"
+            }
+          ]
+        },
+        "bodyType": "Form",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/manage/result/save.do"
+      },
+      "id": "c25fdeef-c20c-4568-901e-8220258c864b",
+      "lastModified": "2018-06-06T15:26:44.472+08:00",
+      "name": "修改比赛结果",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/x-www-form-urlencoded"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "00fe0ae3-87d2-4b92-87e5-e5bde1e5237f"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "scheme": {
+          "secure": true,
+          "name": "https",
+          "version": "V11"
+        }
+      },
+      "id": "f1cd7bee-2c1c-4c56-846f-cfb2829a23cb",
+      "lastModified": "2018-06-06T15:16:19.441+08:00",
+      "name": "富文本上传",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "00fe0ae3-87d2-4b92-87e5-e5bde1e5237f"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "competitionId",
+              "value": "35"
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "title",
+              "value": "新增比赛结果"
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "detail",
+              "value": "结果细节"
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "sponsorId",
+              "value": "1"
+            }
+          ]
+        },
+        "bodyType": "Form",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/manage/result/save.do"
+      },
+      "id": "70a3d31d-1602-430d-bd70-611cec2f65e7",
+      "lastModified": "2018-06-06T15:25:03.108+08:00",
+      "name": "新增比赛结果",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/x-www-form-urlencoded"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "00fe0ae3-87d2-4b92-87e5-e5bde1e5237f"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "competitionId",
+              "value": "35"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/manage/result/detail.do"
+      },
+      "id": "41421721-0ae9-496a-8126-4f52ce99ba1f",
+      "lastModified": "2018-06-06T15:28:33.274+08:00",
+      "name": "比赛结果详情",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "00fe0ae3-87d2-4b92-87e5-e5bde1e5237f"
+    },
+    {
+      "type": "Service",
+      "id": "7570ed48-82c8-4b6d-a50e-161567e84f72",
+      "lastModified": "2018-06-04T18:06:32.925+08:00",
+      "name": "后台_订单接口",
+      "parentId": "5ff63ad2-afae-4b46-a594-da36c4424f50"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "orderNo",
+              "value": "1528033495860"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/manage/order/search.do"
+      },
+      "id": "a2704f6d-badd-4a93-9b18-52888948a2c8",
+      "lastModified": "2018-06-04T18:22:53.497+08:00",
+      "name": "按订单号查询",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "7570ed48-82c8-4b6d-a50e-161567e84f72"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "pageSize",
+              "value": "3"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/manage/order/list.do"
+      },
+      "id": "fc252dde-80dc-4cc6-acd3-a027741fd0b2",
+      "lastModified": "2018-06-04T18:23:22.194+08:00",
+      "name": "订单List",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "7570ed48-82c8-4b6d-a50e-161567e84f72"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "orderNo",
+              "value": "1527497220985"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/manage/order/send_goods.do"
+      },
+      "id": "55ecb6e3-704b-4e6d-9518-20a72a4f8f8c",
+      "lastModified": "2018-06-04T18:20:54.399+08:00",
+      "name": "订单发货",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "7570ed48-82c8-4b6d-a50e-161567e84f72"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "orderNo",
+              "value": "1528033495860"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/manage/order/detail.do"
+      },
+      "id": "6db97b84-ad64-477c-9ef8-1fddbc3e8387",
+      "lastModified": "2018-06-04T18:22:16.424+08:00",
+      "name": "订单详情",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "7570ed48-82c8-4b6d-a50e-161567e84f72"
+    },
+    {
+      "type": "Service",
+      "id": "5889b4ea-87ae-4f4d-8eae-c1b68e68f994",
+      "lastModified": "2018-06-06T15:41:28.967+08:00",
+      "name": "门户_代码",
+      "parentId": "5ff63ad2-afae-4b46-a594-da36c4424f50"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "competitionId",
+              "value": "35"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/code/detail.do"
+      },
+      "id": "de0a1a70-920e-4269-9ebb-5093315259e5",
+      "lastModified": "2018-06-06T15:41:05.605+08:00",
+      "name": "代码信息查询",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "5889b4ea-87ae-4f4d-8eae-c1b68e68f994"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "id",
+              "value": "11"
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "competitionId",
+              "value": "35"
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "title",
+              "value": "修改代码的标题"
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "src",
+              "value": "修改src"
+            }
+          ]
+        },
+        "bodyType": "Form",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/code/save.do"
+      },
+      "id": "bdaa59f9-67f2-4510-8fb5-981708469ea4",
+      "lastModified": "2018-06-06T15:40:28.931+08:00",
+      "name": "代码修改",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/x-www-form-urlencoded"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "5889b4ea-87ae-4f4d-8eae-c1b68e68f994"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "competitionId",
+              "value": "35"
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "title",
+              "value": "代码提交标题"
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "src",
+              "value": "src.src"
+            }
+          ]
+        },
+        "bodyType": "Form",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/code/save.do"
+      },
+      "id": "4b1151a1-6d62-4f20-8d52-313cc5d33eda",
+      "lastModified": "2018-06-06T15:39:06.603+08:00",
+      "name": "代码提交withoutId",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/x-www-form-urlencoded"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "5889b4ea-87ae-4f4d-8eae-c1b68e68f994"
+    },
+    {
+      "type": "Service",
+      "id": "afa1a713-1819-4ee4-b8db-159ff24cd76d",
+      "lastModified": "2018-06-03T21:59:01.354+08:00",
+      "name": "门户_支付接口",
+      "parentId": "5ff63ad2-afae-4b46-a594-da36c4424f50"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "orderNo",
+              "value": "1528033495860"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/order/pay.do"
+      },
+      "id": "9fb2bcbd-ca10-47e3-bc97-0dc0319ec1b1",
+      "lastModified": "2018-06-03T22:01:03.775+08:00",
+      "name": "支付",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "afa1a713-1819-4ee4-b8db-159ff24cd76d"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/order/alipay_callback.do"
+      },
+      "id": "95a32899-69b4-48c8-9fb5-60cc05b8629b",
+      "lastModified": "2018-06-03T22:02:53.038+08:00",
+      "name": "支付宝回调",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "afa1a713-1819-4ee4-b8db-159ff24cd76d"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "orderNo",
+              "value": "1528033495860"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/order/query_order_pay_status.do"
+      },
+      "id": "9bb2faae-697c-458d-8ddf-75a27ce9e026",
+      "lastModified": "2018-06-03T22:02:25.799+08:00",
+      "name": "查询订单支付状态",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "afa1a713-1819-4ee4-b8db-159ff24cd76d"
+    },
+    {
+      "type": "Service",
+      "id": "f9d770f0-2c5a-4833-a909-2dbc4c98726d",
+      "lastModified": "2018-06-03T22:29:21.877+08:00",
+      "name": "门户_收藏夹接口",
+      "parentId": "5ff63ad2-afae-4b46-a594-da36c4424f50"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/cart/list.do"
+      },
+      "id": "76cc9763-45d8-45a4-97e8-d0de47e11a48",
+      "lastModified": "2018-06-03T22:54:53.997+08:00",
+      "name": "收藏夹List列表",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "f9d770f0-2c5a-4833-a909-2dbc4c98726d"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/cart/select_all.do"
+      },
+      "id": "72e2f3d0-2e06-4af4-9565-f27ccceece79",
+      "lastModified": "2018-06-03T22:39:57.465+08:00",
+      "name": "收藏夹全选",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "f9d770f0-2c5a-4833-a909-2dbc4c98726d"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/cart/un_select_all.do"
+      },
+      "id": "9918148d-e7ba-43fe-9c51-46eb5bfe5718",
+      "lastModified": "2018-06-03T22:39:21.628+08:00",
+      "name": "收藏夹取消全选",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "f9d770f0-2c5a-4833-a909-2dbc4c98726d"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "productId",
+              "value": "33"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/cart/un_select.do"
+      },
+      "id": "ddb957fd-574f-444e-bc6f-5cec36bf30e0",
+      "lastModified": "2018-06-03T22:42:09.949+08:00",
+      "name": "收藏夹取消选中某个比赛",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "f9d770f0-2c5a-4833-a909-2dbc4c98726d"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "competitiontId",
+              "value": "33"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/cart/add.do"
+      },
+      "id": "9c8901ad-9a40-4fdb-8c6c-1adb0e0ce5d0",
+      "lastModified": "2018-06-03T22:54:41.523+08:00",
+      "name": "收藏夹添加商品",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "f9d770f0-2c5a-4833-a909-2dbc4c98726d"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "productId",
+              "value": "33"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/cart/select.do"
+      },
+      "id": "ada919d2-d2df-4d44-99bf-151c29a3d923",
+      "lastModified": "2018-06-03T22:42:59.594+08:00",
+      "name": "收藏夹选中某个比赛",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "f9d770f0-2c5a-4833-a909-2dbc4c98726d"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/cart/get_cart_competition_count.do"
+      },
+      "id": "fd90c328-3616-4993-9397-ad95ec455f65",
+      "lastModified": "2018-06-03T22:40:46.595+08:00",
+      "name": "查询在收藏夹里的比赛数量",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "f9d770f0-2c5a-4833-a909-2dbc4c98726d"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "competitionIds",
+              "value": "33"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/cart/delete_competition.do"
+      },
+      "id": "26498f3e-d1bd-4999-8a19-81008d7f97f7",
+      "lastModified": "2018-06-03T22:45:27.622+08:00",
+      "name": "移除收藏夹某个比赛",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "f9d770f0-2c5a-4833-a909-2dbc4c98726d"
+    },
+    {
+      "type": "Service",
+      "id": "a1845a04-f4b1-4e2c-b9fb-adb00b061396",
+      "lastModified": "2018-06-03T22:03:08.067+08:00",
+      "name": "门户_收货地址接口",
+      "parentId": "5ff63ad2-afae-4b46-a594-da36c4424f50"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "shippingId",
+              "value": "31"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/shipping/del.do"
+      },
+      "id": "5adb4687-45cd-4b66-be3c-3fe76c189e55",
+      "lastModified": "2018-06-03T22:14:47.308+08:00",
+      "name": "删除地址",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "a1845a04-f4b1-4e2c-b9fb-adb00b061396"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/shipping/list.do"
+      },
+      "id": "44ed2b31-322f-4868-9526-b166f6637a1d",
+      "lastModified": "2018-06-03T22:04:38.663+08:00",
+      "name": "地址列表",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "a1845a04-f4b1-4e2c-b9fb-adb00b061396"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "userId",
+              "value": "1"
+            },
+            {
+              "enabled": true,
+              "name": "receiverName",
+              "value": "陈志恒1"
+            },
+            {
+              "enabled": true,
+              "name": "receiverPhone",
+              "value": "15135188995"
+            },
+            {
+              "enabled": true,
+              "name": "receiverMobile",
+              "value": "15135188995"
+            },
+            {
+              "enabled": true,
+              "encoded": true,
+              "name": "receiverProvince",
+              "value": "%E5%8C%97%E4%BA%AC"
+            },
+            {
+              "enabled": true,
+              "encoded": true,
+              "name": "receiverCity",
+              "value": "%E5%8C%97%E4%BA%AC%E5%B8%82"
+            },
+            {
+              "enabled": true,
+              "encoded": true,
+              "name": "receiverAddress",
+              "value": "%E4%B8%AD%E5%85%B3%E6%9D%91"
+            },
+            {
+              "enabled": true,
+              "name": "receiverZip",
+              "value": "100000"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/shipping/add.do"
+      },
+      "id": "46b92a34-987a-45ce-b8ee-02c99f79bd24",
+      "lastModified": "2018-06-03T22:14:31.238+08:00",
+      "name": "添加地址",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "a1845a04-f4b1-4e2c-b9fb-adb00b061396"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "id",
+              "value": "32"
+            },
+            {
+              "enabled": true,
+              "name": "receiverName",
+              "value": "AAA"
+            },
+            {
+              "enabled": true,
+              "name": "receiverPhone",
+              "value": "010"
+            },
+            {
+              "enabled": true,
+              "name": "receiverMobile",
+              "value": "18688888888"
+            },
+            {
+              "enabled": true,
+              "encoded": true,
+              "name": "receiverProvince",
+              "value": "%E5%8C%97%E4%BA%AC"
+            },
+            {
+              "enabled": true,
+              "encoded": true,
+              "name": "receiverCity",
+              "value": "%E5%8C%97%E4%BA%AC%E5%B8%82"
+            },
+            {
+              "enabled": true,
+              "encoded": true,
+              "name": "receiverDistrict",
+              "value": "%E6%B5%B7%E6%B7%80%E5%8C%BA"
+            },
+            {
+              "enabled": true,
+              "encoded": true,
+              "name": "receiverAddress",
+              "value": "%E4%B8%AD%E5%85%B3%E6%9D%91"
+            },
+            {
+              "enabled": true,
+              "name": "receiverZip",
+              "value": "100000"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/shipping/update.do"
+      },
+      "id": "d12ea48e-e1a7-43b6-8d4a-1a5708d174a0",
+      "lastModified": "2018-06-03T22:16:54.391+08:00",
+      "name": "登录状态更新地址",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "a1845a04-f4b1-4e2c-b9fb-adb00b061396"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "shippingId",
+              "value": "30"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/shipping/select.do"
+      },
+      "id": "4eba676c-e931-4343-94e0-66d90239737a",
+      "lastModified": "2018-06-03T22:10:18.678+08:00",
+      "name": "选中查看具体的地址",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "a1845a04-f4b1-4e2c-b9fb-adb00b061396"
+    },
+    {
+      "type": "Service",
+      "id": "46b0c0d6-375d-4158-8a82-ff42039fcedb",
+      "lastModified": "2018-06-03T21:55:38.871+08:00",
+      "name": "门户_比赛接口",
+      "parentId": "5ff63ad2-afae-4b46-a594-da36c4424f50"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/competition/listWithResult.do"
+      },
+      "id": "cd71db04-b71c-449b-851e-f21f1d80922d",
+      "lastModified": "2018-06-06T15:44:15.995+08:00",
+      "name": "查询已有结果的比赛",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "46b0c0d6-375d-4158-8a82-ff42039fcedb"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "competitionId",
+              "value": "2"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/competition/detail.do"
+      },
+      "id": "85eb1f76-771c-47ab-a026-4ca91f74145f",
+      "lastModified": "2018-06-03T21:58:33.363+08:00",
+      "name": "比赛detail",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "46b0c0d6-375d-4158-8a82-ff42039fcedb"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "keyword",
+              "value": ""
+            },
+            {
+              "enabled": true,
+              "name": "categoryId",
+              "value": "100001"
+            },
+            {
+              "enabled": true,
+              "name": "orderBy",
+              "value": "price_desc"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/competition/list.do"
+      },
+      "id": "de09d257-a302-4279-8d71-fd63ec12f5cd",
+      "lastModified": "2018-06-03T21:57:50.658+08:00",
+      "name": "比赛搜索及动态排序List",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "46b0c0d6-375d-4158-8a82-ff42039fcedb"
+    },
+    {
+      "type": "Service",
+      "id": "154bb82f-8999-46cd-bc4d-5bf16e9236fa",
+      "lastModified": "2018-06-06T15:45:00.349+08:00",
+      "name": "门户_比赛结果",
+      "parentId": "5ff63ad2-afae-4b46-a594-da36c4424f50"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "scheme": {
+          "secure": true,
+          "name": "https",
+          "version": "V11"
+        }
+      },
+      "id": "af9c99b4-0b51-4b6e-9f6e-f7cf653c04ce",
+      "lastModified": "2018-06-06T15:45:20.025+08:00",
+      "name": "比赛结果查询",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "154bb82f-8999-46cd-bc4d-5bf16e9236fa"
+    },
+    {
+      "type": "Service",
+      "id": "cd36820f-d585-4766-91db-a2c3c8d7059b",
+      "lastModified": "2018-06-03T19:40:59.709+08:00",
+      "name": "门户_用户接口",
+      "parentId": "5ff63ad2-afae-4b46-a594-da36c4424f50"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "username",
+              "value": "geely"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/user/forget_get_question.do"
+      },
+      "id": "cb0d1841-3336-4a95-96b6-e317511ecc18",
+      "lastModified": "2018-06-03T19:40:45.366+08:00",
+      "name": "忘记密码",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "cd36820f-d585-4766-91db-a2c3c8d7059b"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "username",
+              "value": "aaa"
+            },
+            {
+              "enabled": true,
+              "name": "passwordNew",
+              "value": "xxx"
+            },
+            {
+              "enabled": true,
+              "name": "forgetToken",
+              "value": "531ef4b4-9663-4e6d-9a20-fb56367446a5"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/user/forget_reset_password.do"
+      },
+      "id": "e7570dd8-7476-4255-9cf2-0b567f69cabd",
+      "lastModified": "2018-06-03T19:40:45.366+08:00",
+      "name": "忘记密码的重设密码 ",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "cd36820f-d585-4766-91db-a2c3c8d7059b"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "username",
+              "value": "aaa"
+            },
+            {
+              "enabled": true,
+              "name": "question",
+              "value": "aa"
+            },
+            {
+              "enabled": true,
+              "name": "answer",
+              "value": "sss"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/user/forget_check_answer.do"
+      },
+      "id": "e740888c-3305-459f-8c78-babc6e527a2e",
+      "lastModified": "2018-06-03T19:40:45.366+08:00",
+      "name": "提交问题答案",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "cd36820f-d585-4766-91db-a2c3c8d7059b"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "str",
+              "value": "admin"
+            },
+            {
+              "enabled": true,
+              "name": "type",
+              "value": "username"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/user/check_valid.do"
+      },
+      "id": "e4faffba-e045-4351-8ad3-404328369fc6",
+      "lastModified": "2018-06-03T19:40:45.366+08:00",
+      "name": "检查用户名是否有效",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "cd36820f-d585-4766-91db-a2c3c8d7059b"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "username",
+              "value": "chen"
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "password",
+              "value": "123456"
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "email",
+              "value": "czh55@qq.com"
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "phone",
+              "value": "15135188999"
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "question",
+              "value": "问题"
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "answer",
+              "value": "答案"
+            }
+          ]
+        },
+        "bodyType": "Form",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/user/register.do"
+      },
+      "id": "20ef5b29-a6bf-42ac-8bbe-ea3d802594a0",
+      "lastModified": "2018-06-03T19:40:45.366+08:00",
+      "name": "注册",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/x-www-form-urlencoded"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "cd36820f-d585-4766-91db-a2c3c8d7059b"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "username",
+              "value": "admin"
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "password",
+              "value": "admin"
+            }
+          ]
+        },
+        "bodyType": "Form",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/user/login.do"
+      },
+      "id": "708e1bae-32b2-4521-9bd4-446e8f45b0f6",
+      "lastModified": "2018-06-06T10:01:43.720+08:00",
+      "name": "用户登录",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/x-www-form-urlencoded"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "cd36820f-d585-4766-91db-a2c3c8d7059b"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "passwordOld",
+              "value": ""
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "passwordNew",
+              "value": ""
+            }
+          ]
+        },
+        "bodyType": "Form",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/user/reset_password.do"
+      },
+      "id": "0f12a253-3926-436e-bfca-2550e4ea4118",
+      "lastModified": "2018-06-03T19:40:45.366+08:00",
+      "name": "登录中状态重置密码 ",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/x-www-form-urlencoded"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "cd36820f-d585-4766-91db-a2c3c8d7059b"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "email",
+              "value": ""
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "phone",
+              "value": ""
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "question",
+              "value": ""
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "answer",
+              "value": ""
+            }
+          ]
+        },
+        "bodyType": "Form",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/user/update_information.do"
+      },
+      "id": "43626bc8-1091-4f0b-9b10-4d554a3e3f58",
+      "lastModified": "2018-06-03T19:40:45.366+08:00",
+      "name": "登录状态更新个人信息 ",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/x-www-form-urlencoded"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "cd36820f-d585-4766-91db-a2c3c8d7059b"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": [
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "username",
+              "value": "admin"
+            },
+            {
+              "enabled": true,
+              "type": "Text",
+              "name": "password",
+              "value": "admin"
+            }
+          ]
+        },
+        "bodyType": "Form",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/manage/user/login.do"
+      },
+      "id": "d1a10aec-bf34-44d9-80dd-75ebeb25ec5c",
+      "lastModified": "2018-06-03T19:40:45.365+08:00",
+      "name": "管理员登录",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/x-www-form-urlencoded"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "cd36820f-d585-4766-91db-a2c3c8d7059b"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/user/get_information.do"
+      },
+      "id": "613ce067-7fb6-420e-b7b4-1b55cda84d4b",
+      "lastModified": "2018-06-03T19:40:45.366+08:00",
+      "name": "获取当前登录用户的详细信息，并强制登录",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "cd36820f-d585-4766-91db-a2c3c8d7059b"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/user/get_user_info.do"
+      },
+      "id": "3607073d-ba7a-4b8e-bc89-2b4d8c81935b",
+      "lastModified": "2018-06-03T19:40:45.366+08:00",
+      "name": "获取登录用户信息",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "cd36820f-d585-4766-91db-a2c3c8d7059b"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "requestBody": true,
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+        "name": "POST"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/user/logout.do"
+      },
+      "id": "1d788186-bcdb-43f3-9f4b-3e64bd1a20bb",
+      "lastModified": "2018-06-03T19:40:45.366+08:00",
+      "name": "退出登录 ",
+      "headers": [
+        {
+          "enabled": true,
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "metaInfo": {},
+      "parentId": "cd36820f-d585-4766-91db-a2c3c8d7059b"
+    },
+    {
+      "type": "Service",
+      "id": "44865307-301e-4532-9420-7f4cda199b6c",
+      "lastModified": "2018-06-03T19:37:20.343+08:00",
+      "name": "门户_订单接口",
+      "parentId": "5ff63ad2-afae-4b46-a594-da36c4424f50"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "shippingId",
+              "value": "30"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/order/create.do"
+      },
+      "id": "56a4cca0-c4fe-4fd6-8194-298eac2e550a",
+      "lastModified": "2018-06-03T21:45:33.837+08:00",
+      "name": "创建订单",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "44865307-301e-4532-9420-7f4cda199b6c"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "orderNo",
+              "value": "1528033495860"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/order/cancel.do"
+      },
+      "id": "de19ec00-65ec-4458-99f2-2853cea840d3",
+      "lastModified": "2018-06-03T21:46:25.563+08:00",
+      "name": "取消订单",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "44865307-301e-4532-9420-7f4cda199b6c"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/order/get_order_cart_competition.do"
+      },
+      "id": "4f31c4ac-2592-4da0-82c0-80988787a0a1",
+      "lastModified": "2018-06-03T21:50:20.284+08:00",
+      "name": "获取订单中的比赛信息",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "44865307-301e-4532-9420-7f4cda199b6c"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/order/list.do"
+      },
+      "id": "79ce58a8-d684-4895-a513-c37a1841ad81",
+      "lastModified": "2018-06-03T19:42:48.287+08:00",
+      "name": "订单List",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "44865307-301e-4532-9420-7f4cda199b6c"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": [
+            {
+              "enabled": true,
+              "name": "orderNo",
+              "value": "1527063887723"
+            }
+          ]
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/order/detail.do"
+      },
+      "id": "e846a6ef-80cc-4fc4-8423-a35462b37b3e",
+      "lastModified": "2018-06-03T21:42:57.309+08:00",
+      "name": "订单详情detail",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "44865307-301e-4532-9420-7f4cda199b6c"
+    },
+    {
+      "type": "Service",
+      "id": "9a4bc93c-a0be-451b-94c3-9e7328af9cd1",
+      "lastModified": "2018-06-06T15:30:32.920+08:00",
+      "name": "门户_首页分类",
+      "parentId": "5ff63ad2-afae-4b46-a594-da36c4424f50"
+    },
+    {
+      "type": "Request",
+      "method": {
+        "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+        "name": "GET"
+      },
+      "body": {
+        "formBody": {
+          "overrideContentType": true,
+          "encoding": "application/x-www-form-urlencoded",
+          "items": []
+        },
+        "bodyType": "Text",
+        "autoSetLength": true
+      },
+      "headersType": "Form",
+      "uri": {
+        "query": {
+          "delimiter": "&",
+          "items": []
+        },
+        "scheme": {
+          "name": "http",
+          "version": "V11"
+        },
+        "host": "www.programing.com",
+        "path": "/category/get_category_for_index.do"
+      },
+      "id": "f0c4d9ce-b5c4-4b58-98e0-8141872c520c",
+      "lastModified": "2018-06-06T15:30:26.473+08:00",
+      "name": "获取首页分类",
+      "headers": [],
+      "metaInfo": {},
+      "parentId": "9a4bc93c-a0be-451b-94c3-9e7328af9cd1"
+    }
+  ]
+}

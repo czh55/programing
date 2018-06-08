@@ -43,7 +43,6 @@ public class FavouriteServiceImpl implements IFavouriteService {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.ILLEGAL_ARGUMENT.getCode(),ResponseCode.ILLEGAL_ARGUMENT.getDesc());
         }
 
-
         Favourite favourite = favouriteMapper.selectFavouriteByUserIdCompetitionId(userId,competitionId);
         if(favourite == null){
             //这个比赛不在这个收藏夹里,需要新增一个这个比赛的记录

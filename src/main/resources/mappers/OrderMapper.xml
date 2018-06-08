@@ -7,7 +7,6 @@
       <arg column="order_no" jdbcType="BIGINT" javaType="java.lang.Long" />
       <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="sponsor_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="shipping_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="payment" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
       <arg column="payment_type" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="postage" jdbcType="INTEGER" javaType="java.lang.Integer" />
@@ -21,7 +20,7 @@
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, order_no, user_id, sponsor_id, shipping_id, payment, payment_type, postage, status, payment_time,
+    id, order_no, user_id, sponsor_id, payment, payment_type, postage, status, payment_time,
     send_time, end_time, close_time, create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -36,12 +35,12 @@
   </delete>
   <insert id="insert" parameterType="com.programing.pojo.Order" >
     insert into programing_order (id, order_no, user_id, sponsor_id,
-    shipping_id, payment, payment_type,
+    payment, payment_type,
     postage, status, payment_time,
     send_time, end_time, close_time,
     create_time, update_time)
     values (#{id,jdbcType=INTEGER}, #{orderNo,jdbcType=BIGINT}, #{userId,jdbcType=INTEGER}, #{sponsorId,jdbcType=INTEGER},
-    #{shippingId,jdbcType=INTEGER}, #{payment,jdbcType=DECIMAL}, #{paymentType,jdbcType=INTEGER},
+    #{payment,jdbcType=DECIMAL}, #{paymentType,jdbcType=INTEGER},
     #{postage,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{paymentTime,jdbcType=TIMESTAMP},
     #{sendTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{closeTime,jdbcType=TIMESTAMP},
     now(), now())
@@ -60,9 +59,6 @@
       </if>
       <if test="sponsorId != null" >
         sponsor_id,
-      </if>
-      <if test="shippingId != null" >
-        shipping_id,
       </if>
       <if test="payment != null" >
         payment,
@@ -104,9 +100,6 @@
       </if>
       <if test="userId != null" >
         #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="shippingId != null" >
-        #{shippingId,jdbcType=INTEGER},
       </if>
       <if test="payment != null" >
         #{payment,jdbcType=DECIMAL},
@@ -152,9 +145,6 @@
       <if test="sponsorId != null" >
         sponsor_id = #{sponsorId,jdbcType=INTEGER},
       </if>
-      <if test="shippingId != null" >
-        shipping_id = #{shippingId,jdbcType=INTEGER},
-      </if>
       <if test="payment != null" >
         payment = #{payment,jdbcType=DECIMAL},
       </if>
@@ -193,7 +183,6 @@
     set order_no = #{orderNo,jdbcType=BIGINT},
     user_id = #{userId,jdbcType=INTEGER},
     sponsor_id = #{sponsorId,jdbcType=INTEGER},
-    shipping_id = #{shippingId,jdbcType=INTEGER},
     payment = #{payment,jdbcType=DECIMAL},
     payment_type = #{paymentType,jdbcType=INTEGER},
     postage = #{postage,jdbcType=INTEGER},

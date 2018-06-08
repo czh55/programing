@@ -21,8 +21,6 @@ public class Order {
 
     private Integer sponsorId;
 
-    private Integer shippingId;
-
     private BigDecimal payment;
 
     private Integer paymentType;

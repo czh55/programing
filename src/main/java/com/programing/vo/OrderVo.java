@@ -16,7 +16,6 @@ public class OrderVo {
 
     private Integer status;
 
-
     private String statusDesc;
 
     private String paymentTime;
@@ -33,10 +32,7 @@ public class OrderVo {
     private List<OrderItemVo> orderItemVoList;
 
     private String imageHost;
-    private Integer shippingId;
     private String receiverName;
-
-    private ShippingVo shippingVo;
 
     public Long getOrderNo() {
         return orderNo;
@@ -150,13 +146,6 @@ public class OrderVo {
         this.imageHost = imageHost;
     }
 
-    public Integer getShippingId() {
-        return shippingId;
-    }
-
-    public void setShippingId(Integer shippingId) {
-        this.shippingId = shippingId;
-    }
 
     public String getReceiverName() {
         return receiverName;
@@ -166,11 +155,4 @@ public class OrderVo {
         this.receiverName = receiverName;
     }
 
-    public ShippingVo getShippingVo() {
-        return shippingVo;
-    }
-
-    public void setShippingVo(ShippingVo shippingVo) {
-        this.shippingVo = shippingVo;
-    }
 }

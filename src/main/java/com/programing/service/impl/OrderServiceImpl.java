@@ -21,7 +21,6 @@ import com.programing.dao.OrderItemMapper;
 import com.programing.dao.OrderMapper;
 import com.programing.dao.PayInfoMapper;
 import com.programing.dao.CompetitionMapper;
-import com.programing.dao.ShippingMapper;
 import com.programing.pojo.*;
 import com.programing.pojo.Competition;
 import com.programing.service.IOrderService;
@@ -32,7 +31,6 @@ import com.programing.util.PropertiesUtil;
 import com.programing.vo.OrderItemVo;
 import com.programing.vo.OrderCompetitionVo;
 import com.programing.vo.OrderVo;
-import com.programing.vo.ShippingVo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -79,11 +77,9 @@ public class OrderServiceImpl implements IOrderService {
     private FavouriteMapper favouriteMapper;
     @Autowired
     private CompetitionMapper competitionMapper;
-    @Autowired
-    private ShippingMapper shippingMapper;
 
 
-    public ServerResponse createOrder(Integer userId, Integer shippingId){
+    public ServerResponse createOrder(Integer userId){
 
         //从收藏夹中获取数据
         List<Favourite> favouriteList = favouriteMapper.selectCheckedFavouriteByUserId(userId);
@@ -102,7 +98,7 @@ public class OrderServiceImpl implements IOrderService {
         BigDecimal payment = this.getOrderTotalPrice(orderItemList);
 
         //生成订单:这时候操作的是order表，并把数据已经插入
-        Order order = this.assembleOrder(userId,shippingId,payment,sponsorId);
+        Order order = this.assembleOrder(userId,payment,sponsorId);
         if(order == null){
             return ServerResponse.createByErrorMessage("生成订单错误");
         }
@@ -138,13 +134,6 @@ public class OrderServiceImpl implements IOrderService {
         orderVo.setPostage(order.getPostage());
         orderVo.setStatus(order.getStatus());
         orderVo.setStatusDesc(Const.OrderStatusEnum.codeOf(order.getStatus()).getValue());
-
-        orderVo.setShippingId(order.getShippingId());
-        Shipping shipping = shippingMapper.selectByPrimaryKey(order.getShippingId());
-        if(shipping != null){
-            orderVo.setReceiverName(shipping.getReceiverName());
-            orderVo.setShippingVo(assembleShippingVo(shipping));
-        }
 
         orderVo.setPaymentTime(DateTimeUtil.dateToStr(order.getPaymentTime()));
         orderVo.setSendTime(DateTimeUtil.dateToStr(order.getSendTime()));
@@ -182,27 +171,11 @@ public class OrderServiceImpl implements IOrderService {
     }
 
 
-
-    private ShippingVo assembleShippingVo(Shipping shipping){
-        ShippingVo shippingVo = new ShippingVo();
-        shippingVo.setReceiverName(shipping.getReceiverName());
-        shippingVo.setReceiverAddress(shipping.getReceiverAddress());
-        shippingVo.setReceiverProvince(shipping.getReceiverProvince());
-        shippingVo.setReceiverCity(shipping.getReceiverCity());
-        shippingVo.setReceiverDistrict(shipping.getReceiverDistrict());
-        shippingVo.setReceiverMobile(shipping.getReceiverMobile());
-        shippingVo.setReceiverZip(shipping.getReceiverZip());
-        shippingVo.setReceiverPhone(shippingVo.getReceiverPhone());
-        return shippingVo;
-    }
-
     private void cleanFavourite(List<Favourite> favouriteList){
         for(Favourite favourite : favouriteList){
             favouriteMapper.deleteByPrimaryKey(favourite.getId());
         }
     }
-
-
 
     private void reduceCompetitionStock(List<OrderItem> orderItemList){
         for(OrderItem orderItem : orderItemList){
@@ -213,7 +186,7 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     //生成订单:这时候操作的是order表，并把数据已经插入
-    private Order assembleOrder(Integer userId,Integer shippingId,BigDecimal payment, Integer sponsorId){
+    private Order assembleOrder(Integer userId,BigDecimal payment, Integer sponsorId){
         Order order = new Order();
         long orderNo = this.generateOrderNo();
         order.setOrderNo(orderNo);
@@ -224,7 +197,6 @@ public class OrderServiceImpl implements IOrderService {
 
         order.setUserId(userId);
         order.setSponsorId(sponsorId);
-        order.setShippingId(shippingId);
         //发货时间等等
         //付款时间等等
         int rowCount = orderMapper.insert(order);

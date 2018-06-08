@@ -16,7 +16,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.programing.common.Const;
 import com.programing.common.ServerResponse;
-import com.programing.dao.CartMapper;
+import com.programing.dao.FavouriteMapper;
 import com.programing.dao.OrderItemMapper;
 import com.programing.dao.OrderMapper;
 import com.programing.dao.PayInfoMapper;
@@ -76,7 +76,7 @@ public class OrderServiceImpl implements IOrderService {
     @Autowired
     private PayInfoMapper payInfoMapper;
     @Autowired
-    private CartMapper cartMapper;
+    private FavouriteMapper favouriteMapper;
     @Autowired
     private CompetitionMapper competitionMapper;
     @Autowired
@@ -86,14 +86,14 @@ public class OrderServiceImpl implements IOrderService {
     public ServerResponse createOrder(Integer userId, Integer shippingId){
 
         //从收藏夹中获取数据
-        List<Cart> cartList = cartMapper.selectCheckedCartByUserId(userId);
+        List<Favourite> favouriteList = favouriteMapper.selectCheckedFavouriteByUserId(userId);
 
         //查询货物对应的sponsor
-        Competition competition = competitionMapper.selectByPrimaryKey(cartList.get(0).getCompetitionId());
+        Competition competition = competitionMapper.selectByPrimaryKey(favouriteList.get(0).getCompetitionId());
         int sponsorId = competition.getSponsorId();
 
         //计算这个订单的总价,校验收藏夹的数据,包括比赛的状态和数量，返回封装好orderItemList
-        ServerResponse serverResponse = this.getCartOrderItem(userId,cartList,sponsorId);
+        ServerResponse serverResponse = this.getFavouriteOrderItem(userId, favouriteList,sponsorId);
         if(!serverResponse.isSuccess()){
             return serverResponse;
         }
@@ -118,7 +118,7 @@ public class OrderServiceImpl implements IOrderService {
         //生成成功,我们要减少我们比赛的库存
         this.reduceCompetitionStock(orderItemList);
         //清空一下收藏夹
-        this.cleanCart(cartList);
+        this.cleanFavourite(favouriteList);
 
         //返回给前端数据
 
@@ -196,9 +196,9 @@ public class OrderServiceImpl implements IOrderService {
         return shippingVo;
     }
 
-    private void cleanCart(List<Cart> cartList){
-        for(Cart cart : cartList){
-            cartMapper.deleteByPrimaryKey(cart.getId());
+    private void cleanFavourite(List<Favourite> favouriteList){
+        for(Favourite favourite : favouriteList){
+            favouriteMapper.deleteByPrimaryKey(favourite.getId());
         }
     }
 
@@ -250,22 +250,22 @@ public class OrderServiceImpl implements IOrderService {
         return payment;
     }
     //计算这个订单的总价,校验收藏夹的数据,包括比赛的状态和数量，返回封装好orderItemList
-    private ServerResponse getCartOrderItem(Integer userId,List<Cart> cartList,Integer sponsorId){
+    private ServerResponse getFavouriteOrderItem(Integer userId, List<Favourite> favouriteList, Integer sponsorId){
         List<OrderItem> orderItemList = Lists.newArrayList();
-        if(CollectionUtils.isEmpty(cartList)){
+        if(CollectionUtils.isEmpty(favouriteList)){
             return ServerResponse.createByErrorMessage("收藏夹为空");
         }
 
         //校验收藏夹的数据,包括比赛的状态和数量
-        for(Cart cartItem : cartList){
+        for(Favourite favouriteItem : favouriteList){
             OrderItem orderItem = new OrderItem();
-            Competition competition = competitionMapper.selectByPrimaryKey(cartItem.getCompetitionId());
+            Competition competition = competitionMapper.selectByPrimaryKey(favouriteItem.getCompetitionId());
             if(Const.CompetitionStatusEnum.ON_SALE.getCode() != competition.getStatus()){
                 return ServerResponse.createByErrorMessage("比赛"+ competition.getName()+"不是在线售卖状态");
             }
 
             //校验库存
-            if(cartItem.getQuantity() > competition.getStock()){
+            if(favouriteItem.getQuantity() > competition.getStock()){
                 return ServerResponse.createByErrorMessage("比赛"+ competition.getName()+"库存不足");
             }
 
@@ -275,8 +275,8 @@ public class OrderServiceImpl implements IOrderService {
             orderItem.setCompetitionName(competition.getName());
             orderItem.setCompetitionImage(competition.getMainImage());
             orderItem.setCurrentUnitPrice(competition.getPrice());
-            orderItem.setQuantity(cartItem.getQuantity());
-            orderItem.setTotalPrice(BigDecimalUtil.mul(competition.getPrice().doubleValue(),cartItem.getQuantity()));
+            orderItem.setQuantity(favouriteItem.getQuantity());
+            orderItem.setTotalPrice(BigDecimalUtil.mul(competition.getPrice().doubleValue(), favouriteItem.getQuantity()));
             orderItemList.add(orderItem);
         }
         return ServerResponse.createBySuccess(orderItemList);
@@ -308,19 +308,19 @@ public class OrderServiceImpl implements IOrderService {
 
 
 
-    public ServerResponse getOrderCartCompetition(Integer userId){
+    public ServerResponse getOrderFavouriteCompetition(Integer userId){
         OrderCompetitionVo orderCompetitionVo = new OrderCompetitionVo();
         //从收藏夹中获取数据
 
-        List<Cart> cartList = cartMapper.selectCheckedCartByUserId(userId);
+        List<Favourite> favouriteList = favouriteMapper.selectCheckedFavouriteByUserId(userId);
 
         //查询货物对应的sponsor
-        Competition competition = competitionMapper.selectByPrimaryKey(cartList.get(0).getCompetitionId());
+        Competition competition = competitionMapper.selectByPrimaryKey(favouriteList.get(0).getCompetitionId());
         int sponsorId = competition.getSponsorId();
 
-        //这里的getCartOrderItem()还在create订单的时候使用，目的：根据cartList，检查并重组orderItem
+        //这里的getFavouriteOrderItem()还在create订单的时候使用，目的：根据favouriteList，检查并重组orderItem
         //到达确认页以后，可能同时又很多用户同时操作。当我们真正的提交订单时，可能库存已经不够了，所有要调用进行第二次的检查
-        ServerResponse serverResponse =  this.getCartOrderItem(userId,cartList,sponsorId);
+        ServerResponse serverResponse =  this.getFavouriteOrderItem(userId, favouriteList,sponsorId);
         if(!serverResponse.isSuccess()){
             return serverResponse;
         }

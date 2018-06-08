@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.programing.dao.CartMapper" >
-  <resultMap id="BaseResultMap" type="com.programing.pojo.Cart" >
+<mapper namespace="com.programing.dao.FavouriteMapper" >
+  <resultMap id="BaseResultMap" type="com.programing.pojo.Favourite" >
     <constructor >
       <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
@@ -18,23 +18,23 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
     <include refid="Base_Column_List" />
-    from programing_cart
+    from programing_favourite
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from programing_cart
+    delete from programing_favourite
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.programing.pojo.Cart" >
-    insert into programing_cart (id, user_id, competition_id,
+  <insert id="insert" parameterType="com.programing.pojo.Favourite" >
+    insert into programing_favourite (id, user_id, competition_id,
     quantity, checked, create_time,
     update_time)
     values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{competitionId,jdbcType=INTEGER},
     #{quantity,jdbcType=INTEGER}, #{checked,jdbcType=INTEGER}, now(),
     now())
   </insert>
-  <insert id="insertSelective" parameterType="com.programing.pojo.Cart" >
-    insert into programing_cart
+  <insert id="insertSelective" parameterType="com.programing.pojo.Favourite" >
+    insert into programing_favourite
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -82,8 +82,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.programing.pojo.Cart" >
-    update programing_cart
+  <update id="updateByPrimaryKeySelective" parameterType="com.programing.pojo.Favourite" >
+    update programing_favourite
     <set >
       <if test="userId != null" >
         user_id = #{userId,jdbcType=INTEGER},
@@ -107,30 +107,30 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="selectCartByUserIdCompetitionId" resultMap="BaseResultMap" parameterType="map">
+  <select id="selectFavouriteByUserIdCompetitionId" resultMap="BaseResultMap" parameterType="map">
     SELECT
     <include refid="Base_Column_List"/>
-    from programing_cart
+    from programing_favourite
     where user_id = #{userId}
     and competition_id = #{competitionId}
   </select>
 
 
 
-  <select id="selectCartByUserId" resultMap="BaseResultMap" parameterType="int">
+  <select id="selectFavouriteByUserId" resultMap="BaseResultMap" parameterType="int">
     SELECT
     <include refid="Base_Column_List"/>
-    from programing_cart
+    from programing_favourite
     where user_id = #{userId}
   </select>
 
-  <select id="selectCartCompetitionCheckedStatusByUserId" resultType="int" parameterType="int">
-    SELECT  count(1) from programing_cart where checked = 0 and user_id = #{userId}
+  <select id="selectFavouriteCompetitionCheckedStatusByUserId" resultType="int" parameterType="int">
+    SELECT  count(1) from programing_favourite where checked = 0 and user_id = #{userId}
   </select>
 
 
   <delete id="deleteByUserIdCompetitionIds" parameterType="map">
-    delete from programing_cart
+    delete from programing_favourite
     where user_id = #{userId}
     <if test="competitionIdList != null">
       and competition_id in
@@ -143,7 +143,7 @@
 
 
   <update id="checkedOrUncheckedCompetition" parameterType="map">
-    UPDATE  programing_cart
+    UPDATE  programing_favourite
     set checked = #{checked},
     update_time = now()
     where user_id = #{userId}
@@ -153,16 +153,16 @@
   </update>
 
 
-  <select id="selectCartCompetitionCount" parameterType="int" resultType="int">
-    select IFNULL(sum(quantity),0) as count from programing_cart where user_id = #{userId}
+  <select id="selectFavouriteCompetitionCount" parameterType="int" resultType="int">
+    select IFNULL(sum(quantity),0) as count from programing_favourite where user_id = #{userId}
   </select>
 
 
 
-  <select id="selectCheckedCartByUserId" parameterType="int" resultMap="BaseResultMap">
+  <select id="selectCheckedFavouriteByUserId" parameterType="int" resultMap="BaseResultMap">
     SELECT
     <include refid="Base_Column_List"/>
-    from programing_cart
+    from programing_favourite
     where user_id = #{userId}
     and checked = 1
   </select>

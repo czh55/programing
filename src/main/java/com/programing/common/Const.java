@@ -20,7 +20,7 @@ public class Const {
         Set<String> PRICE_ASC_DESC = Sets.newHashSet("price_desc","price_asc");
     }
 
-    public interface Cart{
+    public interface Favourite{
         int CHECKED = 1;//即收藏夹选中状态
         int UN_CHECKED = 0;//收藏夹中未选中状态
 

@@ -2,7 +2,7 @@ package com.programing.vo;
 
 import java.math.BigDecimal;
 
-public class CartCompetitionVo {
+public class FavouriteCompetitionVo {
 
 //结合了比赛和收藏夹的一个抽象对象
 

@@ -289,6 +289,4 @@ public class CompetitionServiceImpl implements ICompetitionService {
 
         return ServerResponse.createBySuccess(sponsorId);
     }
-
-
 }

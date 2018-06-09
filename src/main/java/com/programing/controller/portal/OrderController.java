@@ -135,14 +135,6 @@ public class OrderController {
 
 
 
-
-
-
-
-
-
-
-
     @RequestMapping("pay.do")
     @ResponseBody
     public ServerResponse pay(HttpServletRequest httpServletRequest, Long orderNo, HttpServletRequest request){

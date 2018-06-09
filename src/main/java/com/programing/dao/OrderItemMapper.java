@@ -27,4 +27,5 @@ public interface OrderItemMapper {
     void batchInsert(@Param("orderItemList") List<OrderItem> orderItemList);
 
 
+    OrderItem selectByCompetitionAndUserId(@Param("competitionId")Integer competitionId, @Param("userId")Integer userId);
 }

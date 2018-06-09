@@ -37,6 +37,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.File;
 import java.io.IOException;
@@ -83,6 +84,15 @@ public class OrderServiceImpl implements IOrderService {
 
         //从收藏夹中获取数据
         List<Favourite> favouriteList = favouriteMapper.selectCheckedFavouriteByUserId(userId);
+
+        //检查这些比赛是否已经参加过
+        for(Favourite favourite : favouriteList){
+            ServerResponse serverResponse = this.judgeIsJoin(favourite.getCompetitionId(), userId);
+
+            if(!serverResponse.isSuccess()){
+                return ServerResponse.createByErrorMessage(serverResponse.getMsg());
+            }
+        }
 
         //查询货物对应的sponsor
         Competition competition = competitionMapper.selectByPrimaryKey(favouriteList.get(0).getCompetitionId());
@@ -330,6 +340,19 @@ public class OrderServiceImpl implements IOrderService {
         PageInfo pageResult = new PageInfo(orderList);
         pageResult.setList(orderVoList);
         return ServerResponse.createBySuccess(pageResult);
+    }
+
+    @Override
+    public ServerResponse judgeIsJoin(Integer competitionId,Integer userId) {
+        OrderItem orderItem = orderItemMapper.selectByCompetitionAndUserId(competitionId, userId);
+
+        if(orderItem != null){
+            return ServerResponse.createByErrorMessage(orderItem.getCompetitionName()+"已经参加过，不可重复");
+        }
+        else{
+            return ServerResponse.createBySuccess();
+        }
+
     }
 
 

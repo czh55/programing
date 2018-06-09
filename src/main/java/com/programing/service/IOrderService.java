@@ -15,7 +15,7 @@ public interface IOrderService {
     ServerResponse getOrderFavouriteCompetition(Integer userId);
     ServerResponse<OrderVo> getOrderDetail(Integer userId, Long orderNo);
     ServerResponse<PageInfo> getOrderList(Integer userId, int pageNum, int pageSize);
-
+    ServerResponse judgeIsJoin(Integer competitionId, Integer userId);
 
 
     //backend
@@ -26,6 +26,7 @@ public interface IOrderService {
 
     //hour个小时以内未付款的订单，进行关闭
     void closeOrder(int hour);
+
 
 
 }

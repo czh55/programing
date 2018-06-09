@@ -46,4 +46,7 @@ public class CompetitionController {
                                          @RequestParam(value = "pageSize",defaultValue = "10") int pageSize){
         return iCompetitionService.getCompetitionWithResult(pageNum,pageSize);
     }
+
+
+
 }

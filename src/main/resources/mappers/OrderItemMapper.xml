@@ -192,7 +192,6 @@
   </select>
 
 
-
   <insert id="batchInsert" parameterType="list">
     insert into programing_order_item (id, order_no,user_id, sponsor_id, competition_id,
     competition_name, competition_image, current_unit_price,
@@ -205,6 +204,13 @@
       )
     </foreach>
   </insert>
+
+  <select id="selectByCompetitionAndUserId" parameterType="map" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    from programing_order_item
+    where competition_id = #{competitionId} and user_id = #{userId}
+  </select>
 
 
 

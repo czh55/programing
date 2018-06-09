@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.programing.dao.OrderMapper" >
-  <resultMap id="BaseResultMap" type="com.programing.pojo.Order" >
+<mapper namespace="com.programing.dao.ApplicationMapper" >
+  <resultMap id="BaseResultMap" type="com.programing.pojo.Application" >
     <constructor >
       <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="order_no" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="application_no" jdbcType="BIGINT" javaType="java.lang.Long" />
       <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="sponsor_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="payment" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
@@ -20,39 +20,39 @@
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, order_no, user_id, sponsor_id, payment, payment_type, postage, status, payment_time,
+    id, application_no, user_id, sponsor_id, payment, payment_type, postage, status, payment_time,
     send_time, end_time, close_time, create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
     <include refid="Base_Column_List" />
-    from programing_order
+    from programing_application
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from programing_order
+    delete from programing_application
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.programing.pojo.Order" >
-    insert into programing_order (id, order_no, user_id, sponsor_id,
+  <insert id="insert" parameterType="com.programing.pojo.Application" >
+    insert into programing_application (id, application_no, user_id, sponsor_id,
     payment, payment_type,
     postage, status, payment_time,
     send_time, end_time, close_time,
     create_time, update_time)
-    values (#{id,jdbcType=INTEGER}, #{orderNo,jdbcType=BIGINT}, #{userId,jdbcType=INTEGER}, #{sponsorId,jdbcType=INTEGER},
+    values (#{id,jdbcType=INTEGER}, #{applicationNo,jdbcType=BIGINT}, #{userId,jdbcType=INTEGER}, #{sponsorId,jdbcType=INTEGER},
     #{payment,jdbcType=DECIMAL}, #{paymentType,jdbcType=INTEGER},
     #{postage,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{paymentTime,jdbcType=TIMESTAMP},
     #{sendTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{closeTime,jdbcType=TIMESTAMP},
     now(), now())
   </insert>
-  <insert id="insertSelective" parameterType="com.programing.pojo.Order" >
-    insert into programing_order
+  <insert id="insertSelective" parameterType="com.programing.pojo.Application" >
+    insert into programing_application
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
-      <if test="orderNo != null" >
-        order_no,
+      <if test="applicationNo != null" >
+        application_no,
       </if>
       <if test="userId != null" >
         user_id,
@@ -95,8 +95,8 @@
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="orderNo != null" >
-        #{orderNo,jdbcType=BIGINT},
+      <if test="applicationNo != null" >
+        #{applicationNo,jdbcType=BIGINT},
       </if>
       <if test="userId != null" >
         #{userId,jdbcType=INTEGER},
@@ -133,11 +133,11 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.programing.pojo.Order" >
-    update programing_order
+  <update id="updateByPrimaryKeySelective" parameterType="com.programing.pojo.Application" >
+    update programing_application
     <set >
-      <if test="orderNo != null" >
-        order_no = #{orderNo,jdbcType=BIGINT},
+      <if test="applicationNo != null" >
+        application_no = #{applicationNo,jdbcType=BIGINT},
       </if>
       <if test="userId != null" >
         user_id = #{userId,jdbcType=INTEGER},
@@ -178,9 +178,9 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.programing.pojo.Order" >
-    update programing_order
-    set order_no = #{orderNo,jdbcType=BIGINT},
+  <update id="updateByPrimaryKey" parameterType="com.programing.pojo.Application" >
+    update programing_application
+    set application_no = #{applicationNo,jdbcType=BIGINT},
     user_id = #{userId,jdbcType=INTEGER},
     sponsor_id = #{sponsorId,jdbcType=INTEGER},
     payment = #{payment,jdbcType=DECIMAL},
@@ -197,34 +197,34 @@
   </update>
 
 
-  <select id="selectByUserIdAndOrderNo" resultMap="BaseResultMap" parameterType="map">
+  <select id="selectByUserIdAndApplicationNo" resultMap="BaseResultMap" parameterType="map">
     SELECT
     <include refid="Base_Column_List"></include>
-    from programing_order
-    where order_no = #{orderNo}
+    from programing_application
+    where application_no = #{applicationNo}
     and user_id = #{userId}
   </select>
 
 
-  <select id="selectByOrderNo" resultMap="BaseResultMap" parameterType="long">
+  <select id="selectByApplicationNo" resultMap="BaseResultMap" parameterType="long">
     SELECT
     <include refid="Base_Column_List">
     </include>
-    FROM  programing_order
-    where order_no = #{orderNo}
+    FROM  programing_application
+    where application_no = #{applicationNo}
   </select>
 
-  <select id="selectByOrderNoAndSponsorId" resultMap="BaseResultMap" parameterType="map">
+  <select id="selectByApplicationNoAndSponsorId" resultMap="BaseResultMap" parameterType="map">
     SELECT
     <include refid="Base_Column_List">
     </include>
-    FROM  programing_order
+    FROM  programing_application
     <where>
       <if test="sponsorId != 1">
         and sponsor_id = #{sponsorId}
       </if>
-      <if test="orderNo != null">
-        and order_no = #{orderNo}
+      <if test="applicationNo != null">
+        and application_no = #{applicationNo}
       </if>
     </where>
   </select>
@@ -233,7 +233,7 @@
     SELECT
     <include refid="Base_Column_List">
     </include>
-    FROM  programing_order
+    FROM  programing_application
     <where>
       <if test="sponsorId != 1">
         and sponsor_id = #{sponsorId}
@@ -247,24 +247,24 @@
   <select id="selectByUserId" resultMap="BaseResultMap" parameterType="int">
     SELECT
     <include refid="Base_Column_List"/>
-    from programing_order
+    from programing_application
     where user_id = #{userId}
     order by create_time desc
   </select>
 
 
 
-  <select id="selectAllOrder" resultMap="BaseResultMap">
+  <select id="selectAllApplication" resultMap="BaseResultMap">
     SELECT
     <include refid="Base_Column_List"/>
-    from programing_order
+    from programing_application
     ORDER BY  create_time desc
   </select>
 
-  <select id="selectOrderStatusByCreateTime" resultMap="BaseResultMap" parameterType="map">
+  <select id="selectApplicationStatusByCreateTime" resultMap="BaseResultMap" parameterType="map">
     SELECT
     <include refid="Base_Column_List"/>
-    from programing_order
+    from programing_application
     where status = #{status}
     <![CDATA[
     and create_time <= #{date}
@@ -272,8 +272,8 @@
     order by create_time desc
   </select>
 
-  <update id="closeOrderByOrderId" parameterType="int" >
-    UPDATE programing_order
+  <update id="closeApplicationByApplicationId" parameterType="int" >
+    UPDATE programing_application
     SET status = 0
     where id = #{id}
   </update>

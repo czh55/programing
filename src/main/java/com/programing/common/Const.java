@@ -16,7 +16,7 @@ public class Const {
     public interface RedisCacheExtime{
         int REDIS_SESSION_EXTIME = 60 * 30;//30分钟
     }
-    public interface CompetitionListOrderBy{
+    public interface CompetitionListApplicationBy{
         Set<String> PRICE_ASC_DESC = Sets.newHashSet("price_desc","price_asc");
     }
 
@@ -52,7 +52,7 @@ public class Const {
     }
 
 
-    public enum OrderStatusEnum{
+    public enum ApplicationStatusEnum{
         CANCELED(0,"已取消"),
         NO_PAY(10,"未支付"),
         PAID(20,"已付款"),
@@ -61,7 +61,7 @@ public class Const {
         ORDER_CLOSE(60,"订单关闭");
 
 
-        OrderStatusEnum(int code,String value){
+        ApplicationStatusEnum(int code,String value){
             this.code = code;
             this.value = value;
         }
@@ -76,10 +76,10 @@ public class Const {
             return code;
         }
 
-        public static OrderStatusEnum codeOf(int code){
-            for(OrderStatusEnum orderStatusEnum : values()){
-                if(orderStatusEnum.getCode() == code){
-                    return orderStatusEnum;
+        public static ApplicationStatusEnum codeOf(int code){
+            for(ApplicationStatusEnum applicationStatusEnum : values()){
+                if(applicationStatusEnum.getCode() == code){
+                    return applicationStatusEnum;
                 }
             }
             throw new RuntimeException("么有找到对应的枚举");

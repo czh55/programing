@@ -120,7 +120,7 @@ public class FavouriteServiceImpl implements IFavouriteService {
             for(Favourite favouriteItem : favouriteList){
 
                 Competition competition = competitionMapper.selectByPrimaryKey(favouriteItem.getCompetitionId());
-                //这里要判断比赛存在，并且处于上架状态1，库存这里我们不检查了，即使是0页显示，判断交给订单确认页
+                //这里要判断比赛存在，并且处于上架状态1，名额这里我们不检查了，即使是0页显示，判断交给报名确认页
                 if(competition != null && competition.getStatus() == Const.CompetitionStatusEnum.ON_SALE.getCode()){
 
                     FavouriteCompetitionVo favouriteCompetitionVo = new FavouriteCompetitionVo();
@@ -145,7 +145,7 @@ public class FavouriteServiceImpl implements IFavouriteService {
                         buyLimitCount = favouriteItem.getQuantity();
                         favouriteCompetitionVo.setLimitQuantity(Const.Favourite.LIMIT_NUM_SUCCESS);
                     }else{
-                        //当库存为0的时候执行这里，我写的是一个通用的情况，其实这里只有buyLimitCount = 0，最后将收藏夹中的数量设置为0
+                        //当名额为0的时候执行这里，我写的是一个通用的情况，其实这里只有buyLimitCount = 0，最后将收藏夹中的数量设置为0
                         buyLimitCount = competition.getStock();
                         favouriteCompetitionVo.setLimitQuantity(Const.Favourite.LIMIT_NUM_FAIL);
                         //收藏夹中更新有效名额

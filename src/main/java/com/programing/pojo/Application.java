@@ -12,10 +12,10 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Order {
+public class Application {
     private Integer id;
 
-    private Long orderNo;
+    private Long applicationNo;
 
     private Integer userId;
 
@@ -25,13 +25,9 @@ public class Order {
 
     private Integer paymentType;
 
-    private Integer postage;
-
     private Integer status;
 
     private Date paymentTime;
-
-    private Date sendTime;
 
     private Date endTime;
 

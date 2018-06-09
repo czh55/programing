@@ -8,7 +8,7 @@ import com.programing.common.Const;
 import com.programing.common.ResponseCode;
 import com.programing.common.ServerResponse;
 import com.programing.pojo.User;
-import com.programing.service.IOrderService;
+import com.programing.service.IApplicationService;
 import com.programing.util.CookieUtil;
 import com.programing.util.JsonUtil;
 import com.programing.util.RedisShardedPoolUtil;
@@ -26,13 +26,13 @@ import java.util.Map;
 
 
 @Controller
-@RequestMapping("/order/")
+@RequestMapping("/application/")
 @Slf4j
-public class OrderController {
+public class ApplicationController {
 
 
     @Autowired
-    private IOrderService iOrderService;
+    private IApplicationService iApplicationService;
 
 
     @RequestMapping("create.do")
@@ -48,13 +48,13 @@ public class OrderController {
         if(user ==null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
         }
-        return iOrderService.createOrder(user.getId());
+        return iApplicationService.createApplication(user.getId());
     }
 
 
     @RequestMapping("cancel.do")
     @ResponseBody
-    public ServerResponse cancel(HttpServletRequest httpServletRequest, Long orderNo){
+    public ServerResponse cancel(HttpServletRequest httpServletRequest, Long applicationNo){
         String loginToken = CookieUtil.readLoginToken(httpServletRequest);
         if(StringUtils.isEmpty(loginToken)){
             return ServerResponse.createByErrorMessage("用户未登录,无法获取当前用户的信息");
@@ -65,13 +65,13 @@ public class OrderController {
         if(user ==null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
         }
-        return iOrderService.cancel(user.getId(),orderNo);
+        return iApplicationService.cancel(user.getId(),applicationNo);
     }
 
     //用于订单确认页
-    @RequestMapping("get_order_favourite_competition.do")
+    @RequestMapping("get_application_favourite_competition.do")
     @ResponseBody
-    public ServerResponse getOrderFavouriteCompetition(HttpServletRequest httpServletRequest){
+    public ServerResponse getApplicationFavouriteCompetition(HttpServletRequest httpServletRequest){
         String loginToken = CookieUtil.readLoginToken(httpServletRequest);
         if(StringUtils.isEmpty(loginToken)){
             return ServerResponse.createByErrorMessage("用户未登录,无法获取当前用户的信息");
@@ -82,14 +82,14 @@ public class OrderController {
         if(user ==null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
         }
-        return iOrderService.getOrderFavouriteCompetition(user.getId());
+        return iApplicationService.getApplicationFavouriteCompetition(user.getId());
     }
 
 
 
     @RequestMapping("detail.do")
     @ResponseBody
-    public ServerResponse detail(HttpServletRequest httpServletRequest,Long orderNo){
+    public ServerResponse detail(HttpServletRequest httpServletRequest,Long applicationNo){
         String loginToken = CookieUtil.readLoginToken(httpServletRequest);
         if(StringUtils.isEmpty(loginToken)){
             return ServerResponse.createByErrorMessage("用户未登录,无法获取当前用户的信息");
@@ -100,7 +100,7 @@ public class OrderController {
         if(user ==null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
         }
-        return iOrderService.getOrderDetail(user.getId(),orderNo);
+        return iApplicationService.getApplicationDetail(user.getId(),applicationNo);
     }
 
     @RequestMapping("list.do")
@@ -117,7 +117,7 @@ public class OrderController {
         if(user ==null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
         }
-        return iOrderService.getOrderList(user.getId(),pageNum,pageSize);
+        return iApplicationService.getApplicationList(user.getId(),pageNum,pageSize);
     }
 
 
@@ -137,7 +137,7 @@ public class OrderController {
 
     @RequestMapping("pay.do")
     @ResponseBody
-    public ServerResponse pay(HttpServletRequest httpServletRequest, Long orderNo, HttpServletRequest request){
+    public ServerResponse pay(HttpServletRequest httpServletRequest, Long applicationNo, HttpServletRequest request){
 
         String loginToken = CookieUtil.readLoginToken(httpServletRequest);
         if(StringUtils.isEmpty(loginToken)){
@@ -150,7 +150,7 @@ public class OrderController {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
         }
         String path = request.getSession().getServletContext().getRealPath("upload");
-        return iOrderService.pay(orderNo,user.getId(),path);
+        return iApplicationService.pay(applicationNo,user.getId(),path);
     }
 
     @RequestMapping("alipay_callback.do")
@@ -188,7 +188,7 @@ public class OrderController {
 
 
         //
-        ServerResponse serverResponse = iOrderService.aliCallback(params);
+        ServerResponse serverResponse = iApplicationService.aliCallback(params);
         if(serverResponse.isSuccess()){
             return Const.AlipayCallback.RESPONSE_SUCCESS;
         }
@@ -196,9 +196,9 @@ public class OrderController {
     }
 
 
-    @RequestMapping("query_order_pay_status.do")
+    @RequestMapping("query_application_pay_status.do")
     @ResponseBody
-    public ServerResponse<Boolean> queryOrderPayStatus(HttpServletRequest httpServletRequest, Long orderNo){
+    public ServerResponse<Boolean> queryApplicationPayStatus(HttpServletRequest httpServletRequest, Long applicationNo){
         String loginToken = CookieUtil.readLoginToken(httpServletRequest);
         if(StringUtils.isEmpty(loginToken)){
             return ServerResponse.createByErrorMessage("用户未登录,无法获取当前用户的信息");
@@ -210,7 +210,7 @@ public class OrderController {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
         }
 
-        ServerResponse serverResponse = iOrderService.queryOrderPayStatus(user.getId(),orderNo);
+        ServerResponse serverResponse = iApplicationService.queryApplicationPayStatus(user.getId(),applicationNo);
         if(serverResponse.isSuccess()){
             return ServerResponse.createBySuccess(true);
         }

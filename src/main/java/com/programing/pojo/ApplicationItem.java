@@ -11,10 +11,10 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderItem {
+public class ApplicationItem {
     private Integer id;
 
-    private Long orderNo;
+    private Long applicationNo;
 
     private Integer competitionId;
 

@@ -16,7 +16,7 @@ public class PayInfo {
 
     private Integer userId;
 
-    private Long orderNo;
+    private Long applicationNo;
 
     private Integer payPlatform;
 

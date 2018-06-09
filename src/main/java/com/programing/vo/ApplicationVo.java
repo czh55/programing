@@ -3,24 +3,21 @@ package com.programing.vo;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class OrderVo {
+public class ApplicationVo {
 
-    private Long orderNo;
+    private Long applicationNo;
 
     private BigDecimal payment;
 
     private Integer paymentType;
 
     private String paymentTypeDesc;
-    private Integer postage;
 
     private Integer status;
 
     private String statusDesc;
 
     private String paymentTime;
-
-    private String sendTime;
 
     private String endTime;
 
@@ -29,17 +26,17 @@ public class OrderVo {
     private String createTime;
 
     //订单的明细
-    private List<OrderItemVo> orderItemVoList;
+    private List<ApplicationItemVo> applicationItemVoList;
 
     private String imageHost;
     private String receiverName;
 
-    public Long getOrderNo() {
-        return orderNo;
+    public Long getApplicationNo() {
+        return applicationNo;
     }
 
-    public void setOrderNo(Long orderNo) {
-        this.orderNo = orderNo;
+    public void setApplicationNo(Long applicationNo) {
+        this.applicationNo = applicationNo;
     }
 
     public BigDecimal getPayment() {
@@ -66,14 +63,6 @@ public class OrderVo {
         this.paymentTypeDesc = paymentTypeDesc;
     }
 
-    public Integer getPostage() {
-        return postage;
-    }
-
-    public void setPostage(Integer postage) {
-        this.postage = postage;
-    }
-
     public Integer getStatus() {
         return status;
     }
@@ -96,14 +85,6 @@ public class OrderVo {
 
     public void setPaymentTime(String paymentTime) {
         this.paymentTime = paymentTime;
-    }
-
-    public String getSendTime() {
-        return sendTime;
-    }
-
-    public void setSendTime(String sendTime) {
-        this.sendTime = sendTime;
     }
 
     public String getEndTime() {
@@ -130,12 +111,12 @@ public class OrderVo {
         this.createTime = createTime;
     }
 
-    public List<OrderItemVo> getOrderItemVoList() {
-        return orderItemVoList;
+    public List<ApplicationItemVo> getApplicationItemVoList() {
+        return applicationItemVoList;
     }
 
-    public void setOrderItemVoList(List<OrderItemVo> orderItemVoList) {
-        this.orderItemVoList = orderItemVoList;
+    public void setApplicationItemVoList(List<ApplicationItemVo> applicationItemVoList) {
+        this.applicationItemVoList = applicationItemVoList;
     }
 
     public String getImageHost() {

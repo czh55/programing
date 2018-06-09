@@ -3,17 +3,17 @@ package com.programing.vo;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class OrderCompetitionVo {
-    private List<OrderItemVo> orderItemVoList;
+public class ApplicationCompetitionVo {
+    private List<ApplicationItemVo> applicationItemVoList;
     private BigDecimal competitionTotalPrice;
     private String imageHost;
 
-    public List<OrderItemVo> getOrderItemVoList() {
-        return orderItemVoList;
+    public List<ApplicationItemVo> getApplicationItemVoList() {
+        return applicationItemVoList;
     }
 
-    public void setOrderItemVoList(List<OrderItemVo> orderItemVoList) {
-        this.orderItemVoList = orderItemVoList;
+    public void setApplicationItemVoList(List<ApplicationItemVo> applicationItemVoList) {
+        this.applicationItemVoList = applicationItemVoList;
     }
 
     public BigDecimal getCompetitionTotalPrice() {

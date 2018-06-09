@@ -3,9 +3,9 @@ package com.programing.vo;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class OrderItemVo {
+public class ApplicationItemVo {
 
-    private Long orderNo;
+    private Long applicationNo;
 
     private Integer competitionId;
 
@@ -20,12 +20,12 @@ public class OrderItemVo {
 
     private String createTime;
 
-    public Long getOrderNo() {
-        return orderNo;
+    public Long getApplicationNo() {
+        return applicationNo;
     }
 
-    public void setOrderNo(Long orderNo) {
-        this.orderNo = orderNo;
+    public void setApplicationNo(Long applicationNo) {
+        this.applicationNo = applicationNo;
     }
 
     public Integer getCompetitionId() {

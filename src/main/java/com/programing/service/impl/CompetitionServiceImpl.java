@@ -49,18 +49,18 @@ public class CompetitionServiceImpl implements ICompetitionService {
             if(competition.getId() != null){
                 int rowCount = competitionMapper.updateByPrimaryKey(competition);
                 if(rowCount > 0){
-                    return ServerResponse.createBySuccess("更新产品成功");
+                    return ServerResponse.createBySuccess("更新比赛成功");
                 }
-                return ServerResponse.createBySuccess("更新产品失败");
+                return ServerResponse.createBySuccess("更新比赛失败");
             }else{
                 int rowCount = competitionMapper.insert(competition);
                 if(rowCount > 0){
-                    return ServerResponse.createBySuccess("新增产品成功");
+                    return ServerResponse.createBySuccess("新增比赛成功");
                 }
-                return ServerResponse.createBySuccess("新增产品失败");
+                return ServerResponse.createBySuccess("新增比赛失败");
             }
         }
-        return ServerResponse.createByErrorMessage("新增或更新产品参数不正确");
+        return ServerResponse.createByErrorMessage("新增或更新比赛参数不正确");
     }
 
 
@@ -73,9 +73,9 @@ public class CompetitionServiceImpl implements ICompetitionService {
         competition.setStatus(status);
         int rowCount = competitionMapper.updateByPrimaryKeySelective(competition);
         if(rowCount > 0){
-            return ServerResponse.createBySuccess("修改产品销售状态成功");
+            return ServerResponse.createBySuccess("修改比赛销售状态成功");
         }
-        return ServerResponse.createByErrorMessage("修改产品销售状态失败");
+        return ServerResponse.createByErrorMessage("修改比赛销售状态失败");
     }
 
 
@@ -85,7 +85,7 @@ public class CompetitionServiceImpl implements ICompetitionService {
         }
         Competition competition = competitionMapper.selectByPrimaryKey(competitionId);
         if(competition == null){
-            return ServerResponse.createByErrorMessage("产品已下架或者删除");
+            return ServerResponse.createByErrorMessage("比赛已下架或者删除");
         }
         CompetitionDetailVo competitionDetailVo = assembleCompetitionDetailVo(competition);
         return ServerResponse.createBySuccess(competitionDetailVo);
@@ -212,10 +212,10 @@ public class CompetitionServiceImpl implements ICompetitionService {
         }
         Competition competition = competitionMapper.selectByPrimaryKey(competitionId);
         if(competition == null){
-            return ServerResponse.createByErrorMessage("产品已下架或者删除");
+            return ServerResponse.createByErrorMessage("比赛已下架或者删除");
         }
         if(competition.getStatus() != Const.CompetitionStatusEnum.ON_SALE.getCode()){
-            return ServerResponse.createByErrorMessage("产品已下架或者删除");
+            return ServerResponse.createByErrorMessage("比赛已下架或者删除");
         }
         CompetitionDetailVo competitionDetailVo = assembleCompetitionDetailVo(competition);
         return ServerResponse.createBySuccess(competitionDetailVo);
@@ -246,7 +246,7 @@ public class CompetitionServiceImpl implements ICompetitionService {
         PageHelper.startPage(pageNum,pageSize);
         //排序处理
         if(StringUtils.isNotBlank(orderBy)){
-            if(Const.CompetitionListOrderBy.PRICE_ASC_DESC.contains(orderBy)){
+            if(Const.CompetitionListApplicationBy.PRICE_ASC_DESC.contains(orderBy)){
                 String[] orderByArray = orderBy.split("_");
                 PageHelper.orderBy(orderByArray[0]+" "+orderByArray[1]);
             }

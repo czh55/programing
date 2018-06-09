@@ -50,7 +50,7 @@
             <!--manage/a.do  /manage/*-->
             <!--manage/b.do  /manage/*-->
             <!--manage/competition/save.do /manage/**-->
-            <!--manage/order/detail.do /manage/**-->
+            <!--manage/application/detail.do /manage/**-->
             <mvc:mapping path="/manage/**"/>
             <!--<mvc:exclude-mapping path="/manage/user/login.do"/>-->
             <bean class="com.programing.controller.common.interceptor.AuthorityInterceptor" />

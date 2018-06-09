@@ -98,7 +98,7 @@ public class ApplicationServiceImpl implements IApplicationService {
         int sponsorId = competition.getSponsorId();
 
         //计算这次报名的总价,校验收藏夹的数据,包括比赛的状态和数量，返回封装好applicationItemList
-        ServerResponse serverResponse = this.getFavouriteApplicationItem(userId, favouriteList,sponsorId);
+        ServerResponse serverResponse = this.getApplicationItemByFavouriteList(userId, favouriteList,sponsorId);
         if(!serverResponse.isSuccess()){
             return serverResponse;
         }
@@ -170,8 +170,6 @@ public class ApplicationServiceImpl implements IApplicationService {
         applicationItemVo.setCompetitionName(applicationItem.getCompetitionName());
         applicationItemVo.setCompetitionImage(applicationItem.getCompetitionImage());
         applicationItemVo.setCurrentUnitPrice(applicationItem.getCurrentUnitPrice());
-        applicationItemVo.setQuantity(applicationItem.getQuantity());
-        applicationItemVo.setTotalPrice(applicationItem.getTotalPrice());
 
         applicationItemVo.setCreateTime(DateTimeUtil.dateToStr(applicationItem.getCreateTime()));
         return applicationItemVo;
@@ -187,7 +185,7 @@ public class ApplicationServiceImpl implements IApplicationService {
     private void reduceCompetitionStock(List<ApplicationItem> applicationItemList){
         for(ApplicationItem applicationItem : applicationItemList){
             Competition competition = competitionMapper.selectByPrimaryKey(applicationItem.getCompetitionId());
-            competition.setStock(competition.getStock()- applicationItem.getQuantity());
+            competition.setStock(competition.getStock()- 1);
             competitionMapper.updateByPrimaryKeySelective(competition);
         }
     }
@@ -217,17 +215,16 @@ public class ApplicationServiceImpl implements IApplicationService {
         return currentTime+new Random().nextInt(100);
     }
 
-
-
     private BigDecimal getApplicationTotalPrice(List<ApplicationItem> applicationItemList){
         BigDecimal payment = new BigDecimal("0");
         for(ApplicationItem applicationItem : applicationItemList){
-            payment = BigDecimalUtil.add(payment.doubleValue(), applicationItem.getTotalPrice().doubleValue());
+            payment = BigDecimalUtil.add(payment.doubleValue(), applicationItem.getCurrentUnitPrice().doubleValue());
         }
         return payment;
     }
+
     //计算这次报名的总价,校验收藏夹的数据,包括比赛的状态和数量，返回封装好applicationItemList
-    private ServerResponse getFavouriteApplicationItem(Integer userId, List<Favourite> favouriteList, Integer sponsorId){
+    private ServerResponse getApplicationItemByFavouriteList(Integer userId, List<Favourite> favouriteList, Integer sponsorId){
         List<ApplicationItem> applicationItemList = Lists.newArrayList();
         if(CollectionUtils.isEmpty(favouriteList)){
             return ServerResponse.createByErrorMessage("收藏夹为空");
@@ -242,7 +239,7 @@ public class ApplicationServiceImpl implements IApplicationService {
             }
 
             //校验名额
-            if(favouriteItem.getQuantity() > competition.getStock()){
+            if(competition.getStock() < 1){
                 return ServerResponse.createByErrorMessage("比赛"+ competition.getName()+"名额不足");
             }
 
@@ -252,15 +249,10 @@ public class ApplicationServiceImpl implements IApplicationService {
             applicationItem.setCompetitionName(competition.getName());
             applicationItem.setCompetitionImage(competition.getMainImage());
             applicationItem.setCurrentUnitPrice(competition.getPrice());
-            applicationItem.setQuantity(favouriteItem.getQuantity());
-            applicationItem.setTotalPrice(BigDecimalUtil.mul(competition.getPrice().doubleValue(), favouriteItem.getQuantity()));
             applicationItemList.add(applicationItem);
         }
         return ServerResponse.createBySuccess(applicationItemList);
     }
-
-
-
 
 
     public ServerResponse<String> cancel(Integer userId,Long applicationNo){
@@ -285,7 +277,7 @@ public class ApplicationServiceImpl implements IApplicationService {
 
 
 
-    public ServerResponse getApplicationFavouriteCompetition(Integer userId){
+    public ServerResponse getApplicationForConfirmPage(Integer userId){
         ApplicationCompetitionVo applicationCompetitionVo = new ApplicationCompetitionVo();
         //从收藏夹中获取数据
 
@@ -297,7 +289,7 @@ public class ApplicationServiceImpl implements IApplicationService {
 
         //这里的getFavouriteApplicationItem()还在create报名信息的时候使用，目的：根据favouriteList，检查并重组applicationItem
         //到达确认页以后，可能同时又很多用户同时操作。当我们真正的提交报名时，可能名额已经不够了，所有要调用进行第二次的检查
-        ServerResponse serverResponse =  this.getFavouriteApplicationItem(userId, favouriteList,sponsorId);
+        ServerResponse serverResponse =  this.getApplicationItemByFavouriteList(userId, favouriteList,sponsorId);
         if(!serverResponse.isSuccess()){
             return serverResponse;
         }
@@ -307,7 +299,7 @@ public class ApplicationServiceImpl implements IApplicationService {
 
         BigDecimal payment = new BigDecimal("0");
         for(ApplicationItem applicationItem : applicationItemList){
-            payment = BigDecimalUtil.add(payment.doubleValue(), applicationItem.getTotalPrice().doubleValue());
+            payment = BigDecimalUtil.add(payment.doubleValue(), applicationItem.getCurrentUnitPrice().doubleValue());
             applicationItemVoList.add(assembleApplicationItemVo(applicationItem));
         }
         applicationCompetitionVo.setCompetitionTotalPrice(payment);
@@ -449,7 +441,7 @@ public class ApplicationServiceImpl implements IApplicationService {
         for(ApplicationItem applicationItem : applicationItemList){
             GoodsDetail goods = GoodsDetail.newInstance(applicationItem.getCompetitionId().toString(), applicationItem.getCompetitionName(),
                     BigDecimalUtil.mul(applicationItem.getCurrentUnitPrice().doubleValue(),new Double(100).doubleValue()).longValue(),
-                    applicationItem.getQuantity());
+                    1);
             goodsDetailList.add(goods);
         }
 
@@ -640,7 +632,7 @@ public class ApplicationServiceImpl implements IApplicationService {
                 }
                 Competition competition = new Competition();
                 competition.setId(applicationItem.getCompetitionId());
-                competition.setStock(stock+ applicationItem.getQuantity());
+                competition.setStock(stock + 1);
                 competitionMapper.updateByPrimaryKeySelective(competition);
             }
             applicationMapper.closeApplicationByApplicationId(application.getId());

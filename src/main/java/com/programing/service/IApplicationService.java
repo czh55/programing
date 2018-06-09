@@ -12,7 +12,7 @@ public interface IApplicationService {
     ServerResponse queryApplicationPayStatus(Integer userId,Long applicationNo);
     ServerResponse createApplication(Integer userId);
     ServerResponse<String> cancel(Integer userId,Long applicationNo);
-    ServerResponse getApplicationFavouriteCompetition(Integer userId);
+    ServerResponse getApplicationForConfirmPage(Integer userId);
     ServerResponse<ApplicationVo> getApplicationDetail(Integer userId, Long applicationNo);
     ServerResponse<PageInfo> getApplicationList(Integer userId, int pageNum, int pageSize);
     ServerResponse judgeIsJoin(Integer competitionId, Integer userId);

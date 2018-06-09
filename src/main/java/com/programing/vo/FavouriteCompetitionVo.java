@@ -4,19 +4,17 @@ import java.math.BigDecimal;
 
 public class FavouriteCompetitionVo {
 
-//结合了比赛和收藏夹的一个抽象对象
+//结合了比赛和收藏夹两张表的的一个抽象对象
 
     private Integer id;
     private Integer userId;
     private Integer competitionId;
     private String sponsorName;//用于前台顾客收藏夹显示比赛对应的sponsor
-    private Integer quantity;//收藏夹中此比赛的数量
     private String competitionName;
     private String competitionSubtitle;
     private String competitionMainImage;
     private BigDecimal competitionPrice;
     private Integer competitionStatus;
-    private BigDecimal competitionTotalPrice;
     private Integer competitionStock;
     private Integer competitionChecked;//此比赛是否勾选
 
@@ -44,14 +42,6 @@ public class FavouriteCompetitionVo {
 
     public void setCompetitionId(Integer competitionId) {
         this.competitionId = competitionId;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
     }
 
     public String getCompetitionName() {
@@ -92,14 +82,6 @@ public class FavouriteCompetitionVo {
 
     public void setCompetitionStatus(Integer competitionStatus) {
         this.competitionStatus = competitionStatus;
-    }
-
-    public BigDecimal getCompetitionTotalPrice() {
-        return competitionTotalPrice;
-    }
-
-    public void setCompetitionTotalPrice(BigDecimal competitionTotalPrice) {
-        this.competitionTotalPrice = competitionTotalPrice;
     }
 
     public Integer getCompetitionStock() {

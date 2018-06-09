@@ -6,14 +6,13 @@
       <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="competition_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="quantity" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="checked" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, user_id, competition_id, quantity, checked, create_time, update_time
+    id, user_id, competition_id,checked, create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
@@ -27,10 +26,10 @@
   </delete>
   <insert id="insert" parameterType="com.programing.pojo.Favourite" >
     insert into programing_favourite (id, user_id, competition_id,
-    quantity, checked, create_time,
+    checked, create_time,
     update_time)
     values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{competitionId,jdbcType=INTEGER},
-    #{quantity,jdbcType=INTEGER}, #{checked,jdbcType=INTEGER}, now(),
+    #{checked,jdbcType=INTEGER}, now(),
     now())
   </insert>
   <insert id="insertSelective" parameterType="com.programing.pojo.Favourite" >
@@ -44,9 +43,6 @@
       </if>
       <if test="competitionId != null" >
         competition_id,
-      </if>
-      <if test="quantity != null" >
-        quantity,
       </if>
       <if test="checked != null" >
         checked,
@@ -68,9 +64,6 @@
       <if test="competitionId != null" >
         #{competitionId,jdbcType=INTEGER},
       </if>
-      <if test="quantity != null" >
-        #{quantity,jdbcType=INTEGER},
-      </if>
       <if test="checked != null" >
         #{checked,jdbcType=INTEGER},
       </if>
@@ -90,9 +83,6 @@
       </if>
       <if test="competitionId != null" >
         competition_id = #{competitionId,jdbcType=INTEGER},
-      </if>
-      <if test="quantity != null" >
-        quantity = #{quantity,jdbcType=INTEGER},
       </if>
       <if test="checked != null" >
         checked = #{checked,jdbcType=INTEGER},
@@ -154,7 +144,7 @@
 
 
   <select id="selectFavouriteCompetitionCount" parameterType="int" resultType="int">
-    select IFNULL(sum(quantity),0) as count from programing_favourite where user_id = #{userId}
+    select  count(*) from programing_favourite where user_id = #{userId}
   </select>
 
 

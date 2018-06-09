@@ -18,8 +18,6 @@ public class Favourite {
 
     private Integer competitionId;
 
-    private Integer quantity;
-
     private Integer checked;
 
     private Date createTime;

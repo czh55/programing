@@ -47,8 +47,6 @@ public class FavouriteServiceImpl implements IFavouriteService {
         if(favourite == null){
             //这个比赛不在这个收藏夹里,需要新增一个这个比赛的记录
             Favourite favouriteItem = new Favourite();
-            //这里我们直接设置成1，成为默认值
-            favouriteItem.setQuantity(1);
             favouriteItem.setChecked(Const.Favourite.CHECKED);
             favouriteItem.setCompetitionId(competitionId);
             favouriteItem.setUserId(userId);
@@ -139,29 +137,19 @@ public class FavouriteServiceImpl implements IFavouriteService {
                     favouriteCompetitionVo.setCompetitionPrice(competition.getPrice());
                     favouriteCompetitionVo.setCompetitionStock(competition.getStock());
                     //判断名额
-                    int buyLimitCount = 0;
-                    if(competition.getStock() >= favouriteItem.getQuantity()){
+                    if(competition.getStock() > 0){
                         //名额充足的时候
-                        buyLimitCount = favouriteItem.getQuantity();
                         favouriteCompetitionVo.setLimitQuantity(Const.Favourite.LIMIT_NUM_SUCCESS);
                     }else{
-                        //当名额为0的时候执行这里，我写的是一个通用的情况，其实这里只有buyLimitCount = 0，最后将收藏夹中的数量设置为0
-                        buyLimitCount = competition.getStock();
+                        //当名额为0的时候执行这里
                         favouriteCompetitionVo.setLimitQuantity(Const.Favourite.LIMIT_NUM_FAIL);
-                        //收藏夹中更新有效名额
-                        Favourite favouriteForQuantity = new Favourite();
-                        favouriteForQuantity.setId(favouriteItem.getId());
-                        favouriteForQuantity.setQuantity(buyLimitCount);
-                        favouriteMapper.updateByPrimaryKeySelective(favouriteForQuantity);
                     }
-                    favouriteCompetitionVo.setQuantity(buyLimitCount);
-                    //计算总价
-                    favouriteCompetitionVo.setCompetitionTotalPrice(BigDecimalUtil.mul(competition.getPrice().doubleValue(), favouriteCompetitionVo.getQuantity()));
+
                     favouriteCompetitionVo.setCompetitionChecked(favouriteItem.getChecked());
 
                     if(favouriteItem.getChecked() == Const.Favourite.CHECKED){
                         //如果已经勾选,增加到整个的收藏夹总价中
-                        favouriteTotalPrice = BigDecimalUtil.add(favouriteTotalPrice.doubleValue(), favouriteCompetitionVo.getCompetitionTotalPrice().doubleValue());
+                        favouriteTotalPrice = BigDecimalUtil.add(favouriteTotalPrice.doubleValue(), favouriteCompetitionVo.getCompetitionPrice().doubleValue());
                     }
                     favouriteCompetitionVoList.add(favouriteCompetitionVo);
                 }

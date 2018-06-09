@@ -24,10 +24,6 @@ public class ApplicationItem {
 
     private BigDecimal currentUnitPrice;
 
-    private Integer quantity;
-
-    private BigDecimal totalPrice;
-
     private Date createTime;
 
     private Date updateTime;

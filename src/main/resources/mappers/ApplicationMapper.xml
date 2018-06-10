@@ -40,7 +40,7 @@
     values (#{id,jdbcType=INTEGER}, #{applicationNo,jdbcType=BIGINT}, #{userId,jdbcType=INTEGER}, #{sponsorId,jdbcType=INTEGER},
     #{payment,jdbcType=DECIMAL}, #{paymentType,jdbcType=INTEGER},
     #{status,jdbcType=INTEGER}, #{paymentTime,jdbcType=TIMESTAMP},
-    #{sendTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{closeTime,jdbcType=TIMESTAMP},
+    #{endTime,jdbcType=TIMESTAMP}, #{closeTime,jdbcType=TIMESTAMP},
     now(), now())
   </insert>
   <insert id="insertSelective" parameterType="com.programing.pojo.Application" >
@@ -104,9 +104,6 @@
       </if>
       <if test="paymentTime != null" >
         #{paymentTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="sendTime != null" >
-        #{sendTime,jdbcType=TIMESTAMP},
       </if>
       <if test="endTime != null" >
         #{endTime,jdbcType=TIMESTAMP},

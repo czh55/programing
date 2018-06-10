@@ -118,8 +118,10 @@ public class FavouriteServiceImpl implements IFavouriteService {
             for(Favourite favouriteItem : favouriteList){
 
                 Competition competition = competitionMapper.selectByPrimaryKey(favouriteItem.getCompetitionId());
-                //这里要判断比赛存在，并且处于上架状态1，名额这里我们不检查了，即使是0页显示，判断交给报名确认页
-                if(competition != null && competition.getStatus() == Const.CompetitionStatusEnum.ON_SALE.getCode()){
+                //这里要判断比赛存在，
+                //名额这里我们不检查了，即使是0页显示，判断交给报名确认页
+                //这里也不检查上架状态。只要是收藏的，我们就显示出来。过滤交给报名确认页。
+                if(competition != null){
 
                     FavouriteCompetitionVo favouriteCompetitionVo = new FavouriteCompetitionVo();
                     favouriteCompetitionVo.setId(favouriteItem.getId());
@@ -136,7 +138,7 @@ public class FavouriteServiceImpl implements IFavouriteService {
                     favouriteCompetitionVo.setCompetitionStatus(competition.getStatus());
                     favouriteCompetitionVo.setCompetitionPrice(competition.getPrice());
                     favouriteCompetitionVo.setCompetitionStock(competition.getStock());
-                    //判断名额
+                    //判断名额，名额不影响是否显示
                     if(competition.getStock() > 0){
                         //名额充足的时候
                         favouriteCompetitionVo.setLimitQuantity(Const.Favourite.LIMIT_NUM_SUCCESS);

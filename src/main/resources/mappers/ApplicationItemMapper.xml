@@ -36,7 +36,7 @@
     update_time, user_id, sponsor_id)
     values (#{id,jdbcType=INTEGER}, #{applicationNo,jdbcType=BIGINT}, #{competitionId,jdbcType=INTEGER},
     #{competitionName,jdbcType=VARCHAR}, #{competitionImage,jdbcType=VARCHAR}, #{currentUnitPrice,jdbcType=DECIMAL},
-    #{totalPrice,jdbcType=DECIMAL}, now(),
+    now(),
     now(), #{userId,jdbcType=INTEGER}, #{sponsorId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.programing.pojo.ApplicationItem" >
@@ -91,9 +91,6 @@
       </if>
       <if test="currentUnitPrice != null" >
         #{currentUnitPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="totalPrice != null" >
-        #{totalPrice,jdbcType=DECIMAL},
       </if>
       <if test="createTime != null" >
         now(),
@@ -181,7 +178,7 @@
     values
     <foreach collection="applicationItemList" index="index" item="item" separator=",">
       (
-      #{item.id},#{item.applicationNo},#{item.userId},#{item.sponsorId},#{item.competitionId},#{item.competitionName},#{item.competitionImage},#{item.currentUnitPrice},#{item.totalPrice},now(),now()
+      #{item.id},#{item.applicationNo},#{item.userId},#{item.sponsorId},#{item.competitionId},#{item.competitionName},#{item.competitionImage},#{item.currentUnitPrice},now(),now()
       )
     </foreach>
   </insert>

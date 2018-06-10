@@ -93,9 +93,21 @@ public class ApplicationServiceImpl implements IApplicationService {
             }
         }
 
-        //查询比赛对应的sponsor
+        //验证是否是同一个sponsor
         Competition competition = competitionMapper.selectByPrimaryKey(favouriteList.get(0).getCompetitionId());
         int sponsorId = competition.getSponsorId();
+
+        for(Favourite favourite : favouriteList){
+            Competition competition_temp = competitionMapper.selectByPrimaryKey(favourite.getCompetitionId());
+            int sponsorId_temp = competition_temp.getSponsorId();
+
+            if(sponsorId != sponsorId_temp){
+                return ServerResponse.createByErrorMessage("比赛不同同一个sponsor，请重新选择");
+            }
+            sponsorId = sponsorId_temp;
+        }
+
+        //sponsorId还要application表的字段，正好上面就有
 
         //计算这次报名的总价,校验收藏夹的数据,包括比赛的状态和数量，返回封装好applicationItemList
         ServerResponse serverResponse = this.getApplicationItemByFavouriteList(userId, favouriteList,sponsorId);
@@ -277,11 +289,16 @@ public class ApplicationServiceImpl implements IApplicationService {
 
 
 
-    public ServerResponse getApplicationForConfirmPage(Integer userId){
+    public ServerResponse getApplicationCompetitionForConfirmPage(Integer userId){
         ApplicationCompetitionVo applicationCompetitionVo = new ApplicationCompetitionVo();
         //从收藏夹中获取数据
 
         List<Favourite> favouriteList = favouriteMapper.selectCheckedFavouriteByUserId(userId);
+
+        if(favouriteList.size() == 0){
+            return ServerResponse.createByErrorMessage("收藏夹中没有勾选比赛，请重新选择");
+        }
+
 
         //查询比赛对应的sponsor
         Competition competition = competitionMapper.selectByPrimaryKey(favouriteList.get(0).getCompetitionId());

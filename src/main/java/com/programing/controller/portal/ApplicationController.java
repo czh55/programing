@@ -82,7 +82,7 @@ public class ApplicationController {
         if(user ==null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
         }
-        return iApplicationService.getApplicationForConfirmPage(user.getId());
+        return iApplicationService.getApplicationCompetitionForConfirmPage(user.getId());
     }
 
 

@@ -153,12 +153,15 @@ public class ApplicationController {
         return iApplicationService.pay(applicationNo,user.getId(),path);
     }
 
+
+    //一个是验证是不是支付宝发的，二是改application表的状态，给payInfo表插入信息，最后告诉字符包是否成功，通过字符串
     @RequestMapping("alipay_callback.do")
     @ResponseBody
     public Object alipayCallback(HttpServletRequest request){
         Map<String,String> params = Maps.newHashMap();
 
         Map requestParams = request.getParameterMap();
+        //将字符串数据拼接成一个
         for(Iterator iter = requestParams.keySet().iterator();iter.hasNext();){
             String name = (String)iter.next();
             String[] values = (String[]) requestParams.get(name);
@@ -184,10 +187,7 @@ public class ApplicationController {
             log.error("支付宝验证回调异常",e);
         }
 
-        //todo 验证各种数据
-
-
-        //
+        //验证一下，然后更改application表的状态，给payInfo表插入信息
         ServerResponse serverResponse = iApplicationService.aliCallback(params);
         if(serverResponse.isSuccess()){
             return Const.AlipayCallback.RESPONSE_SUCCESS;

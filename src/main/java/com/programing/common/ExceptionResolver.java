@@ -14,10 +14,12 @@ public class ExceptionResolver implements HandlerExceptionResolver{
 
     @Override
     public ModelAndView resolveException(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) {
+
+        //这句话最后的e一定要加上，否则会出现异常丢失的情况，连后端server都不显示了
         log.error("{} Exception",httpServletRequest.getRequestURI(),e);
         ModelAndView modelAndView = new ModelAndView(new MappingJacksonJsonView());
 
-        //当使用是jackson2.x的时候使用MappingJackson2JsonView，课程中使用的是1.9。
+        //当使用是jackson2.x的时候使用MappingJackson2JsonView，这个项目使用的是1.9。
         modelAndView.addObject("status",ResponseCode.ERROR.getCode());
         modelAndView.addObject("msg","接口异常,详情请查看服务端日志的异常信息");
         modelAndView.addObject("data",e.toString());

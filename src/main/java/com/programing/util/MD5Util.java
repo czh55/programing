@@ -23,10 +23,6 @@ public class MD5Util {
 
     /**
      * 返回大写MD5
-     *
-     * @param origin
-     * @param charsetname
-     * @return
      */
     private static String MD5Encode(String origin, String charsetname) {
         String resultString = null;

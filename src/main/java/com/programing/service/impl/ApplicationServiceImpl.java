@@ -490,10 +490,13 @@ public class ApplicationServiceImpl implements IApplicationService {
                 //细节细节细节
                 String qrPath = String.format(path+"/qr-%s.png",response.getOutTradeNo());
                 String qrFileName = String.format("qr-%s.png",response.getOutTradeNo());
+
+                //ZxingUtils 支付宝中的自己的类
                 ZxingUtils.getQRCodeImge(response.getQrCode(), 256, qrPath);
 
                 File targetFile = new File(path,qrFileName);
                 try {
+                    //将二维码从本地的upload路径传递到ftp服务器
                     FTPUtil.uploadFile(Lists.newArrayList(targetFile));
                 } catch (IOException e) {
                     log.error("上传二维码异常",e);
@@ -529,7 +532,7 @@ public class ApplicationServiceImpl implements IApplicationService {
         }
     }
 
-
+    //验证一下，然后更改application表的状态，给payInfo表插入信息
     public ServerResponse aliCallback(Map<String,String> params){
         Long applicationNo = Long.parseLong(params.get("out_trade_no"));
         String tradeNo = params.get("trade_no");

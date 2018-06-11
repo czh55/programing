@@ -35,7 +35,7 @@ public class AuthorityInterceptor implements HandlerInterceptor{
         String methodName = handlerMethod.getMethod().getName();
         String className = handlerMethod.getBean().getClass().getSimpleName();
 
-        //解析参数,具体的参数key以及value是什么，我们打印日志
+        //解析参数,具体的参数key以及value是什么，打印日志
         StringBuffer requestParamBuffer = new StringBuffer();
         Map paramMap = request.getParameterMap();
         Iterator it = paramMap.entrySet().iterator();
@@ -80,6 +80,7 @@ public class AuthorityInterceptor implements HandlerInterceptor{
             PrintWriter out = response.getWriter();
 
             //上传由于富文本的控件要求，要特殊处理返回值，这里面区分是否登录以及是否有权限
+            //这是插件要求的返回值类型不是我们项目中通用的serverResponse决定的
             if(user == null){
                 if(StringUtils.equals(className,"CompetitionManageController") && StringUtils.equals(methodName,"richtextImgUpload")){
                     Map resultMap = Maps.newHashMap();

@@ -5,6 +5,7 @@ import com.google.common.collect.Sets;
 import java.util.Set;
 
 public class Const {
+    //const主要就是针对一些数字的值，和数据库中用数字来不同的意义，项目开工时就首先要写好
 
     public static final String CURRENT_USER = "currentUser";
 
@@ -75,13 +76,15 @@ public class Const {
             return code;
         }
 
+
+        //codeOf使用的情景是：数据库的一个字段可以表示有两个以上的不同的情况，这时我们的代码中可能需要根据code数值来确定他的value
         public static ApplicationStatusEnum codeOf(int code){
             for(ApplicationStatusEnum applicationStatusEnum : values()){
                 if(applicationStatusEnum.getCode() == code){
                     return applicationStatusEnum;
                 }
             }
-            throw new RuntimeException("么有找到对应的枚举");
+            throw new RuntimeException("没有找到对应的枚举");
         }
     }
     public interface  AlipayCallback{
@@ -138,7 +141,7 @@ public class Const {
                     return paymentTypeEnum;
                 }
             }
-            throw new RuntimeException("么有找到对应的枚举");
+            throw new RuntimeException("没有找到对应的枚举");
         }
 
     }
